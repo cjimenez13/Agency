@@ -49,6 +49,18 @@ public class Magazine extends Delivery {
         System.out.println("Tema: "+get_topic());
         System.out.println("---------------------");
     }
+    public double getTax(){
+        int tax=1;
+        if (catalog){
+           tax=0;
+        }
+        return tax;
+    }
+    public double getPrice(){
+        double price=0;
+        price+=getTax();
+        return price;
+    }
 
     
 }

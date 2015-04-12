@@ -54,6 +54,15 @@ public class Counter {
         }
         return 0;
     }
+    public Locker getLocker(int pNumber){
+        Locker locker=null;
+        for(int i=0;i<100;i++){
+            if(locker_available[i].getNumber()==pNumber){
+                    locker=locker_available[i] ;
+            }
+        }
+        return locker;
+    }
     public Client getClient(int ID){
         Client _client=null;
             for(int i=0; i<cant_clients;i++){
@@ -126,11 +135,29 @@ public void printInfo(int ID){
     System.out.println(pClient.get_phone());
     System.out.println("_____________________");
     
-}   
-public int disscount(int pPrice, int pID){
+}  
+public boolean saveDeliveryEnvelope(int pID,Envelope pDeliverTypeEnvelope){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addEnvelope(pDeliverTypeEnvelope);
+    return true;
+}
+public boolean saveDeliveryPackage(int pID,Package pDeliverTypePackage){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addPackage(pDeliverTypePackage);
+    return true;
+}
+public boolean saveDeliveryMagazine(int pID,Magazine pDeliverTypeMagazine){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addMagazine(pDeliverTypeMagazine);
+    return true;
+}
+public double disscount(double pPrice, int pID){
     
         Client client= getClient(pID);
-        int disscount = 0;
+        double disscount = 0;
         if((client.get_type()).equals("silver")){
             disscount= (pPrice*5)/100;
         }
@@ -141,17 +168,7 @@ public int disscount(int pPrice, int pID){
         System.out.println("el descuento es:");
         System.out.println(disscount);
         return disscount;
-    }
-public void modifyClient(int ID,Client pClient){
-    int indexClient=0;
-    for(int i=0; i<cant_clients;i++){
-                Client client=client_register.get(i);
-                if(client.get_ID()==ID){
-                    indexClient= i;
-                }
-            }
-        
-    client_register.set(indexClient, pClient);
+    
 }
 public void changeType(int pID){
     Client client= getClient(pID);
@@ -163,7 +180,29 @@ public void changeType(int pID){
         }else{
             client.set_type("standard");
         }
-        modifyClient(pID,client);
+}
+public double chargePrice(int pID){
+    double price=0;
+    Client client= getClient(pID);
+    client.get_locker();
+    Locker locker= getLocker(client.get_locker());
+    ArrayList<Magazine> magazines =locker.DeliverMagazine();
+    ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
+    ArrayList<Package> packages=locker.DeliverPackage();
+    for (int i=0; envelopes.size()!=i;i++ ){
+        price+=(envelopes.get(i)).getPrice();
+    }
+    for (int n=0; packages.size()!=n;n++ ){
+        price+=(packages.get(n)).getPrice();
+    }
+    for (int j=0; magazines.size()!=j;j++ ){
+        price+=(magazines.get(j)).getPrice();
+    }
+    System.out.println("el precio sin descuento es "+price);
+    price-=(disscount(price,pID));
+    System.out.println("el precio final es"+price);
+    return price;
+            
 }
     public static void main(String[] args) {
         // TODO code application logic here
@@ -175,6 +214,10 @@ public void changeType(int pID){
         Aerostore.printInfo(304900952);
         Aerostore.changeType(304900952);
         Aerostore.printInfo(304900952);
+        Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor", "cocina mediterranea", false, "cocina");
+        Aerostore.saveDeliveryMagazine(304900952, deliver);
+        Aerostore.chargePrice(304900952);
+        
     }
     
 }

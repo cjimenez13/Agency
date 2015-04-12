@@ -48,4 +48,22 @@ public class Envelope extends Delivery {
         System.out.println("Peso: "+get_weight());
         System.out.println("---------------------");
     } 
+    public int getTax(){
+        int tax=0;
+        if (typeEnvelope.equals("aereo") && !(typeContent.equals("documento"))){
+            tax=1;
+        }
+        if (typeEnvelope.equals("manila") && !(typeContent.equals("documento"))){
+            tax=2;
+        }
+        if (typeEnvelope.equals("manila") && (typeContent.equals("documento"))){
+            tax=1;
+        }
+        return tax;
+    }
+    public double getPrice(){
+        double price=0;
+        price+=getTax();
+        return price;
+    }
 }

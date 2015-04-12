@@ -52,5 +52,21 @@ public class Package extends Delivery {
         System.out.println("---------------------");
         
     }
+    public double getTax(){
+        double tax= weight*0.02;
+        if(technological){
+            tax+=2;
+        }
+        if (frailness){
+            tax+=2;
+        }
+        return tax;
+    }
+    public double getPrice(){
+        double price=0;
+        price+=getTax();
+        return price;
+    }
+   
     
 }
