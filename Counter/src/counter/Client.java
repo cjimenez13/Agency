@@ -102,7 +102,7 @@ public class Client {
         System.out.println("Nombre: "+get_name());
         System.out.println("Email: "+get_email());
         System.out.println("Número telefónico: "+get_phone());
-        System.out.println("Direccóno: "+get_direction());
+        System.out.println("Dirección: "+get_direction());
         System.out.println("Género: "+get_gender());
         System.out.println("Fecha de nacimiento: "+get_birthday());
         System.out.println("Tipo de cuenta: "+get_type());
@@ -110,6 +110,7 @@ public class Client {
         System.out.println("Número de casillero: "+get_locker());
         System.out.println("---------------------");
     }
+    
     
     
     

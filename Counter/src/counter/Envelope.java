@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package counter;
-
+import java.util.Calendar;
 
 public class Envelope extends Delivery {
     private String typeEnvelope;
     private String typeContent;
     private double weight;   
 
-    public Envelope(boolean status,String description,String remittent,String typeEnvelope, String typeContent, double weight) {
-        super(status,description,remittent);
+    public Envelope(boolean status,String description,String remittent,Calendar date,String typeEnvelope, String typeContent, double weight) {
+        super(status,description,remittent,date);
         this.typeEnvelope = typeEnvelope;
         this.typeContent = typeContent;
         this.weight = weight;
@@ -48,4 +48,22 @@ public class Envelope extends Delivery {
         System.out.println("Peso: "+get_weight());
         System.out.println("---------------------");
     } 
+    public int getTax(){
+        int tax=0;
+        if (typeEnvelope.equals("aereo") && !(typeContent.equals("documento"))){
+            tax=1;
+        }
+        if (typeEnvelope.equals("manila") && !(typeContent.equals("documento"))){
+            tax=2;
+        }
+        if (typeEnvelope.equals("manila") && (typeContent.equals("documento"))){
+            tax=1;
+        }
+        return tax;
+    }
+    public double getPrice(){
+        double price=0;
+        price+=getTax();
+        return price;
+    }
 }

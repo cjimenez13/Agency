@@ -2,10 +2,14 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ */ 
 
 package counter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 /**
  *
  * @author Byron
@@ -16,14 +20,15 @@ public class Counter {
     private long legal_identity;
     private String direction;
     private int cant_clients;
-    private ArrayList<Client> client_register = new ArrayList<>(); //se crea un array de clientes con capacidad para 100 miembros.
-    private Locker locker_available[]=new Locker[100];//array de lockers que posee la empresa a disposición.Relación de composición
+    private ArrayList<Client> client_register = new ArrayList<>(); //se crea una lista de clientes
+    private Locker locker_available[];//array de lockers que posee la empresa a disposición.Relación de composición
                                                       //nótese uso del array en el constructor.
     public Counter(String name, long legal_identity, String direction, int cant_lockers) {
         this.name = name;
         this.legal_identity = legal_identity;
         this.direction = direction;
         this.cant_clients=0;
+        this.locker_available=new Locker[cant_lockers];
         for(int i=0;i<cant_lockers;i++){
             Locker Mailbox=new Locker();
             this.locker_available[i]=Mailbox;//se crean todos los locker al Iniciar el counter.
@@ -40,7 +45,12 @@ public class Counter {
     public String get_direction() {
         return direction;
     }
-    
+    public void display_clients(){
+        for(int i=0; i<cant_clients;i++){
+            Client client=client_register.get(i);
+            client.Display_client();
+        }
+    }
     public void set_direction(String direction) {
         this.direction = direction;
     }
@@ -54,12 +64,23 @@ public class Counter {
         }
         return 0;
     }
+    public Locker getLocker(int pNumber){
+        Locker locker=null;
+        for(int i=0;i<100;i++){
+            if(locker_available[i].getNumber()==pNumber){
+                    locker=locker_available[i] ;
+            }
+        }
+        return locker;
+    }
     public Client getClient(int ID){
         Client _client=null;
             for(int i=0; i<cant_clients;i++){
                 Client client=client_register.get(i);
                 if(client.get_ID()==ID){
                     _client= client;
+                    return _client;
+                    
                 }else{
                     _client= null;
                 }
@@ -126,11 +147,30 @@ public void printInfo(int ID){
     System.out.println(pClient.get_phone());
     System.out.println("_____________________");
     
-}   
-public int disscount(int pPrice, int pID){
+}  
+public boolean saveDeliveryEnvelope(int pID,Envelope pDeliverTypeEnvelope){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addEnvelope(pDeliverTypeEnvelope);
+    locker.set_state(true);
+    return true;
+}
+public boolean saveDeliveryPackage(int pID,Package pDeliverTypePackage){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addPackage(pDeliverTypePackage);
+    return true;
+}
+public boolean saveDeliveryMagazine(int pID,Magazine pDeliverTypeMagazine){
+    Client client= getClient(pID);
+    Locker locker= getLocker(client.get_locker());
+    locker.addMagazine(pDeliverTypeMagazine);
+    return true;
+}
+public double disscount(double pPrice, int pID){
     
         Client client= getClient(pID);
-        int disscount = 0;
+        double disscount = 0;
         if((client.get_type()).equals("silver")){
             disscount= (pPrice*5)/100;
         }
@@ -141,17 +181,7 @@ public int disscount(int pPrice, int pID){
         System.out.println("el descuento es:");
         System.out.println(disscount);
         return disscount;
-    }
-public void modifyClient(int ID,Client pClient){
-    int indexClient=0;
-    for(int i=0; i<cant_clients;i++){
-                Client client=client_register.get(i);
-                if(client.get_ID()==ID){
-                    indexClient= i;
-                }
-            }
-        
-    client_register.set(indexClient, pClient);
+    
 }
 public void changeType(int pID){
     Client client= getClient(pID);
@@ -163,9 +193,97 @@ public void changeType(int pID){
         }else{
             client.set_type("standard");
         }
-        modifyClient(pID,client);
 }
-    public static void main(String[] args) {
+public double chargeIndividualPrice(int pCodeOfDeliver, int pID){
+    double price=-1;
+    Client client= getClient(pID);
+    if (client!=null){
+        client.get_locker();
+        Locker locker= getLocker(client.get_locker()); 
+        int option=locker.searchDelivery(pCodeOfDeliver);
+        System.out.println("La opcion es: "+option);
+        if (option==1){
+            ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
+            for (int k=0; k!=envelopes.size();k++){
+                if (envelopes.get(k).get_code()==pCodeOfDeliver){
+                    price=envelopes.get(k).getPrice();
+                    break;
+                }
+            }
+        }
+        if (option==2){
+            ArrayList<Package> packages=locker.DeliverPackage();
+            for (int l=0; l!=packages.size();l++){
+                System.out.println("entra");
+                if (packages.get(l).get_code()==pCodeOfDeliver){
+                    price=packages.get(l).getPrice();
+                    System.out.println("el precio dentro antes de desplegar: "+price);
+                    break;
+                }
+            }
+        }
+        if (option==3){
+            ArrayList<Magazine> magazines=locker.DeliverMagazine();
+            for (int w=0; w!=magazines.size();w++){
+                if (magazines.get(w).get_code()==pCodeOfDeliver){
+                    price=magazines.get(w).getPrice();
+                    break;
+                }
+            }
+        }
+        
+        
+    }
+    
+    System.out.println("El precio individual es "+price);
+    return price;
+}
+public double chargeTotalPrice_InsideLocker(int pID){
+    double price=0;
+    Client client= getClient(pID);
+    client.get_locker();
+    Locker locker= getLocker(client.get_locker());
+    ArrayList<Magazine> magazines =locker.DeliverMagazine();
+    ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
+    ArrayList<Package> packages=locker.DeliverPackage();
+    for (int i=0; envelopes.size()!=i;i++ ){
+        price+=(envelopes.get(i)).getPrice();
+    }
+    for (int n=0; packages.size()!=n;n++ ){
+        price+=(packages.get(n)).getPrice();
+    }
+    for (int j=0; magazines.size()!=j;j++ ){
+        price+=(magazines.get(j)).getPrice();
+    }
+    System.out.println("el precio sin descuento es "+price);
+    price-=(disscount(price,pID));
+    System.out.println("el precio final es"+price);
+    return price;
+            
+}
+public double exchangePurchaseForeignCurrency(){
+    double exchange=0;
+    return exchange;
+}
+public double exchangeSaleOfForeignCurrency(){
+    double exchange=0;
+    return exchange;
+}
+//assign_date se encarga de obtener la fecha del ordenador.
+public static Calendar assing_date(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Calendar.getInstance();
+        System.out.println(dateFormat.format(cal.getTime()));
+        return cal;
+}
+//compare_YMD compara el día, año y mes de 2 fechas; si retorna true las fechas pertencen al mismo día del año, en caso contrario, son fechas distintas.
+ public static boolean compare_YMD(Calendar date1,Calendar date2){
+        boolean sameDay = date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR) && date1.get(Calendar.DAY_OF_YEAR) == date2.get(Calendar.DAY_OF_YEAR) && date1.get(Calendar.DAY_OF_MONTH)==date2.get(Calendar.DAY_OF_MONTH);
+        return sameDay;
+    }
+
+public static void main(String[] args) {
         // TODO code application logic here
         Counter Aerostore=new Counter("aerosostes",12313,"cwewef",100);
         Aerostore.add_client(304900953,"Byron", "bmiranda", 879791312, "paraiso cartago", "H","18/11/1995");
@@ -175,6 +293,16 @@ public void changeType(int pID){
         Aerostore.printInfo(304900952);
         Aerostore.changeType(304900952);
         Aerostore.printInfo(304900952);
+        Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",assing_date(), "cocina mediterranea", false, "cocina");
+        Aerostore.saveDeliveryMagazine(304900953, deliver);
+        Aerostore.chargeTotalPrice_InsideLocker(304900953);
+        Package deliver1=new Package(true,"computadora mac","yorley",assing_date(),true,true,40);
+        Aerostore.saveDeliveryPackage(304900952, deliver1);
+        Aerostore.chargeTotalPrice_InsideLocker(304900952);
+        Aerostore.chargeTotalPrice_InsideLocker(304900952);
+        Aerostore.chargeIndividualPrice(2,304900952);
+        //Aerostore.display_clients();
+        compare_YMD(deliver1.get_date(),deliver.get_date());
     }
     
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package counter;
+import java.util.Calendar;
 /**
  *
  * @author Byron
@@ -13,12 +14,15 @@ public class Delivery {
     protected int code;
     protected boolean status;
     protected String description;
+
     protected String remittent;
-    public Delivery(boolean status, String description, String remittent) {
+    protected Calendar date;
+    public Delivery(boolean status, String description, String remittent,Calendar date) {
         this.code=identifier;
         this.status = status;
         this.description = description;
         this.remittent = remittent;
+        this.date=date;
         identifier++;
     }
 
@@ -46,6 +50,10 @@ public class Delivery {
 
     public String get_remittent() {
         return remittent;
+    }
+    
+    public Calendar get_date() {
+        return date;
     }
     public void Display_delivery(){
         System.out.println("Código: "+get_code());
