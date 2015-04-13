@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package counter;
-
+import java.util.Calendar;
 
 public class Envelope extends Delivery {
     private String typeEnvelope;
     private String typeContent;
     private double weight;   
 
-    public Envelope(boolean status,String description,String remittent,String typeEnvelope, String typeContent, double weight) {
-        super(status,description,remittent);
+    public Envelope(boolean status,String description,String remittent,Calendar date,String typeEnvelope, String typeContent, double weight) {
+        super(status,description,remittent,date);
         this.typeEnvelope = typeEnvelope;
         this.typeContent = typeContent;
         this.weight = weight;

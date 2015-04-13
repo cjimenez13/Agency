@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package counter;
-
+import java.util.Calendar;
 
 public class Package extends Delivery {
     private boolean frailness;
     private double weight;
     private boolean technological;
 
-    public Package(boolean status, String description, String remittent,boolean frailness, boolean technological, double weight ) {
-        super(status, description, remittent);
+    public Package(boolean status, String description, String remittent,Calendar date,boolean frailness, boolean technological, double weight ) {
+        super(status, description, remittent,date);
         this.frailness = frailness;
         this.weight = weight;
         this.technological = technological;

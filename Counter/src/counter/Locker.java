@@ -52,7 +52,9 @@ public  final class Locker {
     
     public void addPackage(Package pDelivery){
         lockerPackages.add(pDelivery);
-        System.out.println((lockerPackages.get(0)).get_description());
+        pDelivery.Display_delivery();
+        
+        System.out.println("el locker de paquetes tiene: "+lockerPackages.size());
     
     }
     public ArrayList<Package> DeliverPackage(){
@@ -60,7 +62,6 @@ public  final class Locker {
     }
     public void addEnvelope(Envelope pDelivery){
         lockerEnvelopes.add(pDelivery);
-        System.out.println((lockerEnvelopes.get(0)).get_description());
     
     }
     public ArrayList<Envelope> DeliverEnvelope(){
@@ -74,6 +75,31 @@ public  final class Locker {
     public ArrayList<Magazine> DeliverMagazine(){
         return lockerMagazines;
     }
+   public int searchDelivery(int pCode){
+       int option=0;
+       for (int i=0; i!= lockerEnvelopes.size();i++){
+           int num=(lockerEnvelopes.get(i).get_code());
+           if (num==(pCode)){
+               option=1;
+               break; 
+           }
+       }
+       for (int m=0; m!= lockerPackages.size();m++){
+           int num=(lockerPackages.get(m).get_code());
+           if (num==(pCode)){
+               option=2;
+               break; 
+           }
+       }       
+       for (int n=0; n!= lockerMagazines.size();n++){
+           int num=(lockerMagazines.get(n).get_code());
+           if (num==(pCode)){
+               option=3;
+               break; 
+           }
+       }
+       return option;
+   }
     
     
 }
