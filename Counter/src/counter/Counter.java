@@ -15,29 +15,43 @@ import java.util.Calendar;
  * @author Byron
  */
 public class Counter {
-
+    private static Counter _Counter =null;
     private String name;
     private long legal_identity;
     private String direction;
     private int cant_clients;
+    private int cant_lockers;
     private ArrayList<Client> client_register = new ArrayList<>(); //se crea una lista de clientes
     private Locker locker_available[];//array de lockers que posee la empresa a disposición.Relación de composición
-                                                      //nótese uso del array en el constructor.
+                                                 //nótese uso del array en el constructor.
     private ArrayList<Envelope> Sold_envelopes=new ArrayList<>();//Array de tipo envelope, para preservar registro de objetos ya retirados.
     private ArrayList<Package> Sold_packages=new ArrayList<>();//Array de tipo package, para preservar registro de objetos ya retirados.
     private ArrayList<Magazine> Sold_magazines=new ArrayList<>();//Array de tipo Magazine, para preservar registro de objetos ya retirados.     
-    public Counter(String name, long legal_identity, String direction, int cant_lockers) {
+    public Counter(String name, long legal_identity, String direction, int Cant_lockers) {
         this.name = name;
         this.legal_identity = legal_identity;
         this.direction = direction;
         this.cant_clients=0;
+        this.cant_lockers=Cant_lockers;
         this.locker_available=new Locker[cant_lockers];
         for(int i=0;i<cant_lockers;i++){
             Locker Mailbox=new Locker();
             this.locker_available[i]=Mailbox;//se crean todos los locker al Iniciar el counter.
         }
+        _Counter = this;
             
     }
+    private Counter(){}
+    private static void createInstance(){
+        if(_Counter ==null){
+            _Counter=new Counter();
+        }
+    }
+    public static synchronized Counter getInstance(){
+        createInstance();
+        return _Counter;
+    }
+    
     public String get_name() {
         return name;
     }
@@ -59,7 +73,7 @@ public class Counter {
     }
     //assing locker se encarga de encontrar el próximo locker desocupado y reorna su número.
     public int assing_locker(){
-        for(int i=0;i<100;i++){
+        for(int i=0;i<cant_lockers;i++){
             if(locker_available[i].get_ocuppied()==false){
                 locker_available[i].set_ocuppied(true);
                 return locker_available[i].getNumber();
@@ -91,28 +105,29 @@ public class Counter {
             return _client;
     }
     //add_client será sustituido a boolean para términos de interfaz(Suscripción exitosa/fallida).
-    public void add_client(int ID, String name, String email, int phone, String direction, String gender, String birthday){
+    public String add_client(int ID, String name, String email, int phone, String direction, String gender, String birthday){
             String number = Integer.toString(ID);
             if(number.length()!=9){
-                System.out.println("El número de cédula ingresado no es válido");//return false; DEBE CAMBIARSE A LA INTERFAZ!!!
+                return("El número de cédula ingresado no es válido");//return false; DEBE CAMBIARSE A LA INTERFAZ!!!
                 }
             if(Integer.toString(phone).length()!=8){
-                System.out.println("El número de telefono no es válido");}
+                return("El número de telefono no es válido");}
             if(email.contains(".com")==false||email.contains("@")==false){
-                System.out.println("Dirección de correo electrónica inválida");}
+                return("Dirección de correo electrónica inválida");}
             else{
                     if(verified_client_existance(ID)==true){
-                        System.out.println("El cliente ya se encuentra registrado");//return false //posicionar en lugar del length cuando exista interfaz
+                        return ("El cliente ya se encuentra registrado");//return false //posicionar en lugar del length cuando exista interfaz
                     }
                     else{
                         int lockers_number=assing_locker();
                         if(lockers_number==0)
-                                System.out.println("No hay lockers disponibles");//return False en caso de que no haya lockers disponibles
+                                return("No hay lockers disponibles");//return False en caso de que no haya lockers disponibles
                         else{
                             Client client=new Client(ID,name,email, phone,direction,gender,birthday);   
                             client.set_locker(lockers_number);///
                             client_register.add(client);
                             cant_clients++;
+                            return "";
                             }
                      //return true;
                     }
@@ -145,12 +160,9 @@ public class Counter {
         }
         else{
             Client client=getClient(ID);
-            if(email!="")
                 client.set_email(email);
-            if(phone!=-1111111)                
                 client.set_phone(phone);
-            if(Direction!="")
-                client.set_diretion(direction);
+                client.set_direction(direction);
         }
         return true;
     }
@@ -196,6 +208,52 @@ public class Counter {
          locker.set_state(true);
         return true;
     }
+    
+    
+    //retorna los paquetes que tiene pendiente de retirar uuna persona en específico.
+    public ArrayList<Package> non_retired_packages(int ID){
+     ArrayList<Package> list=new ArrayList<>();
+     Client client= getClient(ID);
+     Locker locker=getLocker(client.get_locker());
+     for(int i=0;i<locker.DeliverPackage().size();i++){
+         list.add(locker.DeliverPackage().get(i));
+     }
+     for(int k=0;k<list.size();k++){
+         list.get(k).Display_delivery();
+     }
+     return list;    
+     }
+     //retorna los sobres que tiene pendiente de retirar uuna persona en específico.
+    public ArrayList<Envelope> non_retired_envelope(int ID){
+     ArrayList<Envelope> list=new ArrayList<>();
+     Client client= getClient(ID);
+     Locker locker=getLocker(client.get_locker());
+     for(int i=0;i<locker.DeliverEnvelope().size();i++){
+         list.add(locker.DeliverEnvelope().get(i));
+     }
+     for(int k=0;k<list.size();k++){
+         list.get(k).Display_delivery();
+     }
+     return list;    
+     }
+//retorna las revistas que tiene pendiente de retirar uuna persona en específico.
+    public ArrayList<Magazine> non_retired_magazine(int ID){
+     ArrayList<Magazine> list=new ArrayList<>();
+     Client client= getClient(ID);
+     Locker locker=getLocker(client.get_locker());
+     for(int i=0;i<locker.DeliverMagazine().size();i++){
+         list.add(locker.DeliverMagazine().get(i));
+     }
+     for(int k=0;k<list.size();k++){
+         list.get(k).Display_delivery();
+     }
+     return list;    
+     }
+ 
+    
+    
+    
+    
     public double disscount(double pPrice, int pID){
 
             Client client= getClient(pID);
@@ -393,7 +451,6 @@ public class Counter {
             for(int j=0;j<locker.DeliverEnvelope().size();j++){
                 Envelope envelope=locker.DeliverEnvelope().get(i);
                 list.add(envelope);
-                
             }
         }
     return list;
@@ -448,10 +505,161 @@ public class Counter {
     return list;    
     }
     
+    
     public ArrayList<String> retired_packages_received(int day,int month,int year){
          ArrayList<String> list= new ArrayList<>();
     return list;    
     }
+    
+    
+    
+    
+    ///método que forma un string con toda la infromación necesaria del descuento aplicado al cliente en un paquete.
+    public String show_tax_delivery(Package packagee){
+        String information="";
+        information+=("Precio original: "+Double.toString(packagee.get_original_price())+"\n");
+        information+=("Impuesto por peso:"+Double.toString(packagee.get_weight()*0.02)+"\n" );
+        int fragility=0;
+        int techno=0;
+        if(packagee.get_frailness()==true)
+            fragility=2;
+        information+=("Impuesto por fragilidad: "+Integer.toString(fragility)+"\n");
+        if(packagee.get_technological()==true)
+            techno=2;
+        information+=("Impuesto por tipo de paquete: "+Integer.toString(fragility)+"\n");
+        information+=("Precio del artículo con impuestos: "+Double.toString(packagee.get_original_price()+techno+fragility+packagee.get_weight()*0.02));
+        System.out.println(information);
+        return information;
+    }
+       ///método que forma un string con toda la infromación necesaria del descuento aplicado al cliente en un sobre.
+    public String show_tax_delivery(Envelope envelope){
+        String information="";
+        double tax=1;
+        if (envelope.get_typeEnvelope().equals("aereo") && !(envelope.get_typeEnvelope().equals("documento"))){
+            tax=1;
+        }
+        if (envelope.get_typeEnvelope().equals("manila") && !(envelope.get_typeEnvelope().equals("documento"))){
+            tax=2;
+        }
+        if (envelope.get_typeEnvelope().equals("manila") && (envelope.get_typeEnvelope().equals("documento"))){
+            tax=1;
+        }
+        information+=("Precio original del sobre: "+Double.toString(envelope.get_original_price())+"\n");
+        information+=("Tipo de sobre: "+envelope.get_typeEnvelope()+"\n");
+        information+=("Impuesto por tipo de sobre: "+Double.toString(tax)+"\n");
+        information+=("Precio del artículo con impuestos: "+Double.toString(envelope.get_original_price()+tax));
+        System.out.println(information);
+        return information;
+    }
+ ///método que forma un string con toda la infromación necesaria del descuento aplicado al cliente en una revista.
+    public String show_tax_delivery(Magazine magazine){
+        String information="";
+        String tipo="Catálogo";
+        double tax=0;
+        if (magazine.get_catalog()==false){
+            tax=1;
+            tipo="Corriente";
+        }
+        information+=("Precio original de la revista: "+Double.toString(magazine.get_original_price())+"\n");
+        information+=("Tipo de revista: "+tipo+"\n");
+        information+=("Impuesto por tipo de revista: "+Double.toString(tax)+"\n");
+        information+=("Precio del artículo con impuestos: "+Double.toString(magazine.get_original_price()+tax));
+        System.out.println(information);
+        return information;
+    }
+    ///método que forma string con el descuento aplicado al cliente a partir de su tipo(standar, gold, silver)
+    public String show_disscount(Client client,double price){
+        String information="";
+        double disscount=0;
+        if(client.get_type()=="silver")
+            disscount=5;
+         if(client.get_type()=="gold")
+             disscount=10;
+         information+=("Tipo de cuenta: "+client.get_type()+"\n");
+         information+=("Porcentaje de descuento: "+Double.toString(disscount)+"%"+"\n");
+         information+=("Descuento: "+Double.toString(disscount(price,client.get_ID()))+"\n");
+         information+=("Precio final del artículo: "+Double.toString(price-disscount(price,client.get_ID()))+"\n");
+         System.out.println(information);
+         return information;
+    }
+    
+     public ArrayList<Package> retrieve_packages(ArrayList<Integer> list,int ID){
+        ArrayList<Package> packages=new ArrayList<>();
+        Client client=getClient(ID);
+        Locker locker=getLocker(client.get_locker());
+        for(int i=0;i<list.size();i++){
+            for(int k=0;k<locker.DeliverPackage().size();k++){
+                Package packagee=locker.DeliverPackage().get(k);
+                if(packagee.get_code()==list.get(i));
+                {
+                    packagee.setOut_date(assing_date());
+                    Sold_packages.add(packagee);
+                    packages.add(packagee);
+                    locker.DeliverPackage().remove(packagee);
+                    client.setCant_compras(client.get_cant_compras()+1);
+                    changeType(client.get_ID());
+                }
+            }
+        }
+        for(int i=0;i<packages.size();i++)
+            System.out.println(packages.get(i).description);
+        return packages;
+    }
+///método con el cual el cliente paga uno, o varios objetos de tipo sobre   
+    public ArrayList<Envelope> retrieve_envelopes(ArrayList<Integer> list,int ID){
+        ArrayList<Envelope> envelopes=new ArrayList<>();
+        Client client=getClient(ID);
+        Locker locker=getLocker(client.get_locker());
+        for(int i=0;i<list.size();i++){
+            for(int k=0;k<locker.DeliverEnvelope().size();k++){
+                Envelope envelope=locker.DeliverEnvelope().get(k);
+                if(envelope.get_code()==list.get(i));
+                {
+                    envelope.setOut_date(assing_date());
+                    Sold_envelopes.add(envelope);
+                    envelopes.add(envelope);
+                    locker.DeliverEnvelope().remove(envelope);
+                    client.setCant_compras(client.get_cant_compras()+1);
+                    changeType(client.get_ID());
+                }
+            }
+        }
+        for(int i=0;i<envelopes.size();i++)
+            envelopes.get(i).Display_delivery();
+        return envelopes;
+    }
+ ///método con el cual el cliente paga uno, o varios objetos de tipo sobre   
+    public ArrayList<Magazine> retrieve_magazines(ArrayList<Integer> list,int ID){
+        ArrayList<Magazine> magazines=new ArrayList<>();
+        Client client=getClient(ID);
+        Locker locker=getLocker(client.get_locker());
+        for(int i=0;i<list.size();i++){
+            for(int k=0;k<locker.DeliverMagazine().size();k++){
+                Magazine magazine=locker.DeliverMagazine().get(k);
+                if(magazine.get_code()==list.get(i));
+                {
+                    magazine.setOut_date(assing_date());
+                    Sold_magazines.add(magazine);
+                    magazines.add(magazine);
+                    locker.DeliverEnvelope().remove(magazine);
+                    client.setCant_compras(client.get_cant_compras()+1);
+                    changeType(client.get_ID());
+                }
+            }
+        }
+        for(int i=0;i<magazines.size();i++)
+            magazines.get(i).Display_delivery();
+        return magazines;
+    }  
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) {
             // TODO code application logic here
             Counter Aerostore=new Counter("aerosostes",12313,"cwewef",100);

@@ -86,7 +86,7 @@ public class Client {
         this.phone = phone;
     }
 
-    public void set_diretion(String direction) {
+    public void set_direction(String direction) {
         this.direction = direction;
     }
 
@@ -97,6 +97,13 @@ public class Client {
     public void set_type(String type) {
         this.type = type;
     }
+
+    public void setCant_compras(int cant_compras) {
+        this.cant_compras = cant_compras;
+    }
+    
+    
+    
     public void Display_client(){
         System.out.println("Identificación: "+get_ID());
         System.out.println("Nombre: "+get_name());

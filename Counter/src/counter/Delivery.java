@@ -59,6 +59,20 @@ public class Delivery {
     public Calendar get_date() {
         return date;
     }
+
+    public Calendar getOut_date() {
+        return out_date;
+    }
+
+    public void setOut_date(Calendar out_date) {
+        this.out_date = out_date;
+    }
+
+    public Double get_original_price() {
+        return price;
+    }
+    
+    
     public void Display_delivery(){
         System.out.println("Código: "+get_code());
         System.out.println("Estado: "+get_status());

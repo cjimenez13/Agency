@@ -5,6 +5,9 @@
  */
 package View;
 
+import counter.Counter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author YorleydeMaría
@@ -43,22 +46,18 @@ public class ClientView extends javax.swing.JFrame {
         txt_phoneNumber = new javax.swing.JTextField();
         txt_Direction = new javax.swing.JTextField();
         txt_Birthday = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbox_GenderRegister = new javax.swing.JComboBox();
         btn_addClient = new javax.swing.JButton();
         btn_ReturnBack = new javax.swing.JButton();
         Register_Panel1 = new javax.swing.JPanel();
-        lbl_NameModify = new javax.swing.JLabel();
         lbl_EmailModify = new javax.swing.JLabel();
         lbl_PhoneNumberModify = new javax.swing.JLabel();
         lbl_DirectionModify = new javax.swing.JLabel();
-        lbl_TypeModify = new javax.swing.JLabel();
         lbl_InstructionCompleteData1 = new javax.swing.JLabel();
-        txt_NameModify = new javax.swing.JTextField();
         txt_IDModify = new javax.swing.JTextField();
         txt_EmailModify = new javax.swing.JTextField();
         txt_PhoneNumberModify = new javax.swing.JTextField();
         txt_DirectionModify = new javax.swing.JTextField();
-        txt_TypeModify = new javax.swing.JTextField();
         btn_ModifyClient = new javax.swing.JButton();
         btn_ReturnBackModify = new javax.swing.JButton();
         btn_SearchClientModify = new javax.swing.JButton();
@@ -128,7 +127,7 @@ public class ClientView extends javax.swing.JFrame {
         lbl_Email.setText("Correo Electrónico");
 
         lbl_PhoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_PhoneNumber.setText("Telefóno");
+        lbl_PhoneNumber.setText("Teléfono");
 
         lbl_Direction.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_Direction.setText("Dirección");
@@ -142,8 +141,8 @@ public class ClientView extends javax.swing.JFrame {
         lbl_InstructionCompleteData.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_InstructionCompleteData.setText("Complete los datos que se le solicitan a continuación: ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Femenino", "Masculino", " ", " " }));
+        cbox_GenderRegister.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbox_GenderRegister.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Femenino", "Masculino", " ", " " }));
 
         btn_addClient.setBackground(new java.awt.Color(255, 102, 51));
         btn_addClient.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -175,7 +174,7 @@ public class ClientView extends javax.swing.JFrame {
                                 .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lbl_Name, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbox_GenderRegister, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addComponent(txt_Name)
                             .addComponent(txt_ID)
@@ -225,7 +224,7 @@ public class ClientView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_Gender)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbox_GenderRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(Register_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_addClient)
@@ -237,9 +236,6 @@ public class ClientView extends javax.swing.JFrame {
 
         Register_Panel1.setBackground(new java.awt.Color(255, 204, 153));
 
-        lbl_NameModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_NameModify.setText("Nombre Completo");
-
         lbl_EmailModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_EmailModify.setText("Correo Electrónico");
 
@@ -248,9 +244,6 @@ public class ClientView extends javax.swing.JFrame {
 
         lbl_DirectionModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_DirectionModify.setText("Dirección");
-
-        lbl_TypeModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_TypeModify.setText("Tipo de cliente");
 
         lbl_InstructionCompleteData1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_InstructionCompleteData1.setText("Complete los datos que se le solicitan a continuación: ");
@@ -270,6 +263,11 @@ public class ClientView extends javax.swing.JFrame {
 
         btn_SearchClientModify.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_SearchClientModify.setText("Buscar");
+        btn_SearchClientModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchClientModifyActionPerformed(evt);
+            }
+        });
 
         lbl_typeModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_typeModify.setText("Tipo de consulta");
@@ -295,17 +293,13 @@ public class ClientView extends javax.swing.JFrame {
                     .addGroup(Register_Panel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_NameModify)
                             .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_TypeModify)
                                 .addComponent(lbl_DirectionModify)
                                 .addComponent(lbl_PhoneNumberModify)
                                 .addComponent(lbl_EmailModify)
                                 .addComponent(txt_EmailModify, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                                 .addComponent(txt_PhoneNumberModify)
-                                .addComponent(txt_DirectionModify)
-                                .addComponent(txt_TypeModify))
-                            .addComponent(txt_NameModify, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_DirectionModify))
                             .addGroup(Register_Panel1Layout.createSequentialGroup()
                                 .addComponent(lbl_typeModify)
                                 .addGap(18, 18, 18)
@@ -331,11 +325,7 @@ public class ClientView extends javax.swing.JFrame {
                     .addComponent(btn_SearchClientModify))
                 .addGap(34, 34, 34)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_NameModify)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_NameModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(72, 72, 72)
                 .addComponent(lbl_EmailModify)
                 .addGap(2, 2, 2)
                 .addComponent(txt_EmailModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,11 +337,7 @@ public class ClientView extends javax.swing.JFrame {
                 .addComponent(lbl_DirectionModify)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_DirectionModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(lbl_TypeModify)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_TypeModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(107, 107, 107)
                 .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ModifyClient)
                     .addComponent(btn_ReturnBackModify))
@@ -679,19 +665,51 @@ public class ClientView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbdpanel_Client, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(tbdpanel_Client)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addClientActionPerformed
-        // TODO add your handling code here:
+        if(!(txt_Name.getText().equals("")|| txt_ID.getText().equals("")||txt_email.getText().equals("")
+          ||txt_phoneNumber.getText().equals("")||txt_Direction.getText().equals("")||txt_Birthday.getText().equals(""))){
+            String name= txt_Name.getText();
+            int ID= Integer.valueOf(txt_ID.getText());
+            String email= txt_email.getText();
+            int phone=Integer.valueOf(txt_phoneNumber.getText());
+            String direction=txt_Direction.getText();
+            String Birthday=txt_Birthday.getText();
+            String gender= cbox_GenderRegister.getSelectedItem().toString();
+            String error=Counter.getInstance().add_client(ID, name, email, phone, direction, gender, Birthday);
+            if ((error.equals(""))!=true){
+                JOptionPane.showMessageDialog(null,error);
+            }else{
+                JOptionPane.showMessageDialog(null,"Su número de locker es:"+String.valueOf(Counter.getInstance().getClient(ID).get_locker()));
+            }
+            txt_Name.setText("");
+            txt_ID.setText("");
+            txt_email.setText("");
+            txt_phoneNumber.setText("");
+            txt_Direction.setText("");
+            txt_Birthday.setText("");
+            cbox_GenderRegister.setSelectedIndex(0);
+        }
+        
+        
     }//GEN-LAST:event_btn_addClientActionPerformed
 
     private void btn_ModifyClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModifyClientActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_btn_ModifyClientActionPerformed
+
+    private void btn_SearchClientModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientModifyActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btn_SearchClientModifyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -739,10 +757,10 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JButton btn_SearchClientDelete;
     private javax.swing.JButton btn_SearchClientModify;
     private javax.swing.JButton btn_addClient;
+    private javax.swing.JComboBox cbox_GenderRegister;
     private javax.swing.JComboBox cbox_TypeConsult;
     private javax.swing.JComboBox cbox_TypeDelete;
     private javax.swing.JComboBox cbox_typeModify;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -773,7 +791,6 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_InstructionCompleteData;
     private javax.swing.JLabel lbl_InstructionCompleteData1;
     private javax.swing.JLabel lbl_Name;
-    private javax.swing.JLabel lbl_NameModify;
     private javax.swing.JLabel lbl_NameModify1;
     private javax.swing.JLabel lbl_NameResultDelete;
     private javax.swing.JLabel lbl_PhoneNumber;
@@ -787,7 +804,6 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_TypeDeliveryConsult1;
     private javax.swing.JLabel lbl_TypeDeliveryConsult2;
     private javax.swing.JLabel lbl_TypeDeliveryConsult3;
-    private javax.swing.JLabel lbl_TypeModify;
     private javax.swing.JLabel lbl_dateDelivery;
     private javax.swing.JLabel lbl_dateDelivery1;
     private javax.swing.JLabel lbl_dateDelivery2;
@@ -810,9 +826,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JTextField txt_IDModify;
     private javax.swing.JTextField txt_IDdelete;
     private javax.swing.JTextField txt_Name;
-    private javax.swing.JTextField txt_NameModify;
     private javax.swing.JTextField txt_PhoneNumberModify;
-    private javax.swing.JTextField txt_TypeModify;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_phoneNumber;
     // End of variables declaration//GEN-END:variables
