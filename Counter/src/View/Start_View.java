@@ -1,5 +1,6 @@
 package View;
 
+import counter.Counter;
 import javax.swing.JOptionPane;
 
 /**
@@ -131,14 +132,15 @@ public class Start_View extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CreateCounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateCounterActionPerformed
-        if (!(txt_CounterName.getText().equals("") && txt_LegalID.getText().equals("") 
-                && txt_CounterDirection.getText().equals("") && txt_CantCounters.getText().equals(""))){
+        if (!(txt_CounterName.getText().equals("") || txt_LegalID.getText().equals("") 
+                || txt_CounterDirection.getText().equals("") || txt_CantCounters.getText().equals(""))){
            String counterName = txt_CounterName.getText();
-           int legalID = Integer.valueOf(txt_LegalID.getText());
+           long legalID = Integer.valueOf(txt_LegalID.getText());
            int cantCounters = Integer.valueOf(txt_CantCounters.getText());
            String counterDirection = txt_CounterDirection.getText();
            this.setVisible(false);           
            new ActionMenu_View().setVisible(true); 
+           new Counter(counterName,legalID, counterDirection,cantCounters);
         }else{
             JOptionPane.showMessageDialog(null, "Ingrese todos los datos solicitados");
         }

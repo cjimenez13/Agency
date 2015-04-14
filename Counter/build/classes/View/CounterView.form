@@ -274,7 +274,7 @@
                           <Group type="102" attributes="0">
                               <Component id="lbl_TypeDeliery" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" pref="176" max="-2" attributes="0"/>
+                              <Component id="cbox_TypeReceivedArticle" min="-2" pref="176" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -284,15 +284,15 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="txt_DescriptionRD" min="-2" pref="167" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="lbl_DescriptionRD" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Component id="txt_DescriptionRD" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="108" max="32767" attributes="0"/>
+                              <EmptySpace pref="95" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="txt_RemittentRD" min="-2" pref="167" max="-2" attributes="0"/>
@@ -319,10 +319,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lbl_Destinatary" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_DescriptionRD" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbl_RemittentRD" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_Destinatary" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_DescriptionRD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -337,8 +339,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_TypeDeliery" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_TypeDeliery" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbox_TypeReceivedArticle" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="468" max="32767" attributes="0"/>
                       <Component id="btn_Receive" min="-2" max="-2" attributes="0"/>
@@ -366,18 +368,19 @@
                 <Property name="text" type="java.lang.String" value="Tipo de Art&#xed;culo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="cbox_TypeReceivedArticle">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Sobre"/>
-                    <StringItem index="1" value="Paquete"/>
-                    <StringItem index="2" value="Revista"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="  "/>
+                    <StringItem index="1" value="Sobre"/>
+                    <StringItem index="2" value="Paquete"/>
+                    <StringItem index="3" value="Revista"/>
                   </StringArray>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbox_TypeReceivedArticleActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_DescriptionRD">
@@ -407,6 +410,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Recibir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ReceiveActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
