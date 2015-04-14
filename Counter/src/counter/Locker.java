@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public  final class Locker {
     private int number;
     private boolean state;//Determinna si está vacío
-    private boolean ocuppied;//Determina si posee dueño.
+     private boolean ocuppied;//Determina si posee dueño.
     private static int identifier=1000;
-    private ArrayList<Package> lockerPackages= new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
-    private ArrayList<Envelope> lockerEnvelopes= new ArrayList<>();
-    private ArrayList<Magazine> lockerMagazines= new ArrayList<>();
+    private ArrayList<Package> lockerPackages = new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
+    private ArrayList<Envelope> lockerEnvelopes=new ArrayList<>();
+    private ArrayList<Magazine> lockerMagazines=new ArrayList<>();
     public Locker() {
         this.number = identifier;
         this.state = false; //En false el locker estará vacío.
@@ -52,9 +52,7 @@ public  final class Locker {
     
     public void addPackage(Package pDelivery){
         lockerPackages.add(pDelivery);
-        pDelivery.Display_delivery();
-        
-        System.out.println("el locker de paquetes tiene: "+lockerPackages.size());
+        System.out.println((lockerPackages.get(0)).get_description());
     
     }
     public ArrayList<Package> DeliverPackage(){
@@ -62,6 +60,7 @@ public  final class Locker {
     }
     public void addEnvelope(Envelope pDelivery){
         lockerEnvelopes.add(pDelivery);
+        System.out.println((lockerEnvelopes.get(0)).get_description());
     
     }
     public ArrayList<Envelope> DeliverEnvelope(){
@@ -75,7 +74,10 @@ public  final class Locker {
     public ArrayList<Magazine> DeliverMagazine(){
         return lockerMagazines;
     }
-   public int searchDelivery(int pCode){
+   public int get_cantdeliveries(){
+       return lockerPackages.size()+ lockerMagazines.size()+ lockerEnvelopes.size();
+   }
+    public int searchDelivery(int pCode){
        int option=0;
        for (int i=0; i!= lockerEnvelopes.size();i++){
            int num=(lockerEnvelopes.get(i).get_code());
@@ -100,6 +102,5 @@ public  final class Locker {
        }
        return option;
    }
-    
     
 }

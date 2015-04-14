@@ -11,8 +11,8 @@ public class Magazine extends Delivery {
     private boolean catalog=false;
     private String topic="";
 
-    public Magazine(boolean status, String description, String remittent,Calendar date,String name, boolean catalog, String topic) {
-        super(status, description, remittent,date);
+    public Magazine(boolean status, String description, String remittent,Calendar date,Calendar outdate,double price,String name, boolean catalog, String topic) {
+        super(status, description, remittent,date,outdate,price);
         this.name = name;
         this.catalog = catalog;
         this.topic = topic;
@@ -57,9 +57,9 @@ public class Magazine extends Delivery {
         return tax;
     }
     public double getPrice(){
-        double price=0;
-        price+=getTax();
-        return price;
+        //double price=0;
+        this.price+=getTax();
+        return this.price;
     }
 
     

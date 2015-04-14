@@ -18,22 +18,22 @@ import javax.mail.internet.*;
 public class Mail { 
       
     String destinatary; 
-    String subject; 
-    String message; 
+    String asunto; 
+    String mensaje; 
     private final String Sender="yorleymaria@yahoo.com";
     private final String Password="pajarito1";
     private final String host = "smtp.mail.yahoo.com";
       
       
     // Constructor Correo 
-    public Mail (String pDestinatary, String pSubject, String pMessage) { 
-        destinatary = pDestinatary; 
-        subject = pSubject; 
-        message = pMessage;
+    public Mail (String pDestinatario, String pAsunto, String pMensaje) { 
+        destinatary = pDestinatario; 
+        asunto = pAsunto; 
+        mensaje = pMensaje;
           
     } 
       
-    public void sendEmail () {  
+    public void enviarCorreo () {  
           // Get system properties
           Properties properties = System.getProperties();
           // Setup mail server
@@ -58,10 +58,10 @@ public class Mail {
              message.addRecipient(Message.RecipientType.TO,new InternetAddress(destinatary));
 
              // Set Subject: header field
-             message.setSubject(subject);
+             message.setSubject(asunto);
 
              // Now set the actual message
-             message.setText(this.message);
+             message.setText(mensaje);
 
              // Send message
              Transport transport = session.getTransport("smtp");
