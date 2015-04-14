@@ -5,8 +5,9 @@
  */
 
 package counter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -22,7 +23,7 @@ public class Counter {
     private int cant_clients;
     private int cant_lockers;
     private ArrayList<Client> client_register = new ArrayList<>(); //se crea una lista de clientes
-    private Locker locker_available[];//array de lockers que posee la empresa a disposición.Relación de composición
+   // private Locker locker_available[];//array de lockers que posee la empresa a disposición.Relación de composición
                                                  //nótese uso del array en el constructor.
     private ArrayList<Envelope> Sold_envelopes=new ArrayList<>();//Array de tipo envelope, para preservar registro de objetos ya retirados.
     private ArrayList<Package> Sold_packages=new ArrayList<>();//Array de tipo package, para preservar registro de objetos ya retirados.
@@ -33,15 +34,20 @@ public class Counter {
         this.direction = direction;
         this.cant_clients=0;
         this.cant_lockers=Cant_lockers;
-        this.locker_available=new Locker[cant_lockers];
-        for(int i=0;i<cant_lockers;i++){
-            Locker Mailbox=new Locker();
-            this.locker_available[i]=Mailbox;//se crean todos los locker al Iniciar el counter.
-        }
+        //this.locker_available=new Locker[cant_lockers];
+//        for(int i=0;i<cant_lockers;i++){
+//            Locker Mailbox=new Locker();
+//            this.locker_available[i]=Mailbox;//se crean todos los locker al Iniciar el counter.
+//        }
         _Counter = this;
             
     }
     private Counter(){}
+
+    public ArrayList<Client> getClient_register() {
+        return client_register;
+    }
+    
     private static void createInstance(){
         if(_Counter ==null){
             _Counter=new Counter();
@@ -72,24 +78,24 @@ public class Counter {
         this.direction = direction;
     }
     //assing locker se encarga de encontrar el próximo locker desocupado y reorna su número.
-    public int assing_locker(){
-        for(int i=0;i<cant_lockers;i++){
-            if(locker_available[i].get_ocuppied()==false){
-                locker_available[i].set_ocuppied(true);
-                return locker_available[i].getNumber();
-            }
-        }
-        return 0;
-    }
-    public Locker getLocker(int pNumber){
-        Locker locker=null;
-        for(int i=0;i<100;i++){
-            if(locker_available[i].getNumber()==pNumber){
-                    locker=locker_available[i] ;
-            }
-        }
-        return locker;
-    }
+//    public int assing_locker(){
+//        for(int i=0;i<cant_lockers;i++){
+//            if(locker_available[i].get_ocuppied()==false){
+//                locker_available[i].set_ocuppied(true);
+//                return locker_available[i].getNumber();
+//            }
+//        }
+//        return 0;
+//    }
+//    public Locker getLocker(int pNumber){
+//        Locker locker=null;
+//        for(int i=0;i<100;i++){
+//            if(locker_available[i].getNumber()==pNumber){
+//                    locker=locker_available[i] ;
+//            }
+//        }
+//        return locker;
+//    }
     public Client getClient(int ID){
         Client _client=null;
             for(int i=0; i<cant_clients;i++){
@@ -104,9 +110,24 @@ public class Counter {
             }
             return _client;
     }
+    
+    public Client getClientByLocker(int pNumber){
+        Client _client=null;
+            for(int i=0; i<cant_clients;i++){
+                Client client=client_register.get(i);
+                if(client.get_locker().getNumber()==pNumber){
+                    _client= client;
+                    return _client;
+                    
+                }else{
+                    _client= null;
+                }
+            }
+            return _client;
+    }
     //add_client será sustituido a boolean para términos de interfaz(Suscripción exitosa/fallida).
     public String add_client(int ID, String name, String email, int phone, String direction, String gender, String birthday){
-            String number = Integer.toString(ID);
+            String number = Integer.toString(ID);            
             if(number.length()!=9){
                 return("El número de cédula ingresado no es válido");//return false; DEBE CAMBIARSE A LA INTERFAZ!!!
                 }
@@ -119,12 +140,12 @@ public class Counter {
                         return ("El cliente ya se encuentra registrado");//return false //posicionar en lugar del length cuando exista interfaz
                     }
                     else{
-                        int lockers_number=assing_locker();
-                        if(lockers_number==0)
+                        int lockers_number=client_register.size();
+                        if(lockers_number==cant_lockers)
                                 return("No hay lockers disponibles");//return False en caso de que no haya lockers disponibles
                         else{
                             Client client=new Client(ID,name,email, phone,direction,gender,birthday);   
-                            client.set_locker(lockers_number);///
+                            //client.set_locker(lockers_number);///
                             client_register.add(client);
                             cant_clients++;
                             return "";
@@ -149,14 +170,14 @@ public class Counter {
         }
 
     }    
-    public boolean modify_client(int ID,String email,int phone,String Direction){
+    public String modify_client(int ID,String email,int phone,String Direction){
         if(verified_client_existance(ID)!=true){
-            System.out.println("El cliente no se encuentra registrado");
-            return false;
+            return("El cliente no se encuentra registrado");
+             
         }
         if(Integer.toString(phone).length()!=8||email.contains("@")==false||email.contains(".com")==false){
-            System.out.println("Error de formato en la infromación");
-            return false;
+            return("Error de formato en la infromación");
+            
         }
         else{
             Client client=getClient(ID);
@@ -164,7 +185,7 @@ public class Counter {
                 client.set_phone(phone);
                 client.set_direction(direction);
         }
-        return true;
+        return " ";
     }
     //Método que verifica si el cliente se encuentra o no registrado por medio de su ID
     public boolean verified_client_existance(int ID){
@@ -189,21 +210,21 @@ public class Counter {
     }  
     public boolean saveDeliveryEnvelope(int pID,Envelope pDeliverTypeEnvelope){
         Client client= getClient(pID);
-        Locker locker= getLocker(client.get_locker());
+        Locker locker= client.get_locker();
         locker.addEnvelope(pDeliverTypeEnvelope);
         locker.set_state(true);
         return true;
     }
     public boolean saveDeliveryPackage(int pID,Package pDeliverTypePackage){
         Client client= getClient(pID);
-        Locker locker= getLocker(client.get_locker());
+        Locker locker= client.get_locker();
         locker.addPackage(pDeliverTypePackage);
          locker.set_state(true);
         return true;
     }
     public boolean saveDeliveryMagazine(int pID,Magazine pDeliverTypeMagazine){
         Client client= getClient(pID);
-        Locker locker= getLocker(client.get_locker());
+        Locker locker= client.get_locker();
         locker.addMagazine(pDeliverTypeMagazine);
          locker.set_state(true);
         return true;
@@ -214,7 +235,7 @@ public class Counter {
     public ArrayList<Package> non_retired_packages(int ID){
      ArrayList<Package> list=new ArrayList<>();
      Client client= getClient(ID);
-     Locker locker=getLocker(client.get_locker());
+     Locker locker= client.get_locker();
      for(int i=0;i<locker.DeliverPackage().size();i++){
          list.add(locker.DeliverPackage().get(i));
      }
@@ -227,7 +248,7 @@ public class Counter {
     public ArrayList<Envelope> non_retired_envelope(int ID){
      ArrayList<Envelope> list=new ArrayList<>();
      Client client= getClient(ID);
-     Locker locker=getLocker(client.get_locker());
+     Locker locker= client.get_locker();
      for(int i=0;i<locker.DeliverEnvelope().size();i++){
          list.add(locker.DeliverEnvelope().get(i));
      }
@@ -240,7 +261,7 @@ public class Counter {
     public ArrayList<Magazine> non_retired_magazine(int ID){
      ArrayList<Magazine> list=new ArrayList<>();
      Client client= getClient(ID);
-     Locker locker=getLocker(client.get_locker());
+     Locker locker= client.get_locker();
      for(int i=0;i<locker.DeliverMagazine().size();i++){
          list.add(locker.DeliverMagazine().get(i));
      }
@@ -285,8 +306,8 @@ public class Counter {
         double price=0;
         Client client= getClient(pID);
         if (client!=null){
-            client.get_locker();
-            Locker locker= getLocker(client.get_locker()); 
+            //client.get_locker();
+            Locker locker= client.get_locker();
             int option=locker.searchDelivery(pCodeOfDeliver);
             if (option==1){
                 ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
@@ -326,8 +347,8 @@ public class Counter {
         double price=0;
         Client client= getClient(pID);
         System.out.println("_______________________________________");
-        client.get_locker();
-        Locker locker= getLocker(client.get_locker());
+        //client.get_locker();
+        Locker locker= client.get_locker();
         ArrayList<Magazine> magazines =locker.DeliverMagazine();
         ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
         ArrayList<Package> packages=locker.DeliverPackage();
@@ -355,14 +376,8 @@ public class Counter {
         double exchange=0;
         return exchange;
     }
-    //assign_date se encarga de obtener la fecha del ordenador.
-    public static Calendar assing_date(){
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            Calendar.getInstance();
-            System.out.println(dateFormat.format(cal.getTime()));
-            return cal;
-    }
+    
+
     //compare_YMD compara el día, año y mes de 2 fechas; si retorna true las fechas pertencen al mismo día del año, en caso contrario, son fechas distintas.
      public static boolean compare_YMD(Calendar date1,Calendar date2){
             boolean sameDay = date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR) && date1.get(Calendar.DATE) == date2.get(Calendar.DATE) && date1.get(Calendar.MONTH)==date2.get(Calendar.MONTH);
@@ -384,10 +399,10 @@ public class Counter {
                      System.out.println("El cliente no está registrado");
                      return false;
                 }
-                locker=getLocker(client.get_locker());
+                locker= client.get_locker();
            }
            else{
-               locker=getLocker(number);
+               locker=getClient(number).get_locker();
             }       
             if(locker.get_state()==true)
             {
@@ -406,8 +421,7 @@ public class Counter {
         ArrayList<Client> list=new ArrayList<>();
         for(int i=0;i<cant_clients;i++){
             Client client=client_register.get(i);
-            int numLock=client.get_locker();
-            Locker locker=getLocker(numLock);
+            Locker locker=client.get_locker();
             if(locker.get_state()==true){
                 list.add(client);
             }
@@ -420,7 +434,7 @@ public class Counter {
         ArrayList<Package> list=new ArrayList<>();
         for(int i=0;i<cant_clients;i++){
             Client client=client_register.get(i);
-            Locker locker=getLocker(client.get_locker());
+            Locker locker=client.get_locker();
             for(int m=0;m<locker.DeliverPackage().size();m++){
                 Package packagee=locker.DeliverPackage().get(m);
                 list.add(packagee);
@@ -433,7 +447,7 @@ public class Counter {
         ArrayList<Magazine> list=new ArrayList<>();
         for(int i=0;i<cant_clients;i++){
             Client client=client_register.get(i);
-            Locker locker=getLocker(client.get_locker());
+            Locker locker=client.get_locker();
             for(int k=0;k<locker.DeliverMagazine().size();k++){
                 Magazine magazine=locker.DeliverMagazine().get(k);
                 list.add(magazine);
@@ -447,7 +461,7 @@ public class Counter {
         ArrayList<Envelope> list=new ArrayList<>();
         for(int i=0;i<cant_clients;i++){
             Client client=client_register.get(i);
-            Locker locker=getLocker(client.get_locker());
+            Locker locker=client.get_locker();
             for(int j=0;j<locker.DeliverEnvelope().size();j++){
                 Envelope envelope=locker.DeliverEnvelope().get(i);
                 list.add(envelope);
@@ -456,54 +470,114 @@ public class Counter {
     return list;
     }
     //función que retorna lista de tipo string, con los objetos recibidos en una fecha determinada y que no han sido retirados;
-    public ArrayList<String> non_retired_packages_received(int day,int month,int year){
-        ArrayList<String> list=new ArrayList<>();
+    public ArrayList<Package> non_retired_packages_received(int day,int month,int year){
+        ArrayList<Package> list=new ArrayList<>();
          for(int i=0;i<100;i++){
-            if(locker_available[i].get_ocuppied()==true){
-                Locker locker=getLocker(locker_available[i].getNumber());
+            if((client_register.get(i)).get_locker().get_ocuppied()==true){
+                Locker locker=(client_register.get(i)).get_locker();
                 if(locker.get_state()==true){
-                    for(int j=0;j<locker.DeliverEnvelope().size();j++){
-                        Envelope envelope=locker.DeliverEnvelope().get(j);
-                        Calendar date=envelope.get_date();
-                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH+1)&&year==date.get(Calendar.YEAR)){
-                            list.add(Integer.toString(envelope.get_code()));
-                            list.add(envelope.get_remittent());
-                            list.add("Sobre" +envelope.get_typeEnvelope());
-                        }
-                        
-                    }
                     for(int k=0;k<locker.DeliverPackage().size();k++){
                         Package packagee=locker.DeliverPackage().get(k);
                         Calendar date=packagee.get_date();
                         //Es necesario sumarle un elemento al mes, ya que la librería le asigna valores comenzando en 0.
-                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
-                            
-                            list.add(Integer.toString(packagee.get_code()));
-                            list.add(packagee.get_remittent());
-                            list.add("Paquete de: " +packagee.get_description());
+                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){                          
+                            list.add(packagee);
                         }
                     }
-                    for(int m=0;m<locker.DeliverMagazine().size();m++){
+                }       
+            }      
+        }
+    return list;    
+    }
+    //función que retorna lista de tipo envelope, con los objetos recibidos en una fecha determinada y que no han sido retirados;
+    
+    public ArrayList<Envelope> non_retired_envelopes_received(int day,int month,int year){
+        ArrayList<Envelope> list=new ArrayList<>();
+         for(int i=0;i<100;i++){
+            if((client_register.get(i)).get_locker().get_ocuppied()==true){
+                Locker locker=(client_register.get(i)).get_locker();
+                if(locker.get_state()==true){
+                       for(int j=0;j<locker.DeliverEnvelope().size();j++){
+                        Envelope envelope=locker.DeliverEnvelope().get(j);
+                        Calendar date=envelope.get_date();
+                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH+1)&&year==date.get(Calendar.YEAR)){
+                            list.add(envelope);
+                        }
+                    }
+                }     
+            }      
+        }
+    return list;    
+    }
+     //función que retorna lista de tipo magazine, con los objetos recibidos en una fecha determinada y que no han sido retirados;
+    public ArrayList<Magazine> non_retired_magazine_received(int day,int month,int year){
+        ArrayList<Magazine> list=new ArrayList<>();
+         for(int i=0;i<100;i++){
+            if((client_register.get(i)).get_locker().get_ocuppied()==true){
+                Locker locker=(client_register.get(i)).get_locker();
+                if(locker.get_state()==true){                        
+                  for(int m=0;m<locker.DeliverMagazine().size();m++){
                         Magazine magazine=locker.DeliverMagazine().get(m);
                         Calendar date=magazine.get_date();
                         if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
-                            list.add(Integer.toString(magazine.get_code()));
-                            list.add(magazine.get_remittent());
-                            list.add("Revista " +magazine.get_name());
+                            list.add(magazine);
                         }               
                      }
                 }
-        
-            }      
-        }
-    for(int i=0;i<list.size();i++)
-    {
-        System.out.println(list.get(i));
-        if((i+1)%3==0)
-            System.out.println("_________");
-    }
-    return list;    
-    }
+            }
+         }
+         return list;
+     }
+    
+    //función que retorna lista de tipo string, con los objetos recibidos en una fecha determinada y que no han sido retirados;
+//    public ArrayList<String> non_retired_packages_received(int day,int month,int year){
+//        ArrayList<String> list=new ArrayList<>();
+//         for(int i=0;i<100;i++){
+//            if(locker_available[i].get_ocuppied()==true){
+//                Locker locker=getLocker(locker_available[i].getNumber());
+//                if(locker.get_state()==true){
+//                    for(int j=0;j<locker.DeliverEnvelope().size();j++){
+//                        Envelope envelope=locker.DeliverEnvelope().get(j);
+//                        Calendar date=envelope.get_date();
+//                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH+1)&&year==date.get(Calendar.YEAR)){
+//                            list.add(Integer.toString(envelope.get_code()));
+//                            list.add(envelope.get_remittent());
+//                            list.add("Sobre" +envelope.get_typeEnvelope());
+//                        }
+//                        
+//                    }
+//                    for(int k=0;k<locker.DeliverPackage().size();k++){
+//                        Package packagee=locker.DeliverPackage().get(k);
+//                        Calendar date=packagee.get_date();
+//                        //Es necesario sumarle un elemento al mes, ya que la librería le asigna valores comenzando en 0.
+//                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
+//                            
+//                            list.add(Integer.toString(packagee.get_code()));
+//                            list.add(packagee.get_remittent());
+//                            list.add("Paquete de: " +packagee.get_description());
+//                        }
+//                    }
+//                    for(int m=0;m<locker.DeliverMagazine().size();m++){
+//                        Magazine magazine=locker.DeliverMagazine().get(m);
+//                        Calendar date=magazine.get_date();
+//                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
+//                            list.add(Integer.toString(magazine.get_code()));
+//                            list.add(magazine.get_remittent());
+//                            list.add("Revista " +magazine.get_name());
+//                        }               
+//                     }
+//                }
+//        
+//            }      
+//        }
+//    for(int i=0;i<list.size();i++)
+//    {
+//        System.out.println(list.get(i));
+//        if((i+1)%3==0)
+//            System.out.println("_________");
+//    }
+//    return list;    
+//    }
     
     
     public ArrayList<String> retired_packages_received(int day,int month,int year){
@@ -586,13 +660,13 @@ public class Counter {
      public ArrayList<Package> retrieve_packages(ArrayList<Integer> list,int ID){
         ArrayList<Package> packages=new ArrayList<>();
         Client client=getClient(ID);
-        Locker locker=getLocker(client.get_locker());
+        Locker locker=client.get_locker();
         for(int i=0;i<list.size();i++){
             for(int k=0;k<locker.DeliverPackage().size();k++){
                 Package packagee=locker.DeliverPackage().get(k);
                 if(packagee.get_code()==list.get(i));
                 {
-                    packagee.setOut_date(assing_date());
+                    packagee.setOut_date();
                     Sold_packages.add(packagee);
                     packages.add(packagee);
                     locker.DeliverPackage().remove(packagee);
@@ -609,13 +683,13 @@ public class Counter {
     public ArrayList<Envelope> retrieve_envelopes(ArrayList<Integer> list,int ID){
         ArrayList<Envelope> envelopes=new ArrayList<>();
         Client client=getClient(ID);
-        Locker locker=getLocker(client.get_locker());
+        Locker locker=client.get_locker();
         for(int i=0;i<list.size();i++){
             for(int k=0;k<locker.DeliverEnvelope().size();k++){
                 Envelope envelope=locker.DeliverEnvelope().get(k);
                 if(envelope.get_code()==list.get(i));
                 {
-                    envelope.setOut_date(assing_date());
+                    envelope.setOut_date();
                     Sold_envelopes.add(envelope);
                     envelopes.add(envelope);
                     locker.DeliverEnvelope().remove(envelope);
@@ -632,13 +706,13 @@ public class Counter {
     public ArrayList<Magazine> retrieve_magazines(ArrayList<Integer> list,int ID){
         ArrayList<Magazine> magazines=new ArrayList<>();
         Client client=getClient(ID);
-        Locker locker=getLocker(client.get_locker());
+        Locker locker=client.get_locker();
         for(int i=0;i<list.size();i++){
             for(int k=0;k<locker.DeliverMagazine().size();k++){
                 Magazine magazine=locker.DeliverMagazine().get(k);
                 if(magazine.get_code()==list.get(i));
                 {
-                    magazine.setOut_date(assing_date());
+                    magazine.setOut_date();
                     Sold_magazines.add(magazine);
                     magazines.add(magazine);
                     locker.DeliverEnvelope().remove(magazine);
@@ -668,12 +742,12 @@ public class Counter {
             Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
             Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
             Aerostore.changeType(304900952);
-            Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",assing_date(),assing_date(),3123, "cocina mediterranea", false, "cocina");
+            Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
 
             Aerostore.saveDeliveryMagazine(304900950, deliver);
-            Package deliver1=new Package(true,"computadora mac","yorley",assing_date(),assing_date(),100,true,true,40);
+            Package deliver1=new Package(true,"computadora mac","yorley",100,true,true,40);
             Aerostore.saveDeliveryPackage(304900952, deliver1);
-            Package deliver2=new Package(true,"almohadas","yorley",assing_date(),assing_date(),14513,true,true,60);
+            Package deliver2=new Package(true,"almohadas","yorley",14513,true,true,60);
             Aerostore.saveDeliveryPackage(304900952, deliver2);
             Aerostore.chargeTotalPrice_InsideLocker(304900950);
         }

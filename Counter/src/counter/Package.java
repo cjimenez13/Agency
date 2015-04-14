@@ -11,8 +11,8 @@ public class Package extends Delivery {
     private double weight;
     private boolean technological;
 
-    public Package(boolean status, String description, String remittent,Calendar date,Calendar outdate,double price,boolean frailness, boolean technological, double weight ) {
-        super(status, description, remittent,date,outdate,price);
+    public Package(boolean status, String description, String remittent,double price,boolean frailness, boolean technological, double weight ) {
+        super(status, description, remittent,price);
         this.frailness = frailness;
         this.weight = weight;
         this.technological = technological;
