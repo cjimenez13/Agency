@@ -11,8 +11,8 @@ public class Envelope extends Delivery {
     private String typeContent;
     private double weight;   
 
-    public Envelope(boolean status,String description,String remittent,Calendar date,String typeEnvelope, String typeContent, double weight) {
-        super(status,description,remittent,date);
+    public Envelope(boolean status,String description,String remittent,Calendar date,Calendar outdate,double price,String typeEnvelope, String typeContent, double weight) {
+        super(status,description,remittent,date,outdate,price);
         this.typeEnvelope = typeEnvelope;
         this.typeContent = typeContent;
         this.weight = weight;
@@ -62,8 +62,8 @@ public class Envelope extends Delivery {
         return tax;
     }
     public double getPrice(){
-        double price=0;
-        price+=getTax();
-        return price;
+        //double price=0;
+        this.price+=getTax();
+        return this.price;
     }
 }

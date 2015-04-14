@@ -17,12 +17,16 @@ public class Delivery {
 
     protected String remittent;
     protected Calendar date;
-    public Delivery(boolean status, String description, String remittent,Calendar date) {
+    protected Calendar out_date;
+    protected Double price;
+    public Delivery(boolean status, String description, String remittent,Calendar date,Calendar out_date,double price) {
         this.code=identifier;
         this.status = status;
         this.description = description;
         this.remittent = remittent;
         this.date=date;
+        this.out_date=out_date;
+        this.price=price;
         identifier++;
     }
 

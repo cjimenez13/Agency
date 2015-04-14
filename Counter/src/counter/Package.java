@@ -11,8 +11,8 @@ public class Package extends Delivery {
     private double weight;
     private boolean technological;
 
-    public Package(boolean status, String description, String remittent,Calendar date,boolean frailness, boolean technological, double weight ) {
-        super(status, description, remittent,date);
+    public Package(boolean status, String description, String remittent,Calendar date,Calendar outdate,double price,boolean frailness, boolean technological, double weight ) {
+        super(status, description, remittent,date,outdate,price);
         this.frailness = frailness;
         this.weight = weight;
         this.technological = technological;
@@ -63,9 +63,9 @@ public class Package extends Delivery {
         return tax;
     }
     public double getPrice(){
-        double price=0;
-        price+=getTax();
-        return price;
+        //double price=0;
+        this.price+=getTax();
+        return this.price;
     }
    
     
