@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public  final class Locker {
     private int number;
     private boolean state;//Determinna si está vacío
-     private boolean ocuppied;//Determina si posee dueño.
+    private boolean ocuppied;//Determina si posee dueño.
     private static int identifier=1000;
-    private ArrayList<Package> lockerPackages = new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
-    private ArrayList<Envelope> lockerEnvelopes=new ArrayList<>();
-    private ArrayList<Magazine> lockerMagazines=new ArrayList<>();
+    private ArrayList<Package> lockerPackages= new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
+    private ArrayList<Envelope> lockerEnvelopes= new ArrayList<>();
+    private ArrayList<Magazine> lockerMagazines= new ArrayList<>();
     public Locker() {
         this.number = identifier;
         this.state = false; //En false el locker estará vacío.
