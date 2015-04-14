@@ -5,6 +5,7 @@
  */
 package View;
 
+import counter.Client;
 import counter.Counter;
 import javax.swing.JOptionPane;
 
@@ -273,7 +274,7 @@ public class ClientView extends javax.swing.JFrame {
         lbl_typeModify.setText("Tipo de consulta");
 
         cbox_typeModify.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbox_typeModify.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Identificación del cliente", "Número de Casillero" }));
+        cbox_typeModify.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Identificación del cliente", "Número de Casillero" }));
 
         javax.swing.GroupLayout Register_Panel1Layout = new javax.swing.GroupLayout(Register_Panel1);
         Register_Panel1.setLayout(Register_Panel1Layout);
@@ -293,13 +294,12 @@ public class ClientView extends javax.swing.JFrame {
                     .addGroup(Register_Panel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_DirectionModify)
-                                .addComponent(lbl_PhoneNumberModify)
-                                .addComponent(lbl_EmailModify)
-                                .addComponent(txt_EmailModify, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                .addComponent(txt_PhoneNumberModify)
-                                .addComponent(txt_DirectionModify))
+                            .addComponent(lbl_DirectionModify)
+                            .addComponent(lbl_PhoneNumberModify)
+                            .addComponent(lbl_EmailModify)
+                            .addComponent(txt_EmailModify)
+                            .addComponent(txt_PhoneNumberModify)
+                            .addComponent(txt_DirectionModify)
                             .addGroup(Register_Panel1Layout.createSequentialGroup()
                                 .addComponent(lbl_typeModify)
                                 .addGap(18, 18, 18)
@@ -685,7 +685,7 @@ public class ClientView extends javax.swing.JFrame {
             if ((error.equals(""))!=true){
                 JOptionPane.showMessageDialog(null,error);
             }else{
-                JOptionPane.showMessageDialog(null,"Su número de locker es:"+String.valueOf(Counter.getInstance().getClient(ID).get_locker()));
+                JOptionPane.showMessageDialog(null,"Su número de locker es:"+String.valueOf(Counter.getInstance().getClient(ID).get_locker().getNumber()));
             }
             txt_Name.setText("");
             txt_ID.setText("");
@@ -695,19 +695,82 @@ public class ClientView extends javax.swing.JFrame {
             txt_Birthday.setText("");
             cbox_GenderRegister.setSelectedIndex(0);
         }
+        else{
+            JOptionPane.showMessageDialog(null,"Debe completar todos los datos solicitados");
+        }
         
         
     }//GEN-LAST:event_btn_addClientActionPerformed
 
     private void btn_ModifyClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModifyClientActionPerformed
         // TODO add your handling code here:
+        int ID=0;
+        if(!(txt_EmailModify.getText().equals("")|| txt_PhoneNumberModify.getText().equals("")||txt_DirectionModify.getText().equals(""))){
+            if(cbox_typeModify.getSelectedItem().toString().equals("Identificación del cliente")){
+                Client client=Counter.getInstance().getClient(Integer.valueOf(txt_IDModify.getText()));
+                ID= client.get_ID();
+            }
+            if(cbox_typeModify.getSelectedItem().toString().equals("Número de Casillero")){
+               Client client=Counter.getInstance().getClientByLocker(Integer.valueOf(txt_IDModify.getText()));
+                ID= client.get_ID();
+            }
+            
+                String email=txt_EmailModify.getText();
+                int phone= Integer.valueOf(txt_PhoneNumberModify.getText());
+                String direction=txt_DirectionModify.getText();
+                String error=Counter.getInstance().modify_client(ID, email, phone, direction);
+                if ((error.equals(""))!=true){
+                    JOptionPane.showMessageDialog(null,error);
+                }
+            JOptionPane.showMessageDialog(null,"El cliente ha sido modificado");
+            txt_EmailModify.setText("");
+            txt_PhoneNumberModify.setText("");
+            txt_DirectionModify.setText("");
+            cbox_typeModify.setSelectedIndex(0);
+        }
         
         
     }//GEN-LAST:event_btn_ModifyClientActionPerformed
 
     private void btn_SearchClientModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientModifyActionPerformed
         // TODO add your handling code here:
-        
+        if(cbox_typeModify.getSelectedItem().toString().equals(" ")){
+             JOptionPane.showMessageDialog(null,"Debe seleccionar un tipo de busqueda");
+        }
+        if(cbox_typeModify.getSelectedItem().toString().equals("Identificación del cliente")){
+            if(!(txt_IDModify.getText().equals(""))){
+                Client client=Counter.getInstance().getClient(Integer.valueOf(txt_IDModify.getText()));
+                if (client!=null){
+                txt_EmailModify.setText(client.get_email());
+                txt_PhoneNumberModify.setText(String.valueOf(client.get_phone()));
+                txt_DirectionModify.setText(client.get_direction());
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"La identificacion ingresada no pertenece a nincuno de nuestros clientes,"
+                                                + "inténtelo de nuevo");
+            }
+        }else{
+                JOptionPane.showMessageDialog(null,"Debe ingersar un numero de identificacion");
+            }
+     }else{
+            if(!(txt_IDModify.getText().equals(""))){
+                Client client=Counter.getInstance().getClientByLocker(Integer.valueOf(txt_IDModify.getText()));
+                if (client!=null){
+                    txt_EmailModify.setText(client.get_email());
+                    txt_PhoneNumberModify.setText(String.valueOf(client.get_phone()));
+                    txt_DirectionModify.setText(client.get_direction());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El número de casillero ingresado no pertenece a ninguno de nuestros clientes, "
+                                                    + "inténtelo de nuevo");
+                }
+            }else{
+                    JOptionPane.showMessageDialog(null,"Debe ingersar un numero de casillero");
+                }
+            
+            
+            
+        }
         
     }//GEN-LAST:event_btn_SearchClientModifyActionPerformed
 

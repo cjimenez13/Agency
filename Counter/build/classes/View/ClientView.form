@@ -288,14 +288,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lbl_DirectionModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_PhoneNumberModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_EmailModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_EmailModify" alignment="0" pref="280" max="32767" attributes="0"/>
-                                      <Component id="txt_PhoneNumberModify" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txt_DirectionModify" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="lbl_DirectionModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_PhoneNumberModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_EmailModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_EmailModify" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_PhoneNumberModify" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_DirectionModify" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbl_typeModify" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -444,9 +442,10 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Identificaci&#xf3;n del cliente"/>
-                    <StringItem index="1" value="N&#xfa;mero de Casillero"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value=" "/>
+                    <StringItem index="1" value="Identificaci&#xf3;n del cliente"/>
+                    <StringItem index="2" value="N&#xfa;mero de Casillero"/>
                   </StringArray>
                 </Property>
               </Properties>

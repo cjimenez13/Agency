@@ -1,7 +1,15 @@
 package View;
 
-
+import counter.Client;
+import counter.Package;
+import counter.Counter;
+import counter.Envelope;
+import counter.Magazine;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -190,6 +198,11 @@ public class CounterView extends javax.swing.JFrame {
         lbl_IDdrop.setText("Identificación");
 
         btn_SearchClientdrop.setText("Buscar");
+        btn_SearchClientdrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchClientdropActionPerformed(evt);
+            }
+        });
 
         lbl_CodeDrop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_CodeDrop.setText("Codigo");
@@ -354,7 +367,7 @@ public class CounterView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReceiveDeliveryLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Receive)
-                .addContainerGap())
+                .addGap(119, 119, 119))
         );
         panel_ReceiveDeliveryLayout.setVerticalGroup(
             panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,12 +388,12 @@ public class CounterView extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(txt_RemittentRD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_TypeDeliery)
                     .addComponent(cbox_TypeReceivedArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                 .addComponent(btn_Receive)
-                .addContainerGap())
+                .addGap(64, 64, 64))
         );
 
         tabPanel_CounterPrincipal.addTab("Recepcion de  Artículos", panel_ReceiveDelivery);
@@ -912,7 +925,7 @@ public class CounterView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!(txt_Destinatary.getText().equals("") ||txt_DescriptionRD.getText().equals("") 
                 || txt_RemittentRD.getText().equals(""))) {
-            String destinatary = txt_Destinatary.getText();
+            int destinataryID = Integer.valueOf(txt_Destinatary.getText());
             String description = txt_DescriptionRD.getText();
             String remittent = txt_RemittentRD.getText();
             String typeArticle = cbox_TypeReceivedArticle.getSelectedItem().toString();
@@ -927,7 +940,9 @@ public class CounterView extends javax.swing.JFrame {
                     if (cbox_isTechonology.getSelectedItem().toString().equals("No")){
                         isTechnology = false;
                     }
-                    ///////// Crear paquete 
+                    Package nPackage = new Package(false,description,remittent,0,
+                            isFrailness, isTechnology,weight);
+                    Counter.getInstance().saveDeliveryPackage(destinataryID, nPackage);                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                 }             
@@ -937,7 +952,9 @@ public class CounterView extends javax.swing.JFrame {
                     int weight = Integer.valueOf(txt_Weight.getText());
                     String typeEnvelope = lbl_TypeEnvelope.getText();
                     String typeContent = lbl_TypeContent.getText();
-                    ////// Crear Sobreeee
+                    Envelope nEnvelope = new Envelope(false,description,remittent,0,
+                            typeEnvelope, typeContent,weight);  
+                    Counter.getInstance().saveDeliveryEnvelope(destinataryID, nEnvelope);
                 }else{
                     JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                 }
@@ -949,7 +966,9 @@ public class CounterView extends javax.swing.JFrame {
                     if (cbox_isCatalog.getSelectedItem().toString().equals("No")){
                         isCatalog = false;
                     }
-                    ////// Crea las revistas
+                    Magazine nMagazine = new Magazine(false,description,remittent,0,
+                            name, isCatalog,topic);
+                    Counter.getInstance().saveDeliveryMagazine(destinataryID, nMagazine);
                 }else{
                     JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                 }
@@ -960,6 +979,50 @@ public class CounterView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
         }
     }//GEN-LAST:event_btn_ReceiveActionPerformed
+
+    private void btn_SearchClientdropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientdropActionPerformed
+        // TODO add your handling code here:
+        panel_DropDelivery.removeAll();
+        int id = Integer.valueOf(txt_IDdrop.getText());
+        Client client = Counter.getInstance().getClient(id);
+        if (client != null){                        
+            ////Variables para editar el margen en el que se colocan
+            int firstMargenX = 45;
+            int firstMargenY = 15;
+            int widthLbl = 80;
+            int heightLbl = 25;
+            int spaceBetweenLblY = 20;
+            for(int iDelivery = 0; iDelivery!=100; iDelivery++){
+                CheckBox checkBox = new CheckBox(null,null,null);
+                JLabel lbl_code = new JLabel();
+                JLabel lbl_deliveryType = new JLabel();
+                JLabel lbl_isCommited = new JLabel();
+                JLabel lbl_Remittent = new JLabel();
+                JLabel lbl_DateIn = new JLabel();
+                JLabel lbl_Description = new JLabel();
+
+                lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_code.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_code.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_code.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_code.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_code.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                
+                panel_DropDelivery.add(lbl_code);
+                panel_DropDelivery.add(lbl_deliveryType);
+                panel_DropDelivery.add(lbl_isCommited);
+                panel_DropDelivery.add(lbl_Remittent);
+                panel_DropDelivery.add(lbl_DateIn);
+                panel_DropDelivery.add(lbl_Description);
+                
+            }
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(null,"No se encontro el cliente solicitado");
+        }
+        panel_DropDelivery.updateUI();
+    }//GEN-LAST:event_btn_SearchClientdropActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -992,6 +1055,7 @@ public class CounterView extends javax.swing.JFrame {
                 new CounterView().setVisible(true);
             }
         });
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1081,4 +1145,50 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JTextField txt_IDdrop;
     private javax.swing.JTextField txt_RemittentRD;
     // End of variables declaration//GEN-END:variables
+    private class CheckBox extends JCheckBox{
+        private Package _Package = null;
+        private Envelope _Envelope = null;
+        private Magazine _Magazine = null;
+        boolean isSelected = false;
+        public CheckBox(Package pPackage, Envelope pEnvelope, Magazine pMagazine){
+            _Package = pPackage;
+            _Envelope = pEnvelope;
+            _Magazine = pMagazine;
+        }
+        public Package getPackage() {
+            return _Package;
+        }
+
+        public void setPackage(Package _Package) {
+            this._Package = _Package;
+        }
+
+        public Envelope getEnvelope() {
+            return _Envelope;
+        }
+
+        public void setEnvelope(Envelope _Envelope) {
+            this._Envelope = _Envelope;
+        }
+
+        public Magazine getMagazine() {
+            return _Magazine;
+        }
+
+        public void setMagazine(Magazine _Magazine) {
+            this._Magazine = _Magazine;
+        }
+
+        public boolean isIsSelected() {
+            return isSelected;
+        }
+
+        public void setIsSelected(boolean isSelected) {
+            this.isSelected = isSelected;
+        }
+        
+
+        
+        
+    }
 }

@@ -19,7 +19,9 @@ public class Client {
     private String birthday;
     private String type;
     private int cant_compras;
-    private int locker;//# de Locker que le corresponde
+    //private int numlocker;//# de Locker que le corresponde
+    private Locker locker;
+    
 
     public Client(int ID, String name, String email, int phone, String direction, String gender, String birthday) {
         this.ID = ID;
@@ -31,14 +33,15 @@ public class Client {
         this.birthday = birthday;
         this.type = "Estandar";
         this.cant_compras=0;
-        this.locker=locker;
+        this.locker = new Locker();
+        //this.locker=locker;
     }
 
-    public int get_locker() {
+    public Locker get_locker() {
         return locker;
     }
 
-    public void set_locker(int locker) {
+    public void set_locker(Locker locker) {
         this.locker = locker;
     }
 
@@ -114,7 +117,7 @@ public class Client {
         System.out.println("Fecha de nacimiento: "+get_birthday());
         System.out.println("Tipo de cuenta: "+get_type());
         System.out.println("Cantidad de compras: "+get_cant_compras());
-        System.out.println("Número de casillero: "+get_locker());
+        System.out.println("Número de casillero: "+get_locker().getNumber());
         System.out.println("---------------------");
     }
 }

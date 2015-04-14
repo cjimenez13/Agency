@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package counter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 /**
  *
@@ -19,13 +21,12 @@ public class Delivery {
     protected Calendar date;
     protected Calendar out_date;
     protected Double price;
-    public Delivery(boolean status, String description, String remittent,Calendar date,Calendar out_date,double price) {
+    public Delivery(boolean status, String description, String remittent,double price) {
         this.code=identifier;
         this.status = status;
         this.description = description;
         this.remittent = remittent;
-        this.date=date;
-        this.out_date=out_date;
+        this.date=assing_date();
         this.price=price;
         identifier++;
     }
@@ -64,15 +65,22 @@ public class Delivery {
         return out_date;
     }
 
-    public void setOut_date(Calendar out_date) {
-        this.out_date = out_date;
+    public void setOut_date() {
+        this.out_date = assing_date();
     }
 
     public Double get_original_price() {
         return price;
     }
     
-    
+        //assign_date se encarga de obtener la fecha del ordenador.
+    public static Calendar assing_date(){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            Calendar.getInstance();
+            System.out.println(dateFormat.format(cal.getTime()));
+            return cal;
+    }
     public void Display_delivery(){
         System.out.println("Código: "+get_code());
         System.out.println("Estado: "+get_status());
