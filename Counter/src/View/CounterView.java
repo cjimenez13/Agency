@@ -8,7 +8,12 @@ import counter.Magazine;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.Calendar;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,25 +25,27 @@ import javax.swing.JTextField;
  * @author YorleydeMaría
  */
 public class CounterView extends javax.swing.JFrame {
-    Font _BasicFont = new Font("Tahoma",0,14);
-    JLabel lbl_TypeContent = new JLabel("Tipo Contenido");
-    JLabel lbl_Weight = new JLabel("Peso");
-    JLabel lbl_isTechonology = new JLabel("Tecnologico");
-    JLabel lbl_MagazineName = new JLabel("Nombre");
-    JLabel lbl_MagazineTopic = new JLabel("Revista");
-    JLabel lbl_isCatalog = new JLabel("Catalogo");
-    JLabel lbl_TypeEnvelope = new JLabel("Tipo de sobre");
-    JLabel lbl_isFrailness = new JLabel("Fragilidad");
-    JTextField txt_TypeContent = new JTextField();
-    JTextField txt_Weight = new JTextField();
-    JTextField txt_MagazineName = new JTextField();
-    JTextField txt_MagazineTopic = new JTextField();
-    JTextField txt_TypeEnvelope = new JTextField();
-    
-    String[] isSomething = {"Si","No" }; 
-    JComboBox cbox_isFrailness = new JComboBox(isSomething);
-    JComboBox cbox_isTechonology = new JComboBox(isSomething);
-    JComboBox cbox_isCatalog = new JComboBox(isSomething);
+    // Variables para el panel de retiro de paquetes
+    private ArrayList<CheckBox>_CheckBoxList = new ArrayList<CheckBox>();
+    // Variables para el panel de recepcion de paquetes
+    private Font _BasicFont = new Font("Tahoma",0,14);
+    private JLabel lbl_TypeContent = new JLabel("Tipo Contenido");
+    private JLabel lbl_Weight = new JLabel("Peso");
+    private JLabel lbl_isTechonology = new JLabel("Tecnologico");
+    private JLabel lbl_MagazineName = new JLabel("Nombre");
+    private JLabel lbl_MagazineTopic = new JLabel("Revista");
+    private JLabel lbl_isCatalog = new JLabel("Catalogo");
+    private JLabel lbl_TypeEnvelope = new JLabel("Tipo de sobre");
+    private JLabel lbl_isFrailness = new JLabel("Fragilidad");
+    private JTextField txt_TypeContent = new JTextField();
+    private JTextField txt_Weight = new JTextField();
+    private JTextField txt_MagazineName = new JTextField();
+    private JTextField txt_MagazineTopic = new JTextField();
+    private JTextField txt_TypeEnvelope = new JTextField();
+    private String[] isSomething = {"Si","No" }; 
+    private JComboBox cbox_isFrailness = new JComboBox(isSomething);
+    private JComboBox cbox_isTechonology = new JComboBox(isSomething);
+    private JComboBox cbox_isCatalog = new JComboBox(isSomething);
     
 
     public CounterView() {
@@ -88,7 +95,6 @@ public class CounterView extends javax.swing.JFrame {
 
         tabPanel_CounterPrincipal = new javax.swing.JTabbedPane();
         panel_ReturnDelivery = new javax.swing.JPanel();
-        btn_CountableReportdrop = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel_DropDelivery = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -101,7 +107,7 @@ public class CounterView extends javax.swing.JFrame {
         lbl_DateDrop = new javax.swing.JLabel();
         lbl_DescriptionDrop = new javax.swing.JLabel();
         btn_DropDelivery = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cbox_selectAll = new javax.swing.JCheckBox();
         panel_ReceiveDelivery = new javax.swing.JPanel();
         lbl_Destinatary = new javax.swing.JLabel();
         txt_Destinatary = new javax.swing.JTextField();
@@ -150,15 +156,15 @@ public class CounterView extends javax.swing.JFrame {
         panel_PackagesSDeliver = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panel_MagazineSDeliver = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        panel_Currency = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         lbl_TypeBuyCur = new javax.swing.JLabel();
         lbl_TypeSellCur = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        panel_Report = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jSpinner4 = new javax.swing.JSpinner();
         jScrollPane5 = new javax.swing.JScrollPane();
+        panel_ReportDisplay = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         lbl_Tax = new javax.swing.JLabel();
@@ -167,14 +173,18 @@ public class CounterView extends javax.swing.JFrame {
         lbl_Disscount = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lbl_TotalDolars = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        lbl_TotalColons = new javax.swing.JLabel();
+        btn_CreateReport = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        spinner_DayReport = new javax.swing.JSpinner();
+        spinner_MonthReport = new javax.swing.JSpinner();
+        spinner_YearReport = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btn_CountableReportdrop.setText("Generar Reporte Contable");
 
         panel_DropDelivery.setPreferredSize(new java.awt.Dimension(580, 1000));
 
@@ -221,11 +231,16 @@ public class CounterView extends javax.swing.JFrame {
 
         btn_DropDelivery.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btn_DropDelivery.setText("Retirar");
-
-        jCheckBox1.setText("Seleccionar todos los artículos");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        btn_DropDelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                btn_DropDeliveryActionPerformed(evt);
+            }
+        });
+
+        cbox_selectAll.setText("Seleccionar todos los artículos");
+        cbox_selectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_selectAllActionPerformed(evt);
             }
         });
 
@@ -243,11 +258,9 @@ public class CounterView extends javax.swing.JFrame {
                                     .addComponent(lbl_IDdrop, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_IDdrop, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(53, 53, 53)
-                                .addComponent(btn_SearchClientdrop)
-                                .addGap(25, 25, 25)
-                                .addComponent(btn_CountableReportdrop))
+                                .addComponent(btn_SearchClientdrop))
                             .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
-                                .addGap(77, 77, 77)
+                                .addGap(109, 109, 109)
                                 .addComponent(lbl_CodeDrop)
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel2)
@@ -257,7 +270,7 @@ public class CounterView extends javax.swing.JFrame {
                                 .addComponent(lbl_RemittentDrop)
                                 .addGap(36, 36, 36)
                                 .addComponent(lbl_DateDrop)
-                                .addGap(120, 120, 120)
+                                .addGap(88, 88, 88)
                                 .addComponent(lbl_DescriptionDrop)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReturnDeliveryLayout.createSequentialGroup()
@@ -267,24 +280,19 @@ public class CounterView extends javax.swing.JFrame {
             .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
                 .addGap(0, 33, Short.MAX_VALUE)
                 .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(cbox_selectAll)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         panel_ReturnDeliveryLayout.setVerticalGroup(
             panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
-                .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btn_CountableReportdrop))
-                    .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbl_IDdrop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_IDdrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_SearchClientdrop))))
+                .addContainerGap()
+                .addComponent(lbl_IDdrop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_IDdrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_SearchClientdrop))
                 .addGap(18, 18, 18)
                 .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,7 +306,7 @@ public class CounterView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(cbox_selectAll)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(btn_DropDelivery)
                 .addContainerGap())
@@ -661,22 +669,22 @@ public class CounterView extends javax.swing.JFrame {
         lbl_TypeSellCur.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_TypeSellCur.setText("000000.0");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_CurrencyLayout = new javax.swing.GroupLayout(panel_Currency);
+        panel_Currency.setLayout(panel_CurrencyLayout);
+        panel_CurrencyLayout.setHorizontalGroup(
+            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_CurrencyLayout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_TypeSellCur)
                     .addComponent(lbl_TypeBuyCur)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
                 .addContainerGap(349, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panel_CurrencyLayout.setVerticalGroup(
+            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_CurrencyLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
@@ -688,11 +696,24 @@ public class CounterView extends javax.swing.JFrame {
                 .addContainerGap(409, Short.MAX_VALUE))
         );
 
-        tabPanel_CounterPrincipal.addTab("Consultar Tipo de Cambio", jPanel1);
+        tabPanel_CounterPrincipal.addTab("Consultar Tipo de Cambio", panel_Currency);
 
-        jLabel14.setText("Fecha");
+        jLabel14.setText("Día");
 
-        jSpinner4.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1428968760000L), new java.util.Date(1428968760000L), null, java.util.Calendar.DAY_OF_MONTH));
+        panel_ReportDisplay.setPreferredSize(new java.awt.Dimension(680, 1000));
+
+        javax.swing.GroupLayout panel_ReportDisplayLayout = new javax.swing.GroupLayout(panel_ReportDisplay);
+        panel_ReportDisplay.setLayout(panel_ReportDisplayLayout);
+        panel_ReportDisplayLayout.setHorizontalGroup(
+            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+        panel_ReportDisplayLayout.setVerticalGroup(
+            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+
+        jScrollPane5.setViewportView(panel_ReportDisplay);
 
         jLabel15.setText("Código");
 
@@ -710,93 +731,133 @@ public class CounterView extends javax.swing.JFrame {
 
         jLabel18.setText("Monto Total:");
 
-        jLabel19.setText("000000.0");
+        lbl_TotalDolars.setText("000000.0");
 
         jLabel20.setText("$");
 
         jLabel21.setText("₡");
 
-        jLabel22.setText("000000.0");
+        lbl_TotalColons.setText("000000.0");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        btn_CreateReport.setText("Generar Reporte");
+        btn_CreateReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateReportActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Mes");
+
+        jLabel22.setText("Año");
+
+        spinner_DayReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        spinner_MonthReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        spinner_YearReport.setModel(new javax.swing.SpinnerNumberModel(2015, 2015, 2030, 1));
+
+        javax.swing.GroupLayout panel_ReportLayout = new javax.swing.GroupLayout(panel_Report);
+        panel_Report.setLayout(panel_ReportLayout);
+        panel_ReportLayout.setHorizontalGroup(
+            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ReportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel17)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel16)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(panel_ReportLayout.createSequentialGroup()
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel17)
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel16))))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addGap(222, 222, 222)
+                        .addComponent(btn_CreateReport)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(lbl_Tax)
-                        .addGap(37, 37, 37)
-                        .addComponent(lbl_Disscount)
-                        .addGap(42, 42, 42)
-                        .addComponent(lbl_Colones)
-                        .addGap(43, 43, 43)
-                        .addComponent(lbl_Dollars)
-                        .addGap(0, 204, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel14)
-                                .addGap(80, 80, 80))
-                            .addComponent(jSpinner4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(lbl_Tax))
+                                .addGap(37, 37, 37)
+                                .addComponent(lbl_Disscount)
+                                .addGap(42, 42, 42)
+                                .addComponent(lbl_Colones)
+                                .addGap(43, 43, 43)
+                                .addComponent(lbl_Dollars))
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19)
+                .addComponent(lbl_TotalDolars)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel22)
+                .addComponent(lbl_TotalColons)
                 .addGap(47, 47, 47))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panel_ReportLayout.setVerticalGroup(
+            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ReportLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel17))
+                .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(lbl_Tax)
-                    .addComponent(lbl_Colones)
-                    .addComponent(lbl_Dollars)
-                    .addComponent(lbl_Disscount))
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addComponent(btn_CreateReport)
+                        .addGap(55, 55, 55)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(lbl_Tax)
+                            .addComponent(lbl_Colones)
+                            .addComponent(lbl_Dollars)
+                            .addComponent(lbl_Disscount)))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel19)
+                    .addComponent(lbl_TotalDolars)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel22)
+                    .addComponent(lbl_TotalColons)
                     .addComponent(jLabel21))
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
-        tabPanel_CounterPrincipal.addTab("Reporte", jPanel2);
+        tabPanel_CounterPrincipal.addTab("Reporte", panel_Report);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -917,10 +978,6 @@ public class CounterView extends javax.swing.JFrame {
             
     }//GEN-LAST:event_cbox_TypeReceivedArticleActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void btn_ReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReceiveActionPerformed
         // TODO add your handling code here:
         if (!(txt_Destinatary.getText().equals("") ||txt_DescriptionRD.getText().equals("") 
@@ -980,50 +1037,235 @@ public class CounterView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_ReceiveActionPerformed
 
+    private void cbox_selectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_selectAllActionPerformed
+        // TODO add your handling code here:      
+        for (int iBox = 0; iBox != _CheckBoxList.size(); iBox++){
+            _CheckBoxList.get(iBox).setSelected(cbox_selectAll.isSelected());
+        }
+    }//GEN-LAST:event_cbox_selectAllActionPerformed
+
+    private void btn_DropDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DropDeliveryActionPerformed
+        ArrayList <Package> packageList = new ArrayList<Package>();
+        ArrayList <Magazine> magazineList = new ArrayList<Magazine>();
+        ArrayList <Envelope> envelopeList = new ArrayList<Envelope>();
+        for (int iBox = 0; iBox != _CheckBoxList.size(); iBox++){
+            if (_CheckBoxList.get(iBox).isSelected() && _CheckBoxList.get(iBox).getPackage() != null){
+                packageList.add(_CheckBoxList.get(iBox).getPackage());
+            }
+            if (_CheckBoxList.get(iBox).isSelected() && _CheckBoxList.get(iBox).getMagazine() != null){
+                magazineList.add(_CheckBoxList.get(iBox).getMagazine());
+            }
+            if (_CheckBoxList.get(iBox).isSelected() && _CheckBoxList.get(iBox).getEnvelope() != null){
+                envelopeList.add(_CheckBoxList.get(iBox).getEnvelope());
+            }
+        }        
+        this.setVisible(false);
+        new Costs_View(packageList,magazineList,envelopeList).setVisible(true);
+    }//GEN-LAST:event_btn_DropDeliveryActionPerformed
+
     private void btn_SearchClientdropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientdropActionPerformed
         // TODO add your handling code here:
         panel_DropDelivery.removeAll();
         int id = Integer.valueOf(txt_IDdrop.getText());
         Client client = Counter.getInstance().getClient(id);
-        if (client != null){                        
+        if (client != null){
             ////Variables para editar el margen en el que se colocan
-            int firstMargenX = 45;
-            int firstMargenY = 15;
-            int widthLbl = 80;
-            int heightLbl = 25;
-            int spaceBetweenLblY = 20;
-            for(int iDelivery = 0; iDelivery!=100; iDelivery++){
-                CheckBox checkBox = new CheckBox(null,null,null);
-                JLabel lbl_code = new JLabel();
-                JLabel lbl_deliveryType = new JLabel();
-                JLabel lbl_isCommited = new JLabel();
-                JLabel lbl_Remittent = new JLabel();
-                JLabel lbl_DateIn = new JLabel();
-                JLabel lbl_Description = new JLabel();
+            ArrayList <Package> packageList = client.get_locker().DeliverPackage();
+            ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
+            ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
 
-                lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_code.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_code.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_code.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_code.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_code.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                
-                panel_DropDelivery.add(lbl_code);
-                panel_DropDelivery.add(lbl_deliveryType);
-                panel_DropDelivery.add(lbl_isCommited);
-                panel_DropDelivery.add(lbl_Remittent);
-                panel_DropDelivery.add(lbl_DateIn);
-                panel_DropDelivery.add(lbl_Description);
-                
+            for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
+                createLineDropPackage(packageList.get(iDelivery),iDelivery);
             }
-            
-            
+            for(int iDelivery = 0; iDelivery!= magazineList.size(); iDelivery++){
+                createLineDropMagazine(magazineList.get(iDelivery),iDelivery+packageList.size());
+            }
+            for(int iDelivery = 0; iDelivery!= envelopeList.size(); iDelivery++){
+                createLineDropEnvelope(envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size());
+            }
+
         }else{
             JOptionPane.showMessageDialog(null,"No se encontro el cliente solicitado");
         }
         panel_DropDelivery.updateUI();
     }//GEN-LAST:event_btn_SearchClientdropActionPerformed
 
+    private void btn_CreateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateReportActionPerformed
+        // TODO add your handling code here:
+        panel_ReportDisplay.removeAll();
+        String day = spinner_DayReport.getValue().toString();
+        String month = spinner_MonthReport.getValue().toString();
+        String year = spinner_YearReport.getValue().toString();
+        int cantDeliveries = 0;
+        for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+            Client client = Counter.getInstance().getClient_register().get(iClient);
+            ArrayList <Package> packageList = client.get_locker().DeliverPackage();
+            ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
+            ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
+            
+            for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
+                createLineReportPackage(packageList.get(iDelivery),iDelivery+cantDeliveries);
+            }
+            for(int iDelivery = 0; iDelivery!= magazineList.size(); iDelivery++){
+                createLineReportMagazine(magazineList.get(iDelivery),iDelivery+packageList.size()+cantDeliveries);
+            }
+            for(int iDelivery = 0; iDelivery!= envelopeList.size(); iDelivery++){
+                createLineReportEnvelope(envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size()+cantDeliveries);
+            }
+            cantDeliveries =+ packageList.size();
+            cantDeliveries =+ magazineList.size();
+            cantDeliveries =+ envelopeList.size();
+        }
+        
+        panel_ReportDisplay.updateUI();
+        String totalUSD = "0000.0";
+        String totalCRC = "0000.0";
+        lbl_TotalDolars.setText(totalUSD);
+        lbl_TotalColons.setText(totalCRC);
+    }//GEN-LAST:event_btn_CreateReportActionPerformed
+
+    private void createLineDropPackage(Package pPackage, int iDelivery){
+        String code = String.valueOf(pPackage.get_code());
+        String deliveryType = "Paquete";
+        String isCommited = String.valueOf(pPackage.get_status());
+        String remittent = pPackage.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(pPackage.get_date().getTime()); 
+        String description = pPackage.get_description();
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,isCommited,remittent,dateIn,description));
+        CheckBox checkBox = new CheckBox(pPackage,null,null);
+        createLineDrop(packageInfo,iDelivery,checkBox);
+        
+    }
+    private void createLineDropMagazine(Magazine pMagazine, int iDelivery){
+        String code = String.valueOf(pMagazine.get_code());
+        String deliveryType = "Revista";
+        String isCommited = String.valueOf(pMagazine.get_status());
+        String remittent = pMagazine.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(pMagazine.get_date().getTime());       
+        String description = pMagazine.get_description();
+        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,isCommited,remittent,dateIn,description));
+        CheckBox checkBox = new CheckBox(null,null,pMagazine);
+        createLineDrop(magazineInfo,iDelivery,checkBox);
+    }
+    private void createLineDropEnvelope(Envelope pEnvelope, int iDelivery){
+        String code = String.valueOf(pEnvelope.get_code());
+        String deliveryType = "Sobre";
+        String isCommited = String.valueOf(pEnvelope.get_status());
+        String remittent = pEnvelope.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(pEnvelope.get_date().getTime());
+        String description = pEnvelope.get_description();
+        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,isCommited,remittent,dateIn,description));
+        CheckBox checkBox = new CheckBox(null,pEnvelope,null);
+        createLineDrop(envelopeInfo,iDelivery,checkBox);
+    }
+    private void createLineDrop(ArrayList<String> pDeliveryInfo, int iDelivery, CheckBox pCheckBox){
+        int firstMargenX = 55;
+        int firstMargenY = 15;
+        int widthLbl = 65;
+        int heightLbl = 25;
+        int spaceBetweenLblY = 20;
+                
+        JLabel lbl_code = new JLabel(pDeliveryInfo.get(0));
+        JLabel lbl_deliveryType = new JLabel(pDeliveryInfo.get(1));
+        JLabel lbl_isCommited = new JLabel(pDeliveryInfo.get(2));
+        JLabel lbl_Remittent = new JLabel(pDeliveryInfo.get(3));
+        JLabel lbl_DateIn = new JLabel(pDeliveryInfo.get(4));
+        JLabel lbl_Description = new JLabel(pDeliveryInfo.get(5));
+        
+        pCheckBox.setBounds(15, firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery, 25, heightLbl);
+        lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_deliveryType.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_isCommited.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_Remittent.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_DateIn.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl+10,heightLbl);
+        lbl_Description.setBounds(firstMargenX+widthLbl*5+50,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl+70,heightLbl);
+        
+        _CheckBoxList.add(pCheckBox);
+        panel_DropDelivery.add(pCheckBox);
+        panel_DropDelivery.add(lbl_code);
+        panel_DropDelivery.add(lbl_deliveryType);
+        panel_DropDelivery.add(lbl_isCommited);
+        panel_DropDelivery.add(lbl_Remittent);
+        panel_DropDelivery.add(lbl_DateIn);
+        panel_DropDelivery.add(lbl_Description);
+    }
+    private void createLineReportPackage(Package pPackage, int iDelivery){
+        String code = String.valueOf(pPackage.get_code());
+        String deliveryType = "Paquete";
+        String tax = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),1));
+        String discount = pPackage.get_remittent();
+        String totalCRC = "";
+        String totalUSD = pPackage.get_description();
+        String details = "";
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        createLineReport(packageInfo,iDelivery);
+        
+    }
+    private void createLineReportMagazine(Magazine pMagazine, int iDelivery){
+        String code = String.valueOf(pMagazine.get_code());
+        String deliveryType = "Revista";
+        String tax = String.valueOf(pMagazine.get_status());
+        String discount = pMagazine.get_remittent();
+        String totalCRC = "";       
+        String totalUSD = pMagazine.get_description();
+        String details = "";
+        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        createLineReport(magazineInfo,iDelivery);
+    }
+    private void createLineReportEnvelope(Envelope pEnvelope, int iDelivery){
+        String code = String.valueOf(pEnvelope.get_code());
+        String deliveryType = "Sobre";
+        String tax = String.valueOf(pEnvelope.get_status());
+        String discount = pEnvelope.get_remittent();
+        String totalCRC = "";
+        String totalUSD = pEnvelope.get_description();
+        String details = "";
+        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        createLineReport(envelopeInfo,iDelivery);
+    }
+    private void createLineReport(ArrayList<String> pDeliveryInfo, int iDelivery){
+        int firstMargenX = 55;
+        int firstMargenY = 15;
+        int widthLbl = 65;
+        int heightLbl = 25;
+        int spaceBetweenLblY = 20;
+
+        
+        JLabel lbl_code = new JLabel(pDeliveryInfo.get(0));
+        JLabel lbl_deliveryType = new JLabel(pDeliveryInfo.get(1));
+        JLabel lbl_tax = new JLabel(pDeliveryInfo.get(2));
+        JLabel lbl_discount = new JLabel(pDeliveryInfo.get(3));
+        JLabel lbl_CRC = new JLabel(pDeliveryInfo.get(4));
+        JLabel lbl_USD = new JLabel(pDeliveryInfo.get(5));
+        JButton btn_Details = new JButton("Detalles");        
+        btn_Details.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, pDeliveryInfo.get(6));
+            }
+            
+        });
+        
+        lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_deliveryType.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_tax.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_discount.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_CRC.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        lbl_USD.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+        btn_Details.setBounds(firstMargenX+widthLbl*6,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);        
+        
+        panel_ReportDisplay.add(lbl_code);
+        panel_ReportDisplay.add(lbl_deliveryType);
+        panel_ReportDisplay.add(lbl_tax);
+        panel_ReportDisplay.add(lbl_discount);
+        panel_ReportDisplay.add(lbl_CRC);
+        panel_ReportDisplay.add(lbl_USD);
+        panel_ReportDisplay.add(btn_Details);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1048,23 +1290,35 @@ public class CounterView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CounterView().setVisible(true);
             }
         });
-    
+        Counter Aerostore=new Counter("aerosostes",12313,"cwewef",100);
+        //Aerostore.add_client(304900953,"Byron", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
+        Aerostore.add_client(116080577,"GOKU", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
+        //Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
+        //Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
+        //Aerostore.changeType(304900952);
+        Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
+        Aerostore.saveDeliveryMagazine(116080577, deliver);
+        Package deliver1=new Package(true,"computadora mac","yorley",100,true,true,40);
+        Aerostore.saveDeliveryPackage(116080577, deliver1);
+        Package deliver2=new Package(true,"almohadas","yorley",14513,true,true,60);
+        Aerostore.saveDeliveryPackage(116080577, deliver2);
+//        Aerostore.chargeTotalPrice_InsideLocker(304900950);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_CountableReportdrop;
+    private javax.swing.JButton btn_CreateReport;
     private javax.swing.JButton btn_DropDelivery;
     private javax.swing.JButton btn_Receive;
     private javax.swing.JButton btn_SearchClientdrop;
     private javax.swing.JComboBox cbox_TypeReceivedArticle;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox cbox_selectAll;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1088,15 +1342,12 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JLabel lbl_CodeDelieveryConsult;
     private javax.swing.JLabel lbl_CodeDelieveryConsult1;
     private javax.swing.JLabel lbl_CodeDelieveryConsult2;
@@ -1119,6 +1370,8 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_RemittentRD;
     private javax.swing.JLabel lbl_StateDrop;
     private javax.swing.JLabel lbl_Tax;
+    private javax.swing.JLabel lbl_TotalColons;
+    private javax.swing.JLabel lbl_TotalDolars;
     private javax.swing.JLabel lbl_TypeBuyCur;
     private javax.swing.JLabel lbl_TypeDeliery;
     private javax.swing.JLabel lbl_TypeDeliveryConsult;
@@ -1132,13 +1385,19 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_statusDeliveryConsult;
     private javax.swing.JLabel lbl_statusDeliveryConsult1;
     private javax.swing.JLabel lbl_statusDeliveryConsult2;
+    private javax.swing.JPanel panel_Currency;
     private javax.swing.JPanel panel_DropDelivery;
     private javax.swing.JPanel panel_EnvelopeSDeliver;
     private javax.swing.JPanel panel_MagazineSDeliver;
     private javax.swing.JPanel panel_PackagesSDeliver;
     private javax.swing.JPanel panel_ReceiveDelivery;
+    private javax.swing.JPanel panel_Report;
+    private javax.swing.JPanel panel_ReportDisplay;
     private javax.swing.JPanel panel_ReturnDelivery;
     private javax.swing.JPanel panel_SearchDelivery;
+    private javax.swing.JSpinner spinner_DayReport;
+    private javax.swing.JSpinner spinner_MonthReport;
+    private javax.swing.JSpinner spinner_YearReport;
     private javax.swing.JTabbedPane tabPanel_CounterPrincipal;
     private javax.swing.JTextField txt_DescriptionRD;
     private javax.swing.JTextField txt_Destinatary;
