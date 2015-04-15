@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class CounterView extends javax.swing.JFrame {
     // Variables para el panel de retiro de paquetes
-    private ArrayList<CheckBox>_CheckBoxList = new ArrayList<CheckBox>();
+    private ArrayList<CheckBox>_CheckBoxList = new ArrayList<>();
     // Variables para el panel de recepcion de paquetes
     private Font _BasicFont = new Font("Tahoma",0,14);
     private JLabel lbl_TypeContent = new JLabel("Tipo Contenido");
@@ -966,14 +966,19 @@ public class CounterView extends javax.swing.JFrame {
     private void cbox_TypeReceivedArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_TypeReceivedArticleActionPerformed
         // TODO add your handling code here:
         String typeArticle = cbox_TypeReceivedArticle.getSelectedItem().toString();
-        if (typeArticle.equals("Paquete")){
-            showPackageComponents();            
-        }else if (typeArticle.equals("Sobre")){
-            showEnvelopeComponents();
-        }else if (typeArticle.equals("Revista")){
-            showMagazineComponents();
-        }else{
-            clearReceiveComponents();
+        switch (typeArticle) {
+            case "Paquete":
+                showPackageComponents();
+                break;
+            case "Sobre":
+                showEnvelopeComponents();
+                break;
+            case "Revista":
+                showMagazineComponents();
+                break;
+            default:
+                clearReceiveComponents();
+                break;
         }
             
     }//GEN-LAST:event_cbox_TypeReceivedArticleActionPerformed
@@ -986,51 +991,53 @@ public class CounterView extends javax.swing.JFrame {
             String description = txt_DescriptionRD.getText();
             String remittent = txt_RemittentRD.getText();
             String typeArticle = cbox_TypeReceivedArticle.getSelectedItem().toString();
-            if (typeArticle.equals("Paquete")){
-                if (!txt_Weight.getText().equals("")){
-                    boolean isFrailness = true;
-                    boolean isTechnology = false;
-                    int weight = Integer.valueOf(txt_Weight.getText());
-                    if (cbox_isFrailness.getSelectedItem().toString().equals("No")){
-                        isFrailness = false;
-                    }
-                    if (cbox_isTechonology.getSelectedItem().toString().equals("No")){
-                        isTechnology = false;
-                    }
-                    Package nPackage = new Package(false,description,remittent,0,
-                            isFrailness, isTechnology,weight);
-                    Counter.getInstance().saveDeliveryPackage(destinataryID, nPackage);                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
-                }             
-            }else if (typeArticle.equals("Sobre")){
-                if (!(txt_Weight.getText().equals("") || txt_TypeEnvelope.getText().equals("") || 
-                        txt_TypeContent.getText().equals(""))){
-                    int weight = Integer.valueOf(txt_Weight.getText());
-                    String typeEnvelope = lbl_TypeEnvelope.getText();
-                    String typeContent = lbl_TypeContent.getText();
-                    Envelope nEnvelope = new Envelope(false,description,remittent,0,
-                            typeEnvelope, typeContent,weight);  
-                    Counter.getInstance().saveDeliveryEnvelope(destinataryID, nEnvelope);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
-                }
-            }else if (typeArticle.equals("Revista")){
-                if (!(txt_MagazineName.getText().equals("") || txt_MagazineTopic.getText().equals(""))){
-                    boolean isCatalog = true;
-                    String name = txt_MagazineName.getText();
-                    String topic = txt_MagazineTopic.getText();
-                    if (cbox_isCatalog.getSelectedItem().toString().equals("No")){
-                        isCatalog = false;
-                    }
-                    Magazine nMagazine = new Magazine(false,description,remittent,0,
-                            name, isCatalog,topic);
-                    Counter.getInstance().saveDeliveryMagazine(destinataryID, nMagazine);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Porfavor seleccione una opción");
+            switch (typeArticle) {
+                case "Paquete":
+                    if (!txt_Weight.getText().equals("")){
+                        boolean isFrailness = true;
+                        boolean isTechnology = false;
+                        int weight = Integer.valueOf(txt_Weight.getText());
+                        if (cbox_isFrailness.getSelectedItem().toString().equals("No")){
+                            isFrailness = false;
+                        }
+                        if (cbox_isTechonology.getSelectedItem().toString().equals("No")){
+                            isTechnology = false;
+                        }
+                        Package nPackage = new Package(false,description,remittent,0,
+                                isFrailness, isTechnology,weight);
+                        Counter.getInstance().saveDeliveryPackage(destinataryID, nPackage);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
+                    }   break;
+                case "Sobre":
+                    if (!(txt_Weight.getText().equals("") || txt_TypeEnvelope.getText().equals("") ||
+                            txt_TypeContent.getText().equals(""))){
+                        int weight = Integer.valueOf(txt_Weight.getText());
+                        String typeEnvelope = lbl_TypeEnvelope.getText();
+                        String typeContent = lbl_TypeContent.getText();
+                        Envelope nEnvelope = new Envelope(false,description,remittent,0,
+                                typeEnvelope, typeContent,weight);
+                        Counter.getInstance().saveDeliveryEnvelope(destinataryID, nEnvelope);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
+                    }   break;
+                case "Revista":
+                    if (!(txt_MagazineName.getText().equals("") || txt_MagazineTopic.getText().equals(""))){
+                        boolean isCatalog = true;
+                        String name = txt_MagazineName.getText();
+                        String topic = txt_MagazineTopic.getText();
+                        if (cbox_isCatalog.getSelectedItem().toString().equals("No")){
+                            isCatalog = false;
+                        }
+                        Magazine nMagazine = new Magazine(false,description,remittent,0,
+                                name, isCatalog,topic);
+                        Counter.getInstance().saveDeliveryMagazine(destinataryID, nMagazine);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
+                    }   break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Porfavor seleccione una opción");
+                    break;
             }
         }else{
             JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
@@ -1045,9 +1052,9 @@ public class CounterView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbox_selectAllActionPerformed
 
     private void btn_DropDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DropDeliveryActionPerformed
-        ArrayList <Package> packageList = new ArrayList<Package>();
-        ArrayList <Magazine> magazineList = new ArrayList<Magazine>();
-        ArrayList <Envelope> envelopeList = new ArrayList<Envelope>();
+        ArrayList <Package> packageList = new ArrayList<>();
+        ArrayList <Magazine> magazineList = new ArrayList<>();
+        ArrayList <Envelope> envelopeList = new ArrayList<>();
         for (int iBox = 0; iBox != _CheckBoxList.size(); iBox++){
             if (_CheckBoxList.get(iBox).isSelected() && _CheckBoxList.get(iBox).getPackage() != null){
                 packageList.add(_CheckBoxList.get(iBox).getPackage());
@@ -1099,7 +1106,7 @@ public class CounterView extends javax.swing.JFrame {
         int cantDeliveries = 0;
         for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
             Client client = Counter.getInstance().getClient_register().get(iClient);
-            ArrayList <Package> packageList = client.get_locker().DeliverPackage();
+            ArrayList <Package> packageList = Counter.getInstance().
             ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
             ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
             
@@ -1118,7 +1125,8 @@ public class CounterView extends javax.swing.JFrame {
         }
         
         panel_ReportDisplay.updateUI();
-        String totalUSD = "0000.0";
+        
+        String totalUSD = Counter.getInstance().chargeTotalPrice_InsideLocker(null, null, null, null);
         String totalCRC = "0000.0";
         lbl_TotalDolars.setText(totalUSD);
         lbl_TotalColons.setText(totalCRC);

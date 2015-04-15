@@ -1,8 +1,11 @@
 package View;
 
+import counter.Client;
+import counter.Counter;
 import counter.Envelope;
 import counter.Magazine;
 import counter.Package;
+import counter.WebServiceBCCR;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,62 +25,74 @@ public class Costs_View extends javax.swing.JFrame {
     public Costs_View(ArrayList<Package> pPackageList, ArrayList<Magazine> pMagazineList, 
             ArrayList<Envelope> pEnvelopeList) {
         initComponents();
-        lbl_Buy.setText("00000.0");
-        lbl_Sell.setText("00000.0");
+        _PackageList = pPackageList;
+        _MagazineList = pMagazineList;
+        _EnvelopeList = pEnvelopeList;
+        lbl_Buy.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangePurchase()));
+        lbl_Sell.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangeSale()));
         showDeliveryInformation();
     }
     private void showDeliveryInformation(){
         this.panel_CostsDisplay.removeAll();
-        for(int iDelivery = 0; iDelivery!= _PackageList.size(); iDelivery++){
-                createLineReportPackage(_PackageList.get(iDelivery),iDelivery);
+        int cantDeliveries = 0;
+        for(int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+            Client client = Counter.getInstance().getClient_register().get(iClient);
+            
+            for(int iDelivery = 0; iDelivery!= _PackageList.size(); iDelivery++){
+                createLineReportPackage(_PackageList.get(iDelivery),iDelivery+cantDeliveries,client);
             }
             for(int iDelivery = 0; iDelivery!= _MagazineList.size(); iDelivery++){
-                createLineReportMagazine(_MagazineList.get(iDelivery),iDelivery+_PackageList.size());
+                createLineReportMagazine(_MagazineList.get(iDelivery),iDelivery+_PackageList.size()+cantDeliveries,client);
             }
             for(int iDelivery = 0; iDelivery!= _EnvelopeList.size(); iDelivery++){
-                createLineReportEnvelope(_EnvelopeList.get(iDelivery),iDelivery+_PackageList.size()+_MagazineList.size());
+                createLineReportEnvelope(_EnvelopeList.get(iDelivery),iDelivery+_PackageList.size()+_MagazineList.size()+cantDeliveries,client);
             }
+            cantDeliveries =+ _PackageList.size();
+            cantDeliveries =+ _MagazineList.size();
+            cantDeliveries =+ _EnvelopeList.size();
+        }
+        
         this.panel_CostsDisplay.updateUI();
     }
     
-    private void createLineReportPackage(Package pPackage, int iDelivery){
+    private void createLineReportPackage(Package pPackage, int iDelivery, Client pClient){
         String code = String.valueOf(pPackage.get_code());
         String deliveryType = "Paquete";
-        String tax = String.valueOf(pPackage.get_status());
-        String discount = pPackage.get_remittent();
+        String tax = String.valueOf(pPackage.getTax());
+        String discount = String.valueOf(Counter.getInstance().disscount(pPackage.getTax(),pClient.get_ID()));
         String totalCRC = "";
-        String totalUSD = pPackage.get_description();
-        String details = "";
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(), pClient.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pPackage);
         ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
         createLineReport(packageInfo,iDelivery);
         
     }
-    private void createLineReportMagazine(Magazine pMagazine, int iDelivery){
+    private void createLineReportMagazine(Magazine pMagazine, int iDelivery, Client pClient){
         String code = String.valueOf(pMagazine.get_code());
         String deliveryType = "Revista";
-        String tax = String.valueOf(pMagazine.get_status());
-        String discount = pMagazine.get_remittent();
+        String tax = String.valueOf(pMagazine.getTax());
+        String discount = String.valueOf(Counter.getInstance().disscount(pMagazine.getTax(),pClient.get_ID()));
         String totalCRC = "";       
-        String totalUSD = pMagazine.get_description();
-        String details = "";
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(), pClient.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pMagazine);;
         ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
         createLineReport(magazineInfo,iDelivery);
     }
-    private void createLineReportEnvelope(Envelope pEnvelope, int iDelivery){
+    private void createLineReportEnvelope(Envelope pEnvelope, int iDelivery, Client pClient){
         String code = String.valueOf(pEnvelope.get_code());
         String deliveryType = "Sobre";
-        String tax = String.valueOf(pEnvelope.get_status());
-        String discount = pEnvelope.get_remittent();
+        String tax = String.valueOf(pEnvelope.getTax());
+        String discount = String.valueOf(Counter.getInstance().disscount(pEnvelope.getTax(),pClient.get_ID()));
         String totalCRC = "";
-        String totalUSD = pEnvelope.get_description();
-        String details = "";
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(), pClient.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pEnvelope);;
         ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
         createLineReport(envelopeInfo,iDelivery);
     }
     private void createLineReport(ArrayList<String> pDeliveryInfo, int iDelivery){
-        int firstMargenX = 55;
+        int firstMargenX = 15;
         int firstMargenY = 15;
-        int widthLbl = 65;
+        int widthLbl = 75;
         int heightLbl = 25;
         int spaceBetweenLblY = 20;
 
@@ -209,6 +224,11 @@ public class Costs_View extends javax.swing.JFrame {
 
         btn_Pay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btn_Pay.setText("Cobrar");
+        btn_Pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PayActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_CostsLayout = new javax.swing.GroupLayout(panel_Costs);
         panel_Costs.setLayout(panel_CostsLayout);
@@ -217,14 +237,10 @@ public class Costs_View extends javax.swing.JFrame {
             .addGroup(panel_CostsLayout.createSequentialGroup()
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_CostsLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(415, 415, 415)
                         .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Bill)
-                            .addGroup(panel_CostsLayout.createSequentialGroup()
-                                .addGap(376, 376, 376)
-                                .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_BuyText)
-                                    .addComponent(lbl_Buy)))))
+                            .addComponent(lbl_Buy)
+                            .addComponent(lbl_BuyText)))
                     .addGroup(panel_CostsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -239,35 +255,34 @@ public class Costs_View extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
                             .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(panel_CostsLayout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
                                     .addComponent(lbl_Code)
-                                    .addGap(56, 56, 56)
+                                    .addGap(59, 59, 59)
                                     .addComponent(lbl_Type)
-                                    .addGap(69, 69, 69)
+                                    .addGap(32, 32, 32)
                                     .addComponent(lbl_Tax)
-                                    .addGap(47, 47, 47)
+                                    .addGap(31, 31, 31)
                                     .addComponent(lbl_Disscount)
-                                    .addGap(55, 55, 55)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(lbl_Colones)
-                                    .addGap(51, 51, 51)
-                                    .addComponent(lbl_Dollars))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbl_Dollars))))))
                 .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(panel_CostsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CostsLayout.createSequentialGroup()
-                        .addGap(0, 589, Short.MAX_VALUE)
-                        .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_SellText, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_Sell, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(33, 33, 33))
                     .addGroup(panel_CostsLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(31, 31, 31)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CostsLayout.createSequentialGroup()
+                        .addGap(0, 589, Short.MAX_VALUE)
+                        .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_SellText)
+                            .addComponent(lbl_Sell))
+                        .addGap(33, 33, 33))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CostsLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,25 +292,30 @@ public class Costs_View extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CostsLayout.createSequentialGroup()
                         .addComponent(btn_Pay)
                         .addContainerGap())))
+            .addGroup(panel_CostsLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lbl_Bill)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panel_CostsLayout.setVerticalGroup(
             panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CostsLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(22, 22, 22)
                 .addComponent(lbl_Bill)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_CostsLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(11, 11, 11)
                         .addComponent(lbl_SellText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_Sell))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Sell)
+                        .addGap(30, 30, 30))
                     .addGroup(panel_CostsLayout.createSequentialGroup()
                         .addComponent(lbl_BuyText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_Buy)))
-                .addGap(18, 18, 18)
+                        .addComponent(lbl_Buy)
+                        .addGap(25, 25, 25)))
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Code)
                     .addComponent(lbl_Type)
@@ -326,9 +346,10 @@ public class Costs_View extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panel_Costs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,6 +360,11 @@ public class Costs_View extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_PayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PayActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btn_PayActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

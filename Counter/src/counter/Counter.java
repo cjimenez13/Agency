@@ -8,7 +8,18 @@ package counter;
 
 //import java.text.DateFormat;
 //import java.text.SimpleDateFormat;
+//import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.io.StringReader;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 import java.util.Calendar;
 
 /**
@@ -343,15 +354,8 @@ public class Counter {
         System.out.println("El precio individual es "+price);
         return price;
     }
-    public double chargeTotalPrice_InsideLocker(int pID){
+    public double chargeTotalPrice_InsideLocker(Client client,ArrayList<Envelope> envelopes,ArrayList<Package> packages,ArrayList<Magazine> magazines){
         double price=0;
-        Client client= getClient(pID);
-        System.out.println("_______________________________________");
-        //client.get_locker();
-        Locker locker= client.get_locker();
-        ArrayList<Magazine> magazines =locker.DeliverMagazine();
-        ArrayList<Envelope> envelopes=locker.DeliverEnvelope();
-        ArrayList<Package> packages=locker.DeliverPackage();
         for (int i=0; envelopes.size()!=i;i++ ){
             price+=(envelopes.get(i)).getPrice();
         }
@@ -359,25 +363,11 @@ public class Counter {
             price+=(packages.get(n)).getPrice();
         }
         for (int j=0; magazines.size()!=j;j++ ){
-             System.out.println("rntro");
             price+=(magazines.get(j)).getPrice();
         }
-        System.out.println("el precio sin descuento es "+price);
-        price-=(disscount(price,pID));
-        System.out.println("el precio final es"+price);
+        price-=(disscount(price,client.get_ID()));
         return price;
-
     }
-    public double exchangePurchaseForeignCurrency(){
-        double exchange=0;
-        return exchange;
-    }
-    public double exchangeSaleOfForeignCurrency(){
-        double exchange=0;
-        return exchange;
-    }
-    
-
     //compare_YMD compara el día, año y mes de 2 fechas; si retorna true las fechas pertencen al mismo día del año, en caso contrario, son fechas distintas.
      public static boolean compare_YMD(Calendar date1,Calendar date2){
             boolean sameDay = date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR) && date1.get(Calendar.DATE) == date2.get(Calendar.DATE) && date1.get(Calendar.MONTH)==date2.get(Calendar.MONTH);
@@ -502,7 +492,7 @@ public class Counter {
                         Calendar date=envelope.get_date();
                         if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH+1)&&year==date.get(Calendar.YEAR)){
                             list.add(envelope);
-                        } 
+                        }
                     }
                 }     
             }      
@@ -510,27 +500,22 @@ public class Counter {
     return list;    
     }
      //función que retorna lista de tipo magazine, con los objetos recibidos en una fecha determinada y que no han sido retirados;
-    public ArrayList<Magazine> magazine_ByDay(boolean isRetired,int day,int month,int year){
+    public ArrayList<Magazine> magazine_ByDay(Client pClient,boolean isRetired,int day,int month,int year){
         ArrayList<Magazine> list=new ArrayList<>();
-         for(int i=0;i<100;i++){
-            if((client_register.get(i)).get_locker().get_ocuppied()==true){
-                Locker locker=(client_register.get(i)).get_locker();
-                if(locker.get_state()==isRetired){                        
-                  for(int m=0;m<locker.DeliverMagazine().size();m++){
-                        Magazine magazine=locker.DeliverMagazine().get(m);
-                        Calendar date=magazine.get_date();
-                        if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
-                            list.add(magazine);
-                        }               
-                     }
-                }
+        if(pClient.get_locker().get_ocuppied()==true){
+            Locker locker=pClient.get_locker();
+            if(locker.get_state()==isRetired){                        
+              for(int m=0;m<locker.DeliverMagazine().size();m++){
+                    Magazine magazine=locker.DeliverMagazine().get(m);
+                    Calendar date=magazine.get_date();
+                    if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
+                        list.add(magazine);
+                    }               
+                 }
             }
-         }
+        }         
          return list;
-     }
-        
-    
-    
+     }    
     ///método que forma un string con toda la infromación necesaria del descuento aplicado al cliente en un paquete.
     public String show_tax_delivery(Package packagee){
         String information="";
@@ -693,4 +678,5 @@ public class Counter {
             Aerostore.saveDeliveryPackage(304900952, deliver2);
             Aerostore.chargeTotalPrice_InsideLocker(304900950);
         }
+
 }
