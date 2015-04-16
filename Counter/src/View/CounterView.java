@@ -19,6 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -646,15 +647,12 @@ public class CounterView extends javax.swing.JFrame {
             .addGroup(panel_ReportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5)
-                        .addContainerGap())
+                    .addComponent(jScrollPane5)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_ReturnBackfromReport)
                         .addGap(32, 32, 32)
-                        .addComponent(btn_CreateReport)
-                        .addContainerGap())))
+                        .addComponent(btn_CreateReport)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel18)
@@ -673,7 +671,6 @@ public class CounterView extends javax.swing.JFrame {
             .addGroup(panel_ReportLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel17)
-                .addGap(18, 18, 18)
                 .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_ReportLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
@@ -859,34 +856,6 @@ public class CounterView extends javax.swing.JFrame {
         panel_SearchDeliveryLayout.setHorizontalGroup(
             panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(cbox_SearchD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addComponent(spinner_DayReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spinner_MonthReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinner_YearReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel24)
-                        .addGap(11, 11, 11)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel25)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel3)
-                        .addGap(67, 67, 67))
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
@@ -915,15 +884,7 @@ public class CounterView extends javax.swing.JFrame {
                                 .addComponent(lbl_CodeDelieveryConsult1)
                                 .addGap(27, 27, 27)
                                 .addComponent(lbl_TypeDeliveryConsult1)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_statusDeliveryConsult1)
-                                .addGap(27, 27, 27)
-                                .addComponent(lbl_RemittentConsult1)
-                                .addGap(28, 28, 28)
-                                .addComponent(lbl_dateDelivery1)
-                                .addGap(29, 29, 29)
+                                .addGap(266, 266, 266)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
@@ -939,8 +900,6 @@ public class CounterView extends javax.swing.JFrame {
                                 .addComponent(lbl_CodeDelieveryConsult)
                                 .addGap(27, 27, 27)
                                 .addComponent(lbl_TypeDeliveryConsult)
-                                .addGap(24, 24, 24)
-                                .addComponent(lbl_TypeDeliveryConsult3)
                                 .addGap(18, 18, 18)
                                 .addComponent(lbl_statusDeliveryConsult)
                                 .addGap(14, 14, 14)
@@ -948,6 +907,8 @@ public class CounterView extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lbl_dateDelivery)
                                 .addGap(18, 18, 18)
+                                .addComponent(lbl_TypeDeliveryConsult3)
+                                .addGap(24, 24, 24)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
@@ -960,6 +921,44 @@ public class CounterView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_Search)
                 .addGap(43, 43, 43))
+            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(lbl_statusDeliveryConsult1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_RemittentConsult1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_dateDelivery1)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6))
+                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbox_SearchD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                                .addComponent(spinner_DayReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spinner_MonthReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinner_YearReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel24)
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel25)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel3)
+                                .addGap(67, 67, 67))
+                            .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_SearchDeliveryLayout.setVerticalGroup(
             panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -992,9 +991,9 @@ public class CounterView extends javax.swing.JFrame {
                     .addComponent(lbl_RemittentConsult)
                     .addComponent(lbl_DescriptionDeliveryConsult)
                     .addComponent(lbl_dateDelivery)
-                    .addComponent(lbl_TypeDeliveryConsult3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(lbl_TypeDeliveryConsult3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -1004,10 +1003,10 @@ public class CounterView extends javax.swing.JFrame {
                     .addComponent(lbl_statusDeliveryConsult1)
                     .addComponent(lbl_RemittentConsult1)
                     .addComponent(lbl_dateDelivery1)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(lbl_DescriptionDeliveryConsult1))
+                    .addComponent(lbl_DescriptionDeliveryConsult1)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
@@ -1176,7 +1175,7 @@ public class CounterView extends javax.swing.JFrame {
                         if (cbox_isTechonology.getSelectedItem().toString().equals("No")){
                             isTechnology = false;
                         }
-                        Package nPackage = new Package(description,remittent,0,
+                        Package nPackage = new Package(description,remittent,
                                 isFrailness, isTechnology,weight);
                         Counter.getInstance().saveDeliveryPackage(destinataryID, nPackage);
                         JOptionPane.showMessageDialog(null,"El paquete ha sido recibido");
@@ -1189,7 +1188,7 @@ public class CounterView extends javax.swing.JFrame {
                         int weight = Integer.valueOf(txt_Weight.getText());
                         String typeEnvelope = lbl_TypeEnvelope.getText();
                         String typeContent = lbl_TypeContent.getText();
-                        Envelope nEnvelope = new Envelope(description,remittent,0,
+                        Envelope nEnvelope = new Envelope(description,remittent,
                                 typeEnvelope, typeContent,weight);
                         Counter.getInstance().saveDeliveryEnvelope(destinataryID, nEnvelope);
                         JOptionPane.showMessageDialog(null,"El sobre ha sido recibido");
@@ -1204,7 +1203,7 @@ public class CounterView extends javax.swing.JFrame {
                         if (cbox_isCatalog.getSelectedItem().toString().equals("No")){
                             isCatalog = false;
                         }
-                        Magazine nMagazine = new Magazine(description,remittent,0,
+                        Magazine nMagazine = new Magazine(description,remittent,
                                 name, isCatalog,topic);
                         Counter.getInstance().saveDeliveryMagazine(destinataryID, nMagazine);
                         JOptionPane.showMessageDialog(null,"La revista ha sido recibida");
@@ -1212,7 +1211,7 @@ public class CounterView extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                     }   break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Porfavor seleccione una opción");
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione una opción");
                     break;
             }
         }else{
@@ -1246,7 +1245,7 @@ public class CounterView extends javax.swing.JFrame {
         int id = Integer.valueOf(txt_IDdrop.getText());
         Client _Client1 = Counter.getInstance().getClient(id);
         new Costs_View(packageList,magazineList,envelopeList,_Client1).setVisible(true);
-        this.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_DropDeliveryActionPerformed
 
     private void btn_SearchClientdropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientdropActionPerformed
@@ -1286,17 +1285,14 @@ public class CounterView extends javax.swing.JFrame {
         String day = spinner_DayReport.getValue().toString();
         String month = spinner_MonthReport.getValue().toString();
         String year = spinner_YearReport.getValue().toString();
-        System.out.println("Dia: "+day);
-        System.out.println("Mes: "+month);
-        System.out.println("Year: "+year);
         int totalUSD=0;
         int totalUCR=0;
         int cantDeliveries = 0;
         for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
             Client client = Counter.getInstance().getClient_register().get(iClient);
-            ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
-            ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
-            ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
             if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
                 JOptionPane.showMessageDialog(null, "No hay paquetes retirados en esta fecha");
                 break;
@@ -1362,23 +1358,201 @@ public class CounterView extends javax.swing.JFrame {
         if (cbox_SearchD.getSelectedItem().equals(" ")){
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de búsqueda");
         }else{
+            panel_EnvelopeSDeliver.removeAll();
+            panel_MagazineSDeliver.removeAll();
+            panel_PackagesSDeliver.removeAll();
+            String day = spinner_DayReport1.getValue().toString();
+            String month = spinner_MonthReport1.getValue().toString();
+            String year = spinner_YearReport1.getValue().toString();
+            
             switch(cbox_SearchD.getSelectedItem().toString()){
                 case "Fecha de entrega":
                 {
-                    break;
-                }
+                    for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+                        Client client = Counter.getInstance().getClient_register().get(iClient);
+                        ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                       // if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
+                            takeOutEachElementsEnvelope(envelopeList);
+                            takeOutEachElementsPackage(packageList);
+                            takeOutEachElementsMagazine(magazineList);
+                       // }
+                        
+                    }
+                    
+                } break;
                 case "Fecha de recibido":
                 {
-                    break;
-                }
+                    for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+                        Client client = Counter.getInstance().getClient_register().get(iClient);
+                        ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,false,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,false,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,false,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        //if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
+                            takeOutEachElementsEnvelope(envelopeList);
+                            takeOutEachElementsPackage(packageList);
+                            takeOutEachElementsMagazine(magazineList);   
+                       // }
+                    }
+                       
+                }break;
+                
                 case "Pendientes":
                 {
-                    break;
-                }
+                    
+                        ArrayList <Package> packageList = Counter.getInstance().non_retired_packages();
+                        ArrayList <Magazine> magazineList=Counter.getInstance().non_retired_magazine();
+                        ArrayList <Envelope> envelopeList=Counter.getInstance().non_retired_envelope();
+                       // if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
+                            takeOutEachElementsEnvelope(envelopeList);
+                            takeOutEachElementsPackage(packageList);
+                            takeOutEachElementsMagazine(magazineList);   
+                       // }
+                    
+            
+                } break;
+                
             }
         }
     }//GEN-LAST:event_btn_SearchActionPerformed
 
+    private void  takeOutEachElementsEnvelope(ArrayList<Envelope> envelopesDeliveries){
+        for (int iDeliver=0; iDeliver<envelopesDeliveries.size();iDeliver++){
+            createLineDisplayE(envelopesDeliveries.get(iDeliver),iDeliver);
+        }
+    }
+    private void  takeOutEachElementsPackage(ArrayList<Package> packagesDeliveries){
+         for (int iDeliver=0; iDeliver<packagesDeliveries.size();iDeliver++){
+            createLineDisplayP(packagesDeliveries.get(iDeliver),iDeliver);
+        }   
+    }
+    private void  takeOutEachElementsMagazine(ArrayList<Magazine> magazinesDeliveries){
+          for (int iDeliver=0; iDeliver<magazinesDeliveries.size();iDeliver++){
+            createLineDisplayM(magazinesDeliveries.get(iDeliver),iDeliver);
+        }    
+    }
+    private void createLineDisplayE(Envelope envelope,int iDeliver){
+        ArrayList<String> listStrings;
+        String code=String.valueOf(envelope.get_code());
+        String typeDeliver="Sobre";
+        String typeEnvelope=envelope.get_typeEnvelope();
+        String remittent=envelope.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(envelope.get_date().getTime());
+        String typeContent=envelope.get_typeContent();
+        String weight=String.valueOf(envelope.get_weight());
+        String description=envelope.get_description();
+        String status="";
+        if(envelope.get_status()){
+            status="pendiente";
+        }else{
+            status="entregado";
+        }
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,typeDeliver,status,remittent,dateIn,weight,typeContent,typeEnvelope,description));
+        createDropLineSearch(packageInfo,iDeliver,panel_EnvelopeSDeliver);
+        
+        
+    }
+    private void createLineDisplayP(Package pPackage,int iDeliver){
+        
+        String code=String.valueOf(pPackage.get_code());
+        String typeDeliver="Paquete";
+        String isTecnological=String.valueOf(pPackage.get_technological());
+        String remittent=pPackage.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(pPackage.get_date().getTime());
+        String isFragile=String.valueOf(pPackage.get_frailness());
+        String weight=String.valueOf(pPackage.get_weight());
+        String description=pPackage.get_description();
+        String status;
+        if(pPackage.get_status()){
+            status="pendiente";
+        }else{
+            status="entregado";
+        }
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,typeDeliver,status,remittent,dateIn,weight,isTecnological,isFragile,description));
+        createDropLineSearch(packageInfo,iDeliver,panel_PackagesSDeliver);
+    }
+    private void createLineDisplayM(Magazine magazine,int iDeliver){
+        String code=String.valueOf(magazine.get_code());
+        String typeDeliver="Revista";
+        String isCatalog=String.valueOf(magazine.get_catalog());
+        String remittent=magazine.get_remittent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateIn = dateFormat.format(magazine.get_date().getTime());
+        String topic=magazine.get_topic();
+        String name=magazine.get_name();
+        String description=magazine.get_description();
+        String status;
+        if(magazine.get_status()){
+            status="pendiente";
+        }else{
+            status="entregado";
+        }
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,typeDeliver,status,remittent,dateIn,isCatalog,topic,name,description));
+        createDropLineSearch(packageInfo,iDeliver,panel_MagazineSDeliver);
+    }   
+    
+    
+    
+    
+    
+    
+    
+    
+        private void  createDropLineSearch(ArrayList<String> packageInfo,int iDelivery,JPanel panel){
+        ////Variables para editar el margen en el que se colocan
+            int firstMargenX = 15;
+            int firstMargenY = 15;
+            int widthLbl = 70;
+            int heightLbl = 25;
+            int spaceBetweenLblY = 10;
+                
+                JLabel lbl_code = new JLabel();
+                JLabel lbl_deliveryType = new JLabel();
+                JLabel lbl_isCommited = new JLabel();
+                JLabel lbl_Remittent = new JLabel();
+                JLabel lbl_DateIn = new JLabel();
+                JLabel lbl_Specific1= new JLabel();
+                JLabel lbl_Specific2= new JLabel();
+                JLabel lbl_Specific3= new JLabel();
+                JLabel lbl_Description = new JLabel();
+
+                lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_deliveryType.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_isCommited.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_Remittent.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_DateIn.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_Specific1.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_Specific2.setBounds(firstMargenX+widthLbl*6,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_Specific3.setBounds(firstMargenX+widthLbl*7,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                lbl_Description.setBounds(firstMargenX+widthLbl*8,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+                
+                panel.add(lbl_code);
+                panel.add(lbl_deliveryType);
+                panel.add(lbl_isCommited);
+                panel.add(lbl_Remittent);
+                panel.add(lbl_DateIn);
+                panel.add(lbl_Specific1);
+                panel.add(lbl_Specific2);
+                panel.add(lbl_Specific3);
+                panel.add(lbl_Description);
+                
+                lbl_code.setText(packageInfo.get(0));
+                lbl_deliveryType.setText(packageInfo.get(1));
+                lbl_isCommited.setText(packageInfo.get(2));
+                lbl_Remittent.setText(packageInfo.get(3));
+                lbl_DateIn.setText(packageInfo.get(4));
+                lbl_Specific1.setText(packageInfo.get(5));
+                lbl_Specific2.setText(packageInfo.get(6));
+                lbl_Specific3.setText(packageInfo.get(7));
+                lbl_Description.setText(packageInfo.get(8));
+
+            panel.updateUI();
+    }
+
+    
     private void createLineDropPackage(Package pPackage, int iDelivery){
         String code = String.valueOf(pPackage.get_code());
         String deliveryType = "Paquete";
@@ -1455,7 +1629,7 @@ public class CounterView extends javax.swing.JFrame {
         String disscount = String.valueOf(client.disscount(pPackage.getTax()));
         String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),client.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pPackage) ;
+        String details = Counter.getInstance().show_tax_delivery(pPackage)+Counter.getInstance().show_disscount(client,pPackage.getTax());
         ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(packageInfo,iDelivery);
         
@@ -1468,7 +1642,7 @@ public class CounterView extends javax.swing.JFrame {
         String disscount = String.valueOf(client.disscount(pMagazine.getTax()));
         String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(),client.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pMagazine);
+        String details = Counter.getInstance().show_tax_delivery(pMagazine)+Counter.getInstance().show_disscount(client,pMagazine.getTax());
         ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(magazineInfo,iDelivery);
     }
@@ -1480,7 +1654,7 @@ public class CounterView extends javax.swing.JFrame {
         String disscount = String.valueOf(client.disscount(pEnvelope.getTax()));
         String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(),client.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pEnvelope);
+        String details = Counter.getInstance().show_tax_delivery(pEnvelope)+Counter.getInstance().show_disscount(client,pEnvelope.getTax());
         ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(envelopeInfo,iDelivery);
     }
@@ -1557,20 +1731,20 @@ public class CounterView extends javax.swing.JFrame {
         Counter Aerostore=new Counter("aerosostes",12313,"cwewef",100);
         //Aerostore.add_client(304900953,"Byron", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
         Aerostore.add_client(116080577,"GOKU", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
-        //Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
+        Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
         //Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
         //Aerostore.changeType(304900952);
-        Magazine deliver= new Magazine("revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
+        Magazine deliver= new Magazine("revista de cocina mediterranea", "yor","cocina mediterranea", false, "cocina");
         Aerostore.saveDeliveryMagazine(116080577, deliver);
-        Package deliver1=new Package("computadora mac","yorley",100,true,true,40);
-        Aerostore.saveDeliveryPackage(116080577, deliver1);
-        Package deliver2=new Package("almohadas","yorley",14513,true,true,60);
+        Package deliver1=new Package("computadora mac","yorley",true,true,40);
+        Aerostore.saveDeliveryPackage(304900951, deliver1);
+        Package deliver2=new Package("almohadas","yorley",true,true,60);
         Aerostore.saveDeliveryPackage(116080577, deliver2);
-        ArrayList<Integer> h= new ArrayList<>();
-        h.add(1);
-        h.add(2);
-        h.add(3);
-        Aerostore.retrieve_packages(h,116080577);
+//        ArrayList<Integer> h= new ArrayList<>();
+//        h.add(1);
+//        h.add(2);
+//        h.add(3);
+//        Aerostore.retrieve_packages(h,116080577);
         
         
 //        Aerostore.chargeTotalPrice_InsideLocker(304900950);

@@ -1376,7 +1376,7 @@ public class ClientView extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-//            Counter Aerostore=new Counter("Aerostore",1234, "heredia",1);
+            Counter Aerostore=new Counter("Aerostore",1234, "heredia",1);
 //            
 //            Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
 //            

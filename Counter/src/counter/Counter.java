@@ -375,7 +375,7 @@ public class Counter {
             Client client=client_register.get(i);
             Locker locker=client.get_locker();
             for(int j=0;j<locker.DeliverEnvelope().size();j++){
-                Envelope envelope=locker.DeliverEnvelope().get(i);
+                Envelope envelope=locker.DeliverEnvelope().get(j);
                 list.add(envelope);
             }
         }
@@ -388,7 +388,7 @@ public class Counter {
                 ArrayList<Package> deletePackages=pClient.get_locker().getLockerPackagesOut();
                 for(int j=0;j<deletePackages.size();j++){
                             Package packages=deletePackages.get(j);
-                            Calendar date=packages.get_date();;
+                            Calendar date=packages.get_date();
                             if (dateRetired==true){
                                 date=packages.getOut_date();
                             }
@@ -402,7 +402,7 @@ public class Counter {
                 if(locker.get_state()==isRetired){
                     for(int k=0;k<locker.DeliverPackage().size();k++){
                         Package packagee=locker.DeliverPackage().get(k);
-                            Calendar date=packagee.get_date();;
+                            Calendar date=packagee.get_date();
                             if (dateRetired==true){
                                 date=packagee.getOut_date();
                             }
@@ -424,7 +424,7 @@ public class Counter {
                 ArrayList<Envelope> deleteEnvelopes=pClient.get_locker().getLockerEnvelopesOut();
                 for(int j=0;j<deleteEnvelopes.size();j++){
                             Envelope envelope=deleteEnvelopes.get(j);
-                            Calendar date=envelope.get_date();;
+                            Calendar date=envelope.get_date();
                             if (dateRetired==true){
                                 date=envelope.getOut_date();
                             }
@@ -438,7 +438,7 @@ public class Counter {
                     if(locker.get_state()==isRetired){
                            for(int j=0;j<locker.DeliverEnvelope().size();j++){
                             Envelope envelope=locker.DeliverEnvelope().get(j);
-                            Calendar date=envelope.get_date();;
+                            Calendar date=envelope.get_date();
                             if (dateRetired==true){
                                 date=envelope.getOut_date();
                             }
@@ -489,7 +489,7 @@ public class Counter {
     ///método que forma un string con toda la infromación necesaria del descuento aplicado al cliente en un paquete.
     public String show_tax_delivery(Package packagee){
         String information="";
-        information+=("Precio original: "+Double.toString(packagee.get_original_price())+"\n");
+        //information+=("Precio original: "+Double.toString(packagee.get_original_price())+"\n");
         information+=("Impuesto por peso:"+Double.toString(packagee.get_weight()*0.02)+"\n" );
         int fragility=0;
         int techno=0;
@@ -499,7 +499,7 @@ public class Counter {
         if(packagee.get_technological()==true)
             techno=2;
         information+=("Impuesto por tipo de paquete: "+Integer.toString(fragility)+"\n");
-        information+=("Precio del artículo con impuestos: "+Double.toString(packagee.get_original_price()+techno+fragility+packagee.get_weight()*0.02));
+        information+=("Precio del artículo con impuestos: "+Double.toString(packagee.get_original_price()));
         System.out.println(information);
         return information;
     }
@@ -516,10 +516,10 @@ public class Counter {
         if (envelope.get_typeEnvelope().equals("manila") && (envelope.get_typeEnvelope().equals("documento"))){
             tax=1;
         }
-        information+=("Precio original del sobre: "+Double.toString(envelope.get_original_price())+"\n");
+        //information+=("Precio original del sobre: "+Double.toString(envelope.get_original_price())+"\n");
         information+=("Tipo de sobre: "+envelope.get_typeEnvelope()+"\n");
         information+=("Impuesto por tipo de sobre: "+Double.toString(tax)+"\n");
-        information+=("Precio del artículo con impuestos: "+Double.toString(envelope.get_original_price()+tax));
+        information+=("Precio del artículo con impuestos: "+Double.toString(envelope.get_original_price()));
         System.out.println(information);
         return information;
     }
@@ -532,10 +532,10 @@ public class Counter {
             tax=1;
             tipo="Corriente";
         }
-        information+=("Precio original de la revista: "+Double.toString(magazine.get_original_price())+"\n");
+        //information+=("Precio original de la revista: "+Double.toString(magazine.get_original_price())+"\n");
         information+=("Tipo de revista: "+tipo+"\n");
         information+=("Impuesto por tipo de revista: "+Double.toString(tax)+"\n");
-        information+=("Precio del artículo con impuestos: "+Double.toString(magazine.get_original_price()+tax));
+        information+=("Precio del artículo con impuestos: "+Double.toString(magazine.get_original_price()));
         System.out.println(information);
         return information;
     }
@@ -565,6 +565,7 @@ public class Counter {
                 if(packagee.get_code()==list.get(i)){
                     locker.takeOutPackage(packagee.get_code());
                     packages.add(packagee);
+                    
                 }
             }
         }
@@ -612,11 +613,11 @@ public class Counter {
             Aerostore.add_client(304900950,"GOKU", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
             Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
             Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
-            Magazine deliver= new Magazine("revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
+            Magazine deliver= new Magazine("revista de cocina mediterranea", "yor", "cocina mediterranea", false, "cocina");
             Aerostore.saveDeliveryMagazine(304900950, deliver);
-            Package deliver1=new Package("computadora mac","yorley",100,true,true,40);
+            Package deliver1=new Package("computadora mac","yorley",true,true,40);
             Aerostore.saveDeliveryPackage(304900952, deliver1);
-            Package deliver2=new Package("almohadas","yorley",14513,true,true,60);
+            Package deliver2=new Package("almohadas","yorley",true,true,60);
             Aerostore.saveDeliveryPackage(304900952, deliver2);
 
             

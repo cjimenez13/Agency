@@ -20,13 +20,13 @@ public class Delivery {
     protected Calendar date;
     protected Calendar out_date;
     protected Double price;
-    public Delivery(String description, String remittent,double price) {
+    public Delivery(String description, String remittent) {
         this.code=identifier;
         this.statusEsPendiente = true;
         this.description = description;
         this.remittent = remittent;
         this.date=assing_date();
-        this.price=price;
+        this.price=0.0;
         identifier++;
     }
 
@@ -36,8 +36,8 @@ public class Delivery {
     public int get_code() {
         return code;
     }
-    public final void set_status(boolean pstatus) {
-        statusEsPendiente = pstatus;
+    public final void set_status() {
+        statusEsPendiente = false;
     }
     public boolean get_status() {
         return statusEsPendiente;

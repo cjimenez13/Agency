@@ -11,8 +11,8 @@ public class Envelope extends Delivery {
     private String typeContent;
     private double weight;   
 
-    public Envelope(String description,String remittent,double price,String typeEnvelope, String typeContent, double weight) {
-        super(description,remittent,price);
+    public Envelope(String description,String remittent,String typeEnvelope, String typeContent, double weight) {
+        super(description,remittent);
         this.typeEnvelope = typeEnvelope;
         this.typeContent = typeContent;
         this.weight = weight;
@@ -48,22 +48,22 @@ public class Envelope extends Delivery {
         System.out.println("Peso: "+get_weight());
         System.out.println("---------------------");
     } 
-    public int getTax(){
-        int tax=0;
+    public double getTax(){
+        double tax=0.0;
         if (typeEnvelope.equals("aereo") && !(typeContent.equals("documento"))){
-            tax=1;
+            tax=1.0;
         }
         if (typeEnvelope.equals("manila") && !(typeContent.equals("documento"))){
-            tax=2;
+            tax=2.0;
         }
         if (typeEnvelope.equals("manila") && (typeContent.equals("documento"))){
-            tax=1;
+            tax=1.0;
         }
         return tax;
     }
     public double getPrice(){
         //double price=0;
-        this.price+=getTax();
+        this.price=getTax();
         return this.price;
     }
 }

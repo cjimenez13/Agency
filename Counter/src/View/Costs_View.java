@@ -38,10 +38,10 @@ public class Costs_View extends javax.swing.JFrame {
     private void showDeliveryInformation(){
         this.panel_CostsDisplay.removeAll();
         int cantDeliveries = 0;
-        int total_USD=0;
-        int total_UCRC=0;
-        //for(int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
-           // Client client = Counter.getInstance().getClient_register().get(iClient);
+        double total_USD=0;
+        double total_UCRC=0;
+//        for(int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+//            Client client = Counter.getInstance().getClient_register().get(iClient);
             total_USD+=Counter.getInstance().chargeTotalPrice_InsideLocker(_Client1,_EnvelopeList, _PackageList, _MagazineList);
             total_UCRC+=Counter.getInstance().chargeTotalPrice_InsideLocker(_Client1,_EnvelopeList, _PackageList, _MagazineList)*(WebServiceBCCR.getInstance().getExchangeSale());
             for(int iDelivery = 0; iDelivery!= _PackageList.size(); iDelivery++){
@@ -56,7 +56,7 @@ public class Costs_View extends javax.swing.JFrame {
             cantDeliveries =+ _PackageList.size();
             cantDeliveries =+ _MagazineList.size();
             cantDeliveries =+ _EnvelopeList.size();
-        //}
+       // }
         
         this.panel_CostsDisplay.updateUI();
         lbl_totalDolars.setText(String.valueOf(total_USD));
@@ -69,9 +69,9 @@ public class Costs_View extends javax.swing.JFrame {
         String tax = String.valueOf(pPackage.getTax());
 //        String discount = String.valueOf(Counter.getInstance().disscount(pPackage.getTax(),pClient.get_ID()));
         String disscount = String.valueOf(pClient.disscount(pPackage.getTax()));
-        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pPackage.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());
-        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(), pClient.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pPackage);
+        String totalCRC = String.valueOf((pPackage.getTax()-pClient.disscount(pPackage.getTax()))*WebServiceBCCR.getInstance().getExchangeSale());
+        String totalUSD = String.valueOf((pPackage.getTax()-pClient.disscount(pPackage.getTax())));
+        String details = Counter.getInstance().show_tax_delivery(pPackage)+"\n"+Counter.getInstance().show_disscount(pClient,pPackage.getTax());;
         ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(packageInfo,iDelivery);
         
@@ -82,9 +82,9 @@ public class Costs_View extends javax.swing.JFrame {
         String tax = String.valueOf(pMagazine.getTax());
 //        String discount = String.valueOf(Counter.getInstance().disscount(pMagazine.getTax(),pClient.get_ID()));
         String disscount = String.valueOf(pClient.disscount(pMagazine.getTax()));
-        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());       
-        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(), pClient.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pMagazine);;
+        String totalCRC = String.valueOf((pMagazine.getTax()-pClient.disscount(pMagazine.getTax()))*WebServiceBCCR.getInstance().getExchangeSale());
+        String totalUSD = String.valueOf((pMagazine.getTax()-pClient.disscount(pMagazine.getTax())));
+        String details = Counter.getInstance().show_tax_delivery(pMagazine)+"\n"+Counter.getInstance().show_disscount(pClient,pMagazine.getTax());
         ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(magazineInfo,iDelivery);
     }
@@ -94,9 +94,9 @@ public class Costs_View extends javax.swing.JFrame {
         String tax = String.valueOf(pEnvelope.getTax());
         //String discount = String.valueOf(Counter.getInstance().disscount(pEnvelope.getTax(),pClient.get_ID()));
         String disscount = String.valueOf(pClient.disscount(pEnvelope.getTax()));
-        String totalCRC =String.valueOf((Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());
-        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(), pClient.get_ID()));
-        String details = Counter.getInstance().show_tax_delivery(pEnvelope);;
+        String totalCRC = String.valueOf((pEnvelope.getTax()-pClient.disscount(pEnvelope.getTax()))*WebServiceBCCR.getInstance().getExchangeSale());
+        String totalUSD = String.valueOf((pEnvelope.getTax()-pClient.disscount(pEnvelope.getTax())));
+        String details = Counter.getInstance().show_tax_delivery(pEnvelope)+"\n"+Counter.getInstance().show_disscount(pClient,pEnvelope.getTax());
         ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(envelopeInfo,iDelivery);
     }
@@ -396,6 +396,7 @@ public class Costs_View extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null,"Los paquetes han sido retirados");
         this.dispose();
+        new CounterView().setVisible(true);
         
         
 //_PackageList.

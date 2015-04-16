@@ -109,7 +109,9 @@ public  final class Locker {
            int num=(lockerPackages.get(m).get_code());
            if (num==(code)){
                lockerPackages.get(m).setOut_date();
+               lockerPackages.get(m).set_status();
                lockerPackagesOut.add(lockerPackages.remove(m));
+               
                
                break; 
            }
@@ -121,8 +123,9 @@ public  final class Locker {
            int num=(lockerEnvelopes.get(m).get_code());
            if (num==(code)){
                lockerEnvelopes.get(m).setOut_date();
+               lockerEnvelopes.get(m).set_status();
                lockerEnvelopesOut.add(lockerEnvelopes.remove(m));
-               System.out.println(lockerEnvelopes.remove(m).get_code());
+               
                break; 
            }
        }       
@@ -133,6 +136,7 @@ public  final class Locker {
            int num=(lockerMagazines.get(m).get_code());
            if (num==(code)){
                lockerMagazines.get(m).setOut_date();
+               lockerMagazines.get(m).set_status();
                lockerMagazinesOut.add(lockerMagazines.remove(m));
                break; 
            }
