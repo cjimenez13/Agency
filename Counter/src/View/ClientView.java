@@ -113,6 +113,7 @@ public class ClientView extends javax.swing.JFrame {
         lbl_DescriptionDeliveryConsult1 = new javax.swing.JLabel();
         lbl_TypeConsultConsult = new javax.swing.JLabel();
         cbox_TypeConsult = new javax.swing.JComboBox();
+        btn_returnBackConsult = new javax.swing.JButton();
         panel_Delete = new javax.swing.JPanel();
         txt_IDdelete = new javax.swing.JTextField();
         btn_SearchClientDelete = new javax.swing.JButton();
@@ -122,6 +123,7 @@ public class ClientView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         lbl_TypeConsultDelete = new javax.swing.JLabel();
         cbox_TypeDelete = new javax.swing.JComboBox();
+        btn_ReturnBackfromDelete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lbl_Name1 = new javax.swing.JLabel();
         lbl_ID1 = new javax.swing.JLabel();
@@ -142,6 +144,7 @@ public class ClientView extends javax.swing.JFrame {
         txt_ID_INFO = new javax.swing.JTextField();
         btn_SearchClientINFO = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
+        btn_returnBackfromInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,7 +188,12 @@ public class ClientView extends javax.swing.JFrame {
 
         btn_ReturnBack.setBackground(new java.awt.Color(255, 102, 51));
         btn_ReturnBack.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_ReturnBack.setText("Cancelar");
+        btn_ReturnBack.setText("Regresar");
+        btn_ReturnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Register_PanelLayout = new javax.swing.GroupLayout(Register_Panel);
         Register_Panel.setLayout(Register_PanelLayout);
@@ -289,7 +297,12 @@ public class ClientView extends javax.swing.JFrame {
 
         btn_ReturnBackModify.setBackground(new java.awt.Color(255, 102, 51));
         btn_ReturnBackModify.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_ReturnBackModify.setText("Cancelar");
+        btn_ReturnBackModify.setText("Regresar");
+        btn_ReturnBackModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackModifyActionPerformed(evt);
+            }
+        });
 
         btn_SearchClientModify.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_SearchClientModify.setText("Buscar");
@@ -370,11 +383,14 @@ public class ClientView extends javax.swing.JFrame {
                 .addGroup(Register_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ModifyClient)
                     .addComponent(btn_ReturnBackModify))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         tbdpanel_Client.addTab("Modificar", Register_Panel1);
 
+        panel_Consult.setBackground(new java.awt.Color(255, 204, 153));
+
+        panel_EnvelopeConsult.setBackground(new java.awt.Color(255, 255, 204));
         panel_EnvelopeConsult.setPreferredSize(new java.awt.Dimension(537, 1000));
 
         javax.swing.GroupLayout panel_EnvelopeConsultLayout = new javax.swing.GroupLayout(panel_EnvelopeConsult);
@@ -392,6 +408,7 @@ public class ClientView extends javax.swing.JFrame {
 
         lbl_CodeDelieveryConsult.setText("Código");
 
+        btn_SearchClientConsult.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_SearchClientConsult.setText("Buscar");
         btn_SearchClientConsult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -431,6 +448,7 @@ public class ClientView extends javax.swing.JFrame {
 
         lbl_dateDelivery2.setText("Fecha");
 
+        panel_PackageConsult.setBackground(new java.awt.Color(255, 255, 204));
         panel_PackageConsult.setPreferredSize(new java.awt.Dimension(573, 1000));
 
         javax.swing.GroupLayout panel_PackageConsultLayout = new javax.swing.GroupLayout(panel_PackageConsult);
@@ -446,6 +464,7 @@ public class ClientView extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(panel_PackageConsult);
 
+        panel_MagazineConsult.setBackground(new java.awt.Color(255, 255, 204));
         panel_MagazineConsult.setPreferredSize(new java.awt.Dimension(573, 1000));
 
         javax.swing.GroupLayout panel_MagazineConsultLayout = new javax.swing.GroupLayout(panel_MagazineConsult);
@@ -487,6 +506,14 @@ public class ClientView extends javax.swing.JFrame {
         cbox_TypeConsult.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbox_TypeConsult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Identificación del cliente", "Número de Casillero" }));
 
+        btn_returnBackConsult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_returnBackConsult.setText("Regresar");
+        btn_returnBackConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_returnBackConsultActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_ConsultLayout = new javax.swing.GroupLayout(panel_Consult);
         panel_Consult.setLayout(panel_ConsultLayout);
         panel_ConsultLayout.setHorizontalGroup(
@@ -496,56 +523,56 @@ public class ClientView extends javax.swing.JFrame {
                 .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_ConsultLayout.createSequentialGroup()
                         .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                        .addComponent(lbl_CodeDelieveryConsult)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(lbl_TypeDeliveryConsult)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(lbl_statusDeliveryConsult)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(lbl_RemittentConsult)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lbl_dateDelivery)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lbl_TypeDeliveryConsult3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lbl_DescriptionDeliveryConsult))
-                                    .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                        .addComponent(lbl_CodeDelieveryConsult2)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(lbl_TypeDeliveryConsult2)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(lbl_statusDeliveryConsult2)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(lbl_RemittentConsult2)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(lbl_dateDelivery2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jLabel8)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(lbl_DescriptionDeliveryConsult2))
-                                    .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                                .addComponent(lbl_TypeConsultConsult)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cbox_TypeConsult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(panel_ConsultLayout.createSequentialGroup()
-                                                .addComponent(txt_IDConsult, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(53, 53, 53)
-                                                .addComponent(btn_SearchClientConsult)))))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panel_ConsultLayout.createSequentialGroup()
+                                    .addComponent(lbl_CodeDelieveryConsult)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(lbl_TypeDeliveryConsult)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(lbl_statusDeliveryConsult)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(lbl_RemittentConsult)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(lbl_dateDelivery)
+                                    .addGap(23, 23, 23)
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lbl_TypeDeliveryConsult3)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lbl_DescriptionDeliveryConsult))
+                                .addGroup(panel_ConsultLayout.createSequentialGroup()
+                                    .addComponent(lbl_CodeDelieveryConsult2)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(lbl_TypeDeliveryConsult2)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(lbl_statusDeliveryConsult2)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(lbl_RemittentConsult2)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(lbl_dateDelivery2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel7)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(jLabel8)
+                                    .addGap(59, 59, 59)
+                                    .addComponent(lbl_DescriptionDeliveryConsult2))
+                                .addGroup(panel_ConsultLayout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panel_ConsultLayout.createSequentialGroup()
+                                            .addComponent(lbl_TypeConsultConsult)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbox_TypeConsult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(panel_ConsultLayout.createSequentialGroup()
+                                            .addComponent(txt_IDConsult, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(53, 53, 53)
+                                            .addComponent(btn_SearchClientConsult)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_returnBackConsult)))))
                             .addComponent(jScrollPane1)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3))
@@ -588,7 +615,8 @@ public class ClientView extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_IDConsult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_SearchClientConsult))
+                    .addComponent(btn_SearchClientConsult)
+                    .addComponent(btn_returnBackConsult))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -616,8 +644,8 @@ public class ClientView extends javax.swing.JFrame {
                     .addComponent(lbl_DescriptionDeliveryConsult1)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(panel_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_CodeDelieveryConsult2)
                     .addComponent(lbl_TypeDeliveryConsult2)
@@ -629,11 +657,13 @@ public class ClientView extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tbdpanel_Client.addTab("Consultar", panel_Consult);
+
+        panel_Delete.setBackground(new java.awt.Color(255, 204, 153));
 
         btn_SearchClientDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_SearchClientDelete.setText("Buscar");
@@ -659,12 +689,22 @@ public class ClientView extends javax.swing.JFrame {
         cbox_TypeDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbox_TypeDelete.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Identificación del cliente", "Número de Casillero" }));
 
+        btn_ReturnBackfromDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ReturnBackfromDelete.setText("Regresar");
+        btn_ReturnBackfromDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_DeleteLayout = new javax.swing.GroupLayout(panel_Delete);
         panel_Delete.setLayout(panel_DeleteLayout);
         panel_DeleteLayout.setHorizontalGroup(
             panel_DeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DeleteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ReturnBackfromDelete)
+                .addGap(28, 28, 28)
                 .addComponent(btn_Delete)
                 .addGap(24, 24, 24))
             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -702,12 +742,16 @@ public class ClientView extends javax.swing.JFrame {
                 .addComponent(lbl_NameDelete)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_NameResultDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 327, Short.MAX_VALUE)
-                .addComponent(btn_Delete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addGroup(panel_DeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Delete)
+                    .addComponent(btn_ReturnBackfromDelete))
                 .addGap(44, 44, 44))
         );
 
         tbdpanel_Client.addTab("Eliminar", panel_Delete);
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
 
         lbl_Name1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_Name1.setText("Nombre Completo");
@@ -757,6 +801,14 @@ public class ClientView extends javax.swing.JFrame {
             }
         });
 
+        btn_returnBackfromInfo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_returnBackfromInfo.setText("Regresar");
+        btn_returnBackfromInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_returnBackfromInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -764,26 +816,6 @@ public class ClientView extends javax.swing.JFrame {
             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_genderINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_Direction1)
-                                        .addComponent(lbl_PhoneNumber1)
-                                        .addComponent(lbl_Bierthday1)
-                                        .addComponent(lbl_Gender1)))
-                                .addComponent(lbl_ID1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbl_Name1)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lbl_Email1)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_phoneINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbl_emailINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,6 +839,29 @@ public class ClientView extends javax.swing.JFrame {
                         .addGap(138, 138, 138)
                         .addComponent(lbl_DirectionINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(261, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_genderINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(2, 2, 2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbl_Direction1)
+                                .addComponent(lbl_PhoneNumber1)
+                                .addComponent(lbl_Bierthday1)
+                                .addComponent(lbl_Gender1)))
+                        .addComponent(lbl_ID1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_Name1)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbl_Email1)
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbl_phoneINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_emailINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_returnBackfromInfo)
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -850,7 +905,9 @@ public class ClientView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lbl_birthdayINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_Gender1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Gender1)
+                    .addComponent(btn_returnBackfromInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_genderINFO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
@@ -1259,6 +1316,7 @@ public class ClientView extends javax.swing.JFrame {
                 if (client!=null){
                     
                     lbl_nameINFO.setText(client.get_name());
+                    lbl_ID_INFO.setText(String.valueOf(client.get_ID()));
                     lbl_emailINFO.setText(client.get_email());
                     lbl_phoneINFO.setText(String.valueOf(client.get_phone()));
                     lbl_DirectionINFO.setText(client.get_direction());
@@ -1283,17 +1341,47 @@ public class ClientView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_SearchClientINFOActionPerformed
 
+    private void btn_returnBackConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnBackConsultActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_returnBackConsultActionPerformed
+
+    private void btn_ReturnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackActionPerformed
+
+    private void btn_ReturnBackModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackModifyActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackModifyActionPerformed
+
+    private void btn_ReturnBackfromDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromDeleteActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackfromDeleteActionPerformed
+
+    private void btn_returnBackfromInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnBackfromInfoActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_returnBackfromInfoActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-            Counter Aerostore=new Counter("Aerostore",1234, "heredia",1);
-            
-            Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
-            Aerostore.changeType(304900952);
-            Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
-            Aerostore.saveDeliveryMagazine(304900952, deliver);
+//            Counter Aerostore=new Counter("Aerostore",1234, "heredia",1);
+//            
+//            Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
+//            
+//            Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
+//            Aerostore.saveDeliveryMagazine(304900952, deliver);
 //            Package deliver1=new Package(true,"computadora mac","yorley",100,true,true,40);
 //            Aerostore.saveDeliveryPackage(304900952, deliver1);
 //            Package deliver2=new Package(true,"almohadas","yorley",14513,true,true,60);
@@ -1335,11 +1423,14 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JButton btn_ModifyClient;
     private javax.swing.JButton btn_ReturnBack;
     private javax.swing.JButton btn_ReturnBackModify;
+    private javax.swing.JButton btn_ReturnBackfromDelete;
     private javax.swing.JButton btn_SearchClientConsult;
     private javax.swing.JButton btn_SearchClientDelete;
     private javax.swing.JButton btn_SearchClientINFO;
     private javax.swing.JButton btn_SearchClientModify;
     private javax.swing.JButton btn_addClient;
+    private javax.swing.JButton btn_returnBackConsult;
+    private javax.swing.JButton btn_returnBackfromInfo;
     private javax.swing.JComboBox cbox_GenderRegister;
     private javax.swing.JComboBox cbox_TypeConsult;
     private javax.swing.JComboBox cbox_TypeDelete;

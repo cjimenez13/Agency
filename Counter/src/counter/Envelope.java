@@ -11,8 +11,8 @@ public class Envelope extends Delivery {
     private String typeContent;
     private double weight;   
 
-    public Envelope(boolean status,String description,String remittent,double price,String typeEnvelope, String typeContent, double weight) {
-        super(status,description,remittent,price);
+    public Envelope(String description,String remittent,double price,String typeEnvelope, String typeContent, double weight) {
+        super(description,remittent,price);
         this.typeEnvelope = typeEnvelope;
         this.typeContent = typeContent;
         this.weight = weight;

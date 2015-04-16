@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Clase Java para anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType>
@@ -49,7 +49,7 @@ public class ObtenerIndicadoresEconomicosResponse {
     protected ObtenerIndicadoresEconomicosResponse.ObtenerIndicadoresEconomicosResult obtenerIndicadoresEconomicosResult;
 
     /**
-     * Gets the value of the obtenerIndicadoresEconomicosResult property.
+     * Obtiene el valor de la propiedad obtenerIndicadoresEconomicosResult.
      * 
      * @return
      *     possible object is
@@ -61,7 +61,7 @@ public class ObtenerIndicadoresEconomicosResponse {
     }
 
     /**
-     * Sets the value of the obtenerIndicadoresEconomicosResult property.
+     * Define el valor de la propiedad obtenerIndicadoresEconomicosResult.
      * 
      * @param value
      *     allowed object is
@@ -74,9 +74,9 @@ public class ObtenerIndicadoresEconomicosResponse {
 
 
     /**
-     * <p>Java class for anonymous complex type.
+     * <p>Clase Java para anonymous complex type.
      * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
+     * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
      * 
      * <pre>
      * &lt;complexType>
@@ -102,7 +102,7 @@ public class ObtenerIndicadoresEconomicosResponse {
         protected Object any;
 
         /**
-         * Gets the value of the any property.
+         * Obtiene el valor de la propiedad any.
          * 
          * @return
          *     possible object is
@@ -114,7 +114,7 @@ public class ObtenerIndicadoresEconomicosResponse {
         }
 
         /**
-         * Sets the value of the any property.
+         * Define el valor de la propiedad any.
          * 
          * @param value
          *     allowed object is

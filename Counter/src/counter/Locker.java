@@ -16,6 +16,10 @@ public  final class Locker {
     private boolean state;//Determinna si está vacío
      private boolean ocuppied;//Determina si posee dueño.
     private static int identifier=1000;
+    private ArrayList<Package> lockerPackagesOut = new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
+    private ArrayList<Envelope> lockerEnvelopesOut=new ArrayList<>();
+    private ArrayList<Magazine> lockerMagazinesOut=new ArrayList<>();
+    
     private ArrayList<Package> lockerPackages = new ArrayList<>(); //se crea un array de entregables con capacidad para 100 miembros.
     private ArrayList<Envelope> lockerEnvelopes=new ArrayList<>();
     private ArrayList<Magazine> lockerMagazines=new ArrayList<>();
@@ -43,6 +47,7 @@ public  final class Locker {
     }
 
     public boolean get_state(){
+        
         return state;
     }
 
@@ -52,24 +57,21 @@ public  final class Locker {
     
     public void addPackage(Package pDelivery){
         lockerPackages.add(pDelivery);
-        System.out.println((lockerPackages.get(0)).get_description());
-    
+        state = true;    
     }
     public ArrayList<Package> DeliverPackage(){
         return lockerPackages;
     }
     public void addEnvelope(Envelope pDelivery){
         lockerEnvelopes.add(pDelivery);
-        System.out.println((lockerEnvelopes.get(0)).get_description());
-    
+        state = true; 
     }
     public ArrayList<Envelope> DeliverEnvelope(){
         return lockerEnvelopes;
     }
     public void addMagazine(Magazine pDelivery){
         lockerMagazines.add(pDelivery);
-        pDelivery.Display_delivery();
-    
+        state = true;     
     }
     public ArrayList<Magazine> DeliverMagazine(){
         return lockerMagazines;
@@ -102,5 +104,88 @@ public  final class Locker {
        }
        return option;
    }
+    public void takeOutPackage(int code){
+        for (int m=0; m!= lockerPackages.size();m++){
+           int num=(lockerPackages.get(m).get_code());
+           if (num==(code)){
+               lockerPackages.get(m).setOut_date();
+               lockerPackagesOut.add(lockerPackages.remove(m));
+               
+               break; 
+           }
+       }       
+        
+    }
+    public void takeOutEnvelope(int code){
+        for (int m=0; m!= lockerEnvelopes.size();m++){
+           int num=(lockerEnvelopes.get(m).get_code());
+           if (num==(code)){
+               lockerEnvelopes.get(m).setOut_date();
+               lockerEnvelopesOut.add(lockerEnvelopes.remove(m));
+               System.out.println(lockerEnvelopes.remove(m).get_code());
+               break; 
+           }
+       }       
+        
+    }
+    public void takeOutMagazines(int code){
+        for (int m=0; m!= lockerMagazines.size();m++){
+           int num=(lockerMagazines.get(m).get_code());
+           if (num==(code)){
+               lockerMagazines.get(m).setOut_date();
+               lockerMagazinesOut.add(lockerMagazines.remove(m));
+               break; 
+           }
+       }       
+        
+    }
+    public ArrayList<Package> getSearchDeletePackages(ArrayList<Integer> codesList){
+        ArrayList<Package> packagesPreviousRetired=new ArrayList<>();
+        for (int j=0;j<codesList.size();j++){
+            for(int m=0;m<lockerPackagesOut.size();m++){
+                if(codesList.get(j)==lockerPackagesOut.get(m).get_code()){
+                    packagesPreviousRetired.add(lockerPackagesOut.get(m));
+                }
+            }
+        }
+        return packagesPreviousRetired;
+    }
+    public ArrayList<Envelope> getSearchDeleteEnvelopes(ArrayList<Integer> codesList){
+        ArrayList<Envelope> envelopesPreviousRetired=new ArrayList<>();
+        for (int j=0;j<codesList.size();j++){
+            for(int m=0;m<lockerEnvelopesOut.size();m++){
+                if(codesList.get(j)==lockerEnvelopesOut.get(m).get_code()){
+                    
+                    envelopesPreviousRetired.add(lockerEnvelopesOut.get(m));
+                }
+            }
+        }
+        return envelopesPreviousRetired;
+    }
+    public ArrayList<Magazine> getSearchDeleteMagazines(ArrayList<Integer> codesList){
+        ArrayList<Magazine> magazinesPreviousRetired=new ArrayList<>();
+        for (int j=0;j<codesList.size();j++){
+            for(int m=0;m<lockerMagazinesOut.size();m++){
+                if(codesList.get(j)==lockerMagazinesOut.get(m).get_code()){
+                    magazinesPreviousRetired.add(lockerMagazinesOut.get(m));
+                }
+            }
+        }
+        return magazinesPreviousRetired;
+    }
+
+    public ArrayList<Package> getLockerPackagesOut() {
+        System.out.println("el largo es:");
+        System.out.println(lockerPackagesOut.size());
+        return lockerPackagesOut;
+    }
+
+    public ArrayList<Envelope> getLockerEnvelopesOut() {
+        return lockerEnvelopesOut;
+    }
+
+    public ArrayList<Magazine> getLockerMagazinesOut() {
+        return lockerMagazinesOut;
+    }
     
 }

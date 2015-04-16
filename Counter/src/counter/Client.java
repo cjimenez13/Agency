@@ -18,7 +18,7 @@ public class Client {
     private String gender;
     private String birthday;
     private String type;
-    private int cant_compras;
+    private int cant_recibidos;
     //private int numlocker;//# de Locker que le corresponde
     private Locker locker;
     
@@ -32,7 +32,7 @@ public class Client {
         this.gender = gender;
         this.birthday = birthday;
         this.type = "Estandar";
-        this.cant_compras=0;
+        this.cant_recibidos=0;
         this.locker = new Locker();
         //this.locker=locker;
     }
@@ -77,8 +77,8 @@ public class Client {
         return type;
     }
 
-    public int get_cant_compras() {
-        return cant_compras;
+    public int get_cant_recibidos() {
+        return cant_recibidos;
     }
 
     public void set_email(String email) {
@@ -101,10 +101,29 @@ public class Client {
         this.type = type;
     }
 
-    public void setCant_compras(int cant_compras) {
-        this.cant_compras = cant_compras;
+    public void setCant_recibidos(int cant_recibidos) {
+        this.cant_recibidos = cant_recibidos;
     }
-    
+    public void changeType(){
+            if ((get_cant_recibidos()/10)<=2){
+                set_type("gold");
+            }else
+            if ((get_cant_recibidos()/10)>=1 && (get_cant_recibidos()/10)<2 ){
+                set_type("silver");
+            }else{
+                set_type("standard");
+            }
+    }
+    public double disscount(double pPrice){
+            double disscount = 0;
+            if((get_type()).equals("silver")){
+                disscount= (pPrice*5)/100;
+            }
+            if((get_type()).equals("gold")){
+                disscount= (pPrice*10)/100;
+            }
+            return disscount;
+    }
     
     
     public void Display_client(){
@@ -116,7 +135,7 @@ public class Client {
         System.out.println("Género: "+get_gender());
         System.out.println("Fecha de nacimiento: "+get_birthday());
         System.out.println("Tipo de cuenta: "+get_type());
-        System.out.println("Cantidad de compras: "+get_cant_compras());
+        System.out.println("Cantidad de compras: "+get_cant_recibidos());
         System.out.println("Número de casillero: "+get_locker().getNumber());
         System.out.println("---------------------");
     }

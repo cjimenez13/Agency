@@ -11,8 +11,8 @@ public class Magazine extends Delivery {
     private boolean catalog=false;
     private String topic="";
 
-    public Magazine(boolean status, String description, String remittent,double price,String name, boolean catalog, String topic) {
-        super(status, description, remittent,price);
+    public Magazine(String description, String remittent,double price,String name, boolean catalog, String topic) {
+        super(description, remittent,price);
         this.name = name;
         this.catalog = catalog;
         this.topic = topic;

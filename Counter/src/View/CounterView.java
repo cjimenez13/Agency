@@ -5,6 +5,7 @@ import counter.Package;
 import counter.Counter;
 import counter.Envelope;
 import counter.Magazine;
+import counter.WebServiceBCCR;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -108,6 +109,7 @@ public class CounterView extends javax.swing.JFrame {
         lbl_DescriptionDrop = new javax.swing.JLabel();
         btn_DropDelivery = new javax.swing.JButton();
         cbox_selectAll = new javax.swing.JCheckBox();
+        btn_ReturnBackfromReg = new javax.swing.JButton();
         panel_ReceiveDelivery = new javax.swing.JPanel();
         lbl_Destinatary = new javax.swing.JLabel();
         txt_Destinatary = new javax.swing.JTextField();
@@ -118,10 +120,41 @@ public class CounterView extends javax.swing.JFrame {
         txt_DescriptionRD = new javax.swing.JTextField();
         txt_RemittentRD = new javax.swing.JTextField();
         btn_Receive = new javax.swing.JButton();
+        btn_ReturnBackfromReceive = new javax.swing.JButton();
+        panel_Currency = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lbl_TypeBuyCur = new javax.swing.JLabel();
+        lbl_TypeSellCur = new javax.swing.JLabel();
+        btn_ConsultExchange = new javax.swing.JButton();
+        btn_ReturnBackfromExchange = new javax.swing.JButton();
+        panel_Report = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        panel_ReportDisplay = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lbl_Tax = new javax.swing.JLabel();
+        lbl_Colones = new javax.swing.JLabel();
+        lbl_Dollars = new javax.swing.JLabel();
+        lbl_Disscount = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbl_TotalDolars = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lbl_TotalColons = new javax.swing.JLabel();
+        btn_CreateReport = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        spinner_DayReport = new javax.swing.JSpinner();
+        spinner_MonthReport = new javax.swing.JSpinner();
+        spinner_YearReport = new javax.swing.JSpinner();
+        btn_ReturnBackfromReport = new javax.swing.JButton();
         panel_SearchDelivery = new javax.swing.JPanel();
         jSpinner3 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbox_SearchD = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         lbl_CodeDelieveryConsult = new javax.swing.JLabel();
         lbl_TypeDeliveryConsult = new javax.swing.JLabel();
@@ -156,36 +189,20 @@ public class CounterView extends javax.swing.JFrame {
         panel_PackagesSDeliver = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panel_MagazineSDeliver = new javax.swing.JPanel();
-        panel_Currency = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        lbl_TypeBuyCur = new javax.swing.JLabel();
-        lbl_TypeSellCur = new javax.swing.JLabel();
-        panel_Report = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        panel_ReportDisplay = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        lbl_Tax = new javax.swing.JLabel();
-        lbl_Colones = new javax.swing.JLabel();
-        lbl_Dollars = new javax.swing.JLabel();
-        lbl_Disscount = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        lbl_TotalDolars = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        lbl_TotalColons = new javax.swing.JLabel();
-        btn_CreateReport = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        spinner_DayReport = new javax.swing.JSpinner();
-        spinner_MonthReport = new javax.swing.JSpinner();
-        spinner_YearReport = new javax.swing.JSpinner();
+        btn_ReturnBackfromSearch = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        spinner_DayReport1 = new javax.swing.JSpinner();
+        jLabel24 = new javax.swing.JLabel();
+        spinner_MonthReport1 = new javax.swing.JSpinner();
+        jLabel25 = new javax.swing.JLabel();
+        spinner_YearReport1 = new javax.swing.JSpinner();
+        btn_Search = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panel_ReturnDelivery.setBackground(new java.awt.Color(255, 204, 153));
+
+        panel_DropDelivery.setBackground(new java.awt.Color(255, 255, 204));
         panel_DropDelivery.setPreferredSize(new java.awt.Dimension(580, 1000));
 
         javax.swing.GroupLayout panel_DropDeliveryLayout = new javax.swing.GroupLayout(panel_DropDelivery);
@@ -244,6 +261,14 @@ public class CounterView extends javax.swing.JFrame {
             }
         });
 
+        btn_ReturnBackfromReg.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ReturnBackfromReg.setText("Regresar");
+        btn_ReturnBackfromReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromRegActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_ReturnDeliveryLayout = new javax.swing.GroupLayout(panel_ReturnDelivery);
         panel_ReturnDelivery.setLayout(panel_ReturnDeliveryLayout);
         panel_ReturnDeliveryLayout.setHorizontalGroup(
@@ -275,6 +300,8 @@ public class CounterView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReturnDeliveryLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_ReturnBackfromReg)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_DropDelivery)))
                 .addContainerGap())
             .addGroup(panel_ReturnDeliveryLayout.createSequentialGroup()
@@ -304,15 +331,19 @@ public class CounterView extends javax.swing.JFrame {
                         .addComponent(lbl_DateDrop)
                         .addComponent(lbl_DescriptionDrop)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbox_selectAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(btn_DropDelivery)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addGroup(panel_ReturnDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_DropDelivery)
+                    .addComponent(btn_ReturnBackfromReg))
                 .addContainerGap())
         );
 
         tabPanel_CounterPrincipal.addTab("Retiro de Articulos", panel_ReturnDelivery);
+
+        panel_ReceiveDelivery.setBackground(new java.awt.Color(255, 204, 153));
 
         lbl_Destinatary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_Destinatary.setText("Identificación del Destinatario");
@@ -338,6 +369,14 @@ public class CounterView extends javax.swing.JFrame {
         btn_Receive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ReceiveActionPerformed(evt);
+            }
+        });
+
+        btn_ReturnBackfromReceive.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ReturnBackfromReceive.setText("Regresar");
+        btn_ReturnBackfromReceive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromReceiveActionPerformed(evt);
             }
         });
 
@@ -374,8 +413,10 @@ public class CounterView extends javax.swing.JFrame {
                                 .addGap(45, 45, 45))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReceiveDeliveryLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ReturnBackfromReceive)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Receive)
-                .addGap(119, 119, 119))
+                .addGap(23, 23, 23))
         );
         panel_ReceiveDeliveryLayout.setVerticalGroup(
             panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,20 +440,287 @@ public class CounterView extends javax.swing.JFrame {
                 .addGroup(panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_TypeDeliery)
                     .addComponent(cbox_TypeReceivedArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
-                .addComponent(btn_Receive)
-                .addGap(64, 64, 64))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
+                .addGroup(panel_ReceiveDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Receive)
+                    .addComponent(btn_ReturnBackfromReceive))
+                .addGap(56, 56, 56))
         );
 
         tabPanel_CounterPrincipal.addTab("Recepcion de  Artículos", panel_ReceiveDelivery);
+
+        panel_Currency.setBackground(new java.awt.Color(255, 204, 153));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Tipo de cambio de compra extrajera");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("Tipo de cambio de venta extrajera");
+
+        lbl_TypeBuyCur.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_TypeBuyCur.setText("000000.0");
+
+        lbl_TypeSellCur.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_TypeSellCur.setText("000000.0");
+
+        btn_ConsultExchange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ConsultExchange.setText("Consultar");
+        btn_ConsultExchange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ConsultExchangeActionPerformed(evt);
+            }
+        });
+
+        btn_ReturnBackfromExchange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ReturnBackfromExchange.setText("Regresar");
+        btn_ReturnBackfromExchange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromExchangeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_CurrencyLayout = new javax.swing.GroupLayout(panel_Currency);
+        panel_Currency.setLayout(panel_CurrencyLayout);
+        panel_CurrencyLayout.setHorizontalGroup(
+            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_CurrencyLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ReturnBackfromExchange)
+                .addGap(46, 46, 46)
+                .addComponent(btn_ConsultExchange)
+                .addGap(46, 46, 46))
+            .addGroup(panel_CurrencyLayout.createSequentialGroup()
+                .addGroup(panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_CurrencyLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addGroup(panel_CurrencyLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(lbl_TypeBuyCur))))
+                    .addGroup(panel_CurrencyLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(lbl_TypeSellCur)))
+                .addContainerGap(349, Short.MAX_VALUE))
+        );
+        panel_CurrencyLayout.setVerticalGroup(
+            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_CurrencyLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel12)
+                .addGap(27, 27, 27)
+                .addComponent(lbl_TypeBuyCur)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel13)
+                .addGap(43, 43, 43)
+                .addComponent(lbl_TypeSellCur)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGroup(panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ConsultExchange)
+                    .addComponent(btn_ReturnBackfromExchange))
+                .addGap(140, 140, 140))
+        );
+
+        tabPanel_CounterPrincipal.addTab("Consultar Tipo de Cambio", panel_Currency);
+
+        panel_Report.setBackground(new java.awt.Color(255, 204, 153));
+
+        jLabel14.setText("Día");
+
+        panel_ReportDisplay.setBackground(new java.awt.Color(255, 255, 204));
+        panel_ReportDisplay.setPreferredSize(new java.awt.Dimension(680, 1000));
+
+        javax.swing.GroupLayout panel_ReportDisplayLayout = new javax.swing.GroupLayout(panel_ReportDisplay);
+        panel_ReportDisplay.setLayout(panel_ReportDisplayLayout);
+        panel_ReportDisplayLayout.setHorizontalGroup(
+            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+        panel_ReportDisplayLayout.setVerticalGroup(
+            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+
+        jScrollPane5.setViewportView(panel_ReportDisplay);
+
+        jLabel15.setText("Código");
+
+        jLabel16.setText("Tipo");
+
+        lbl_Tax.setText("Impuesto");
+
+        lbl_Colones.setText("Total Colones");
+
+        lbl_Dollars.setText("Total Dolares");
+
+        lbl_Disscount.setText("Descuento");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Seleccionar fecha");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel18.setText("Monto Total:");
+
+        lbl_TotalDolars.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbl_TotalDolars.setText("000000.0");
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel20.setText("$");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel21.setText("₡");
+
+        lbl_TotalColons.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbl_TotalColons.setText("000000.0");
+
+        btn_CreateReport.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_CreateReport.setText("Generar Reporte");
+        btn_CreateReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateReportActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Mes");
+
+        jLabel22.setText("Año");
+
+        spinner_DayReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        spinner_MonthReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        spinner_YearReport.setModel(new javax.swing.SpinnerNumberModel(2015, 2015, 2030, 1));
+
+        btn_ReturnBackfromReport.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_ReturnBackfromReport.setText("Regresar");
+        btn_ReturnBackfromReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromReportActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_ReportLayout = new javax.swing.GroupLayout(panel_Report);
+        panel_Report.setLayout(panel_ReportLayout);
+        panel_ReportLayout.setHorizontalGroup(
+            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ReportLayout.createSequentialGroup()
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel16)))))
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(lbl_Tax))
+                                .addGap(37, 37, 37)
+                                .addComponent(lbl_Disscount)
+                                .addGap(42, 42, 42)
+                                .addComponent(lbl_Colones)
+                                .addGap(43, 43, 43)
+                                .addComponent(lbl_Dollars))
+                            .addGroup(panel_ReportLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(panel_ReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_ReturnBackfromReport)
+                        .addGap(32, 32, 32)
+                        .addComponent(btn_CreateReport)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_TotalDolars)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_TotalColons)
+                .addGap(38, 38, 38))
+        );
+        panel_ReportLayout.setVerticalGroup(
+            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ReportLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(lbl_Tax)
+                            .addComponent(lbl_Colones)
+                            .addComponent(lbl_Dollars)
+                            .addComponent(lbl_Disscount)))
+                    .addGroup(panel_ReportLayout.createSequentialGroup()
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lbl_TotalDolars)
+                    .addComponent(jLabel20)
+                    .addComponent(lbl_TotalColons)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ReturnBackfromReport)
+                    .addComponent(btn_CreateReport))
+                .addGap(19, 19, 19))
+        );
+
+        tabPanel_CounterPrincipal.addTab("Reporte", panel_Report);
+
+        panel_SearchDelivery.setBackground(new java.awt.Color(255, 204, 153));
 
         jSpinner3.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1428968760000L), new java.util.Date(1428968760000L), null, java.util.Calendar.DAY_OF_MONTH));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Tipo de Busqueda");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fecha de entrega", "Fecha de recibido", "Pendientes" }));
+        cbox_SearchD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbox_SearchD.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Fecha de entrega", "Fecha de recibido", "Pendientes" }));
 
         jLabel3.setText("Fecha");
 
@@ -470,6 +778,7 @@ public class CounterView extends javax.swing.JFrame {
 
         lbl_DescriptionDeliveryConsult2.setText("Descripción");
 
+        panel_EnvelopeSDeliver.setBackground(new java.awt.Color(255, 255, 204));
         panel_EnvelopeSDeliver.setPreferredSize(new java.awt.Dimension(578, 1000));
 
         javax.swing.GroupLayout panel_EnvelopeSDeliverLayout = new javax.swing.GroupLayout(panel_EnvelopeSDeliver);
@@ -485,6 +794,7 @@ public class CounterView extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(panel_EnvelopeSDeliver);
 
+        panel_PackagesSDeliver.setBackground(new java.awt.Color(255, 255, 204));
         panel_PackagesSDeliver.setPreferredSize(new java.awt.Dimension(577, 1000));
 
         javax.swing.GroupLayout panel_PackagesSDeliverLayout = new javax.swing.GroupLayout(panel_PackagesSDeliver);
@@ -500,6 +810,7 @@ public class CounterView extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(panel_PackagesSDeliver);
 
+        panel_MagazineSDeliver.setBackground(new java.awt.Color(255, 255, 204));
         panel_MagazineSDeliver.setPreferredSize(new java.awt.Dimension(577, 1000));
 
         javax.swing.GroupLayout panel_MagazineSDeliverLayout = new javax.swing.GroupLayout(panel_MagazineSDeliver);
@@ -515,66 +826,89 @@ public class CounterView extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(panel_MagazineSDeliver);
 
+        btn_ReturnBackfromSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_ReturnBackfromSearch.setText("Regresar");
+        btn_ReturnBackfromSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnBackfromSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("Día");
+
+        spinner_DayReport1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        jLabel24.setText("Mes");
+
+        spinner_MonthReport1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        jLabel25.setText("Año");
+
+        spinner_YearReport1.setModel(new javax.swing.SpinnerNumberModel(2015, 2015, 2030, 1));
+
+        btn_Search.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_Search.setText("Buscar");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_SearchDeliveryLayout = new javax.swing.GroupLayout(panel_SearchDelivery);
         panel_SearchDelivery.setLayout(panel_SearchDeliveryLayout);
         panel_SearchDeliveryLayout.setHorizontalGroup(
             panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(126, 126, 126))
+                .addComponent(cbox_SearchD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addComponent(spinner_DayReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spinner_MonthReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spinner_YearReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel24)
+                        .addGap(11, 11, 11)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel25)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel3)
+                        .addGap(67, 67, 67))
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
                         .addGap(0, 29, Short.MAX_VALUE)
-                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                                .addComponent(lbl_CodeDelieveryConsult2)
-                                .addGap(27, 27, 27)
-                                .addComponent(lbl_TypeDeliveryConsult2)
-                                .addGap(38, 38, 38)
-                                .addComponent(lbl_statusDeliveryConsult2)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_RemittentConsult2)
-                                .addGap(27, 27, 27)
-                                .addComponent(lbl_dateDelivery2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel10)
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel11)
-                                .addGap(59, 59, 59)
-                                .addComponent(lbl_DescriptionDeliveryConsult2))
-                            .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                                    .addComponent(lbl_CodeDelieveryConsult)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(lbl_TypeDeliveryConsult)
-                                    .addGap(24, 24, 24)
-                                    .addComponent(lbl_TypeDeliveryConsult3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(lbl_statusDeliveryConsult)
-                                    .addGap(14, 14, 14)
-                                    .addComponent(lbl_RemittentConsult)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(lbl_dateDelivery)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel5)
-                                    .addGap(58, 58, 58)
-                                    .addComponent(lbl_DescriptionDeliveryConsult))
-                                .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(59, 59, 59))
+                        .addComponent(lbl_CodeDelieveryConsult2)
+                        .addGap(27, 27, 27)
+                        .addComponent(lbl_TypeDeliveryConsult2)
+                        .addGap(38, 38, 38)
+                        .addComponent(lbl_statusDeliveryConsult2)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_RemittentConsult2)
+                        .addGap(27, 27, 27)
+                        .addComponent(lbl_dateDelivery2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel11)
+                        .addGap(59, 59, 59)
+                        .addComponent(lbl_DescriptionDeliveryConsult2)
+                        .addGap(63, 63, 63))
                     .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
                         .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
@@ -597,23 +931,60 @@ public class CounterView extends javax.swing.JFrame {
                                 .addComponent(lbl_DescriptionDeliveryConsult1))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
+                                .addComponent(lbl_CodeDelieveryConsult)
+                                .addGap(27, 27, 27)
+                                .addComponent(lbl_TypeDeliveryConsult)
+                                .addGap(24, 24, 24)
+                                .addComponent(lbl_TypeDeliveryConsult3)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_statusDeliveryConsult)
+                                .addGap(14, 14, 14)
+                                .addComponent(lbl_RemittentConsult)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_dateDelivery)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addGap(58, 58, 58)
+                                .addComponent(lbl_DescriptionDeliveryConsult)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ReturnBackfromSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Search)
+                .addGap(43, 43, 43))
         );
         panel_SearchDeliveryLayout.setVerticalGroup(
             panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(16, 16, 16)
                         .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbox_SearchD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_SearchDeliveryLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinner_DayReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_MonthReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinner_YearReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SearchDeliveryLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_CodeDelieveryConsult)
                     .addComponent(lbl_TypeDeliveryConsult)
@@ -625,8 +996,8 @@ public class CounterView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_CodeDelieveryConsult1)
                     .addComponent(lbl_TypeDeliveryConsult1)
@@ -637,9 +1008,9 @@ public class CounterView extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(lbl_DescriptionDeliveryConsult1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_CodeDelieveryConsult2)
                     .addComponent(lbl_TypeDeliveryConsult2)
@@ -650,214 +1021,16 @@ public class CounterView extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panel_SearchDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ReturnBackfromSearch)
+                    .addComponent(btn_Search))
+                .addContainerGap())
         );
 
         tabPanel_CounterPrincipal.addTab("Búsqueda de Artículos", panel_SearchDelivery);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("Tipo de cambio de compra extrajera");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel13.setText("Tipo de cambio de venta extrajera");
-
-        lbl_TypeBuyCur.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_TypeBuyCur.setText("000000.0");
-
-        lbl_TypeSellCur.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_TypeSellCur.setText("000000.0");
-
-        javax.swing.GroupLayout panel_CurrencyLayout = new javax.swing.GroupLayout(panel_Currency);
-        panel_Currency.setLayout(panel_CurrencyLayout);
-        panel_CurrencyLayout.setHorizontalGroup(
-            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_CurrencyLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_TypeSellCur)
-                    .addComponent(lbl_TypeBuyCur)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addContainerGap(349, Short.MAX_VALUE))
-        );
-        panel_CurrencyLayout.setVerticalGroup(
-            panel_CurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_CurrencyLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_TypeBuyCur)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel13)
-                .addGap(29, 29, 29)
-                .addComponent(lbl_TypeSellCur)
-                .addContainerGap(409, Short.MAX_VALUE))
-        );
-
-        tabPanel_CounterPrincipal.addTab("Consultar Tipo de Cambio", panel_Currency);
-
-        jLabel14.setText("Día");
-
-        panel_ReportDisplay.setPreferredSize(new java.awt.Dimension(680, 1000));
-
-        javax.swing.GroupLayout panel_ReportDisplayLayout = new javax.swing.GroupLayout(panel_ReportDisplay);
-        panel_ReportDisplay.setLayout(panel_ReportDisplayLayout);
-        panel_ReportDisplayLayout.setHorizontalGroup(
-            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-        panel_ReportDisplayLayout.setVerticalGroup(
-            panel_ReportDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-
-        jScrollPane5.setViewportView(panel_ReportDisplay);
-
-        jLabel15.setText("Código");
-
-        jLabel16.setText("Tipo");
-
-        lbl_Tax.setText("Impuesto");
-
-        lbl_Colones.setText("Total Colones");
-
-        lbl_Dollars.setText("Total Dolares");
-
-        lbl_Disscount.setText("Descuento");
-
-        jLabel17.setText("Seleccionar fecha");
-
-        jLabel18.setText("Monto Total:");
-
-        lbl_TotalDolars.setText("000000.0");
-
-        jLabel20.setText("$");
-
-        jLabel21.setText("₡");
-
-        lbl_TotalColons.setText("000000.0");
-
-        btn_CreateReport.setText("Generar Reporte");
-        btn_CreateReport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CreateReportActionPerformed(evt);
-            }
-        });
-
-        jLabel19.setText("Mes");
-
-        jLabel22.setText("Año");
-
-        spinner_DayReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
-
-        spinner_MonthReport.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-
-        spinner_YearReport.setModel(new javax.swing.SpinnerNumberModel(2015, 2015, 2030, 1));
-
-        javax.swing.GroupLayout panel_ReportLayout = new javax.swing.GroupLayout(panel_Report);
-        panel_Report.setLayout(panel_ReportLayout);
-        panel_ReportLayout.setHorizontalGroup(
-            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_ReportLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5)
-                .addContainerGap())
-            .addGroup(panel_ReportLayout.createSequentialGroup()
-                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel17)
-                            .addGroup(panel_ReportLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel16))))
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))))
-                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
-                        .addGap(222, 222, 222)
-                        .addComponent(btn_CreateReport)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_ReportLayout.createSequentialGroup()
-                                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(lbl_Tax))
-                                .addGap(37, 37, 37)
-                                .addComponent(lbl_Disscount)
-                                .addGap(42, 42, 42)
-                                .addComponent(lbl_Colones)
-                                .addGap(43, 43, 43)
-                                .addComponent(lbl_Dollars))
-                            .addGroup(panel_ReportLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ReportLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_TotalDolars)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_TotalColons)
-                .addGap(47, 47, 47))
-        );
-        panel_ReportLayout.setVerticalGroup(
-            panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_ReportLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addComponent(btn_CreateReport)
-                        .addGap(55, 55, 55)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(lbl_Tax)
-                            .addComponent(lbl_Colones)
-                            .addComponent(lbl_Dollars)
-                            .addComponent(lbl_Disscount)))
-                    .addGroup(panel_ReportLayout.createSequentialGroup()
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel22))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(spinner_DayReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spinner_MonthReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spinner_YearReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panel_ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(lbl_TotalDolars)
-                    .addComponent(jLabel20)
-                    .addComponent(lbl_TotalColons)
-                    .addComponent(jLabel21))
-                .addContainerGap(244, Short.MAX_VALUE))
-        );
-
-        tabPanel_CounterPrincipal.addTab("Reporte", panel_Report);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1003,9 +1176,10 @@ public class CounterView extends javax.swing.JFrame {
                         if (cbox_isTechonology.getSelectedItem().toString().equals("No")){
                             isTechnology = false;
                         }
-                        Package nPackage = new Package(false,description,remittent,0,
+                        Package nPackage = new Package(description,remittent,0,
                                 isFrailness, isTechnology,weight);
                         Counter.getInstance().saveDeliveryPackage(destinataryID, nPackage);
+                        JOptionPane.showMessageDialog(null,"El paquete ha sido recibido");
                     }else{
                         JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                     }   break;
@@ -1015,9 +1189,10 @@ public class CounterView extends javax.swing.JFrame {
                         int weight = Integer.valueOf(txt_Weight.getText());
                         String typeEnvelope = lbl_TypeEnvelope.getText();
                         String typeContent = lbl_TypeContent.getText();
-                        Envelope nEnvelope = new Envelope(false,description,remittent,0,
+                        Envelope nEnvelope = new Envelope(description,remittent,0,
                                 typeEnvelope, typeContent,weight);
                         Counter.getInstance().saveDeliveryEnvelope(destinataryID, nEnvelope);
+                        JOptionPane.showMessageDialog(null,"El sobre ha sido recibido");
                     }else{
                         JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                     }   break;
@@ -1029,9 +1204,10 @@ public class CounterView extends javax.swing.JFrame {
                         if (cbox_isCatalog.getSelectedItem().toString().equals("No")){
                             isCatalog = false;
                         }
-                        Magazine nMagazine = new Magazine(false,description,remittent,0,
+                        Magazine nMagazine = new Magazine(description,remittent,0,
                                 name, isCatalog,topic);
                         Counter.getInstance().saveDeliveryMagazine(destinataryID, nMagazine);
+                        JOptionPane.showMessageDialog(null,"La revista ha sido recibida");
                     }else{
                         JOptionPane.showMessageDialog(null, "Ingrese todas los datos solicitadas");
                     }   break;
@@ -1067,32 +1243,39 @@ public class CounterView extends javax.swing.JFrame {
             }
         }        
         this.setVisible(false);
-        new Costs_View(packageList,magazineList,envelopeList).setVisible(true);
+        int id = Integer.valueOf(txt_IDdrop.getText());
+        Client _Client1 = Counter.getInstance().getClient(id);
+        new Costs_View(packageList,magazineList,envelopeList,_Client1).setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_btn_DropDeliveryActionPerformed
 
     private void btn_SearchClientdropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchClientdropActionPerformed
         // TODO add your handling code here:
         panel_DropDelivery.removeAll();
-        int id = Integer.valueOf(txt_IDdrop.getText());
-        Client client = Counter.getInstance().getClient(id);
-        if (client != null){
-            ////Variables para editar el margen en el que se colocan
-            ArrayList <Package> packageList = client.get_locker().DeliverPackage();
-            ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
-            ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
+        if(!(txt_IDdrop.getText().equals(""))){
+            int id = Integer.valueOf(txt_IDdrop.getText());
+            Client client = Counter.getInstance().getClient(id);
+            if (client != null){
+                ////Variables para editar el margen en el que se colocan
+                ArrayList <Package> packageList = client.get_locker().DeliverPackage();
+                ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
+                ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
 
-            for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
-                createLineDropPackage(packageList.get(iDelivery),iDelivery);
-            }
-            for(int iDelivery = 0; iDelivery!= magazineList.size(); iDelivery++){
-                createLineDropMagazine(magazineList.get(iDelivery),iDelivery+packageList.size());
-            }
-            for(int iDelivery = 0; iDelivery!= envelopeList.size(); iDelivery++){
-                createLineDropEnvelope(envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size());
-            }
+                for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
+                    createLineDropPackage(packageList.get(iDelivery),iDelivery);
+                }
+                for(int iDelivery = 0; iDelivery!= magazineList.size(); iDelivery++){
+                    createLineDropMagazine(magazineList.get(iDelivery),iDelivery+packageList.size());
+                }
+                for(int iDelivery = 0; iDelivery!= envelopeList.size(); iDelivery++){
+                    createLineDropEnvelope(envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size());
+                }
 
+            }else{
+                JOptionPane.showMessageDialog(null,"No se encontro el cliente solicitado");
+            }
         }else{
-            JOptionPane.showMessageDialog(null,"No se encontro el cliente solicitado");
+            JOptionPane.showMessageDialog(null,"Debe ingresar la identificación");
         }
         panel_DropDelivery.updateUI();
     }//GEN-LAST:event_btn_SearchClientdropActionPerformed
@@ -1103,21 +1286,31 @@ public class CounterView extends javax.swing.JFrame {
         String day = spinner_DayReport.getValue().toString();
         String month = spinner_MonthReport.getValue().toString();
         String year = spinner_YearReport.getValue().toString();
+        System.out.println("Dia: "+day);
+        System.out.println("Mes: "+month);
+        System.out.println("Year: "+year);
+        int totalUSD=0;
+        int totalUCR=0;
         int cantDeliveries = 0;
         for (int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
             Client client = Counter.getInstance().getClient_register().get(iClient);
-            ArrayList <Package> packageList = Counter.getInstance().
-            ArrayList <Magazine> magazineList = client.get_locker().DeliverMagazine();
-            ArrayList <Envelope> envelopeList = client.get_locker().DeliverEnvelope();
-            
+            ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+            if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
+                JOptionPane.showMessageDialog(null, "No hay paquetes retirados en esta fecha");
+                break;
+            }
+            totalUSD+=Counter.getInstance().chargeTotalPrice_InsideLocker(client,envelopeList, packageList, magazineList);
+            totalUCR+=Counter.getInstance().chargeTotalPrice_InsideLocker(client,envelopeList, packageList, magazineList)*(WebServiceBCCR.getInstance().getExchangeSale());
             for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
-                createLineReportPackage(packageList.get(iDelivery),iDelivery+cantDeliveries);
+                createLineReportPackage(client,packageList.get(iDelivery),iDelivery+cantDeliveries);
             }
             for(int iDelivery = 0; iDelivery!= magazineList.size(); iDelivery++){
-                createLineReportMagazine(magazineList.get(iDelivery),iDelivery+packageList.size()+cantDeliveries);
+                createLineReportMagazine(client,magazineList.get(iDelivery),iDelivery+packageList.size()+cantDeliveries);
             }
             for(int iDelivery = 0; iDelivery!= envelopeList.size(); iDelivery++){
-                createLineReportEnvelope(envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size()+cantDeliveries);
+                createLineReportEnvelope(client,envelopeList.get(iDelivery),iDelivery+packageList.size()+magazineList.size()+cantDeliveries);
             }
             cantDeliveries =+ packageList.size();
             cantDeliveries =+ magazineList.size();
@@ -1125,12 +1318,66 @@ public class CounterView extends javax.swing.JFrame {
         }
         
         panel_ReportDisplay.updateUI();
-        
-        String totalUSD = Counter.getInstance().chargeTotalPrice_InsideLocker(null, null, null, null);
-        String totalCRC = "0000.0";
-        lbl_TotalDolars.setText(totalUSD);
-        lbl_TotalColons.setText(totalCRC);
+        lbl_TotalDolars.setText(String.valueOf(totalUSD));
+        lbl_TotalColons.setText(String.valueOf(totalUCR));
     }//GEN-LAST:event_btn_CreateReportActionPerformed
+
+    private void btn_ConsultExchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultExchangeActionPerformed
+        // TODO add your handling code here:
+        lbl_TypeBuyCur.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangePurchase()));
+        lbl_TypeSellCur.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangeSale()));
+        
+    }//GEN-LAST:event_btn_ConsultExchangeActionPerformed
+
+    private void btn_ReturnBackfromRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromRegActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackfromRegActionPerformed
+
+    private void btn_ReturnBackfromReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromReceiveActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_ReturnBackfromReceiveActionPerformed
+
+    private void btn_ReturnBackfromSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromSearchActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackfromSearchActionPerformed
+
+    private void btn_ReturnBackfromExchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromExchangeActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btn_ReturnBackfromExchangeActionPerformed
+
+    private void btn_ReturnBackfromReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromReportActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_ReturnBackfromReportActionPerformed
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        // TODO add your handling code here:
+        if (cbox_SearchD.getSelectedItem().equals(" ")){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de búsqueda");
+        }else{
+            switch(cbox_SearchD.getSelectedItem().toString()){
+                case "Fecha de entrega":
+                {
+                    break;
+                }
+                case "Fecha de recibido":
+                {
+                    break;
+                }
+                case "Pendientes":
+                {
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_SearchActionPerformed
 
     private void createLineDropPackage(Package pPackage, int iDelivery){
         String code = String.valueOf(pPackage.get_code());
@@ -1200,38 +1447,41 @@ public class CounterView extends javax.swing.JFrame {
         panel_DropDelivery.add(lbl_DateIn);
         panel_DropDelivery.add(lbl_Description);
     }
-    private void createLineReportPackage(Package pPackage, int iDelivery){
+    private void createLineReportPackage(Client client,Package pPackage, int iDelivery){
         String code = String.valueOf(pPackage.get_code());
         String deliveryType = "Paquete";
-        String tax = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),1));
-        String discount = pPackage.get_remittent();
-        String totalCRC = "";
-        String totalUSD = pPackage.get_description();
-        String details = "";
-        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        String tax = String.valueOf(pPackage.getTax());
+        //String discount = String.valueOf(Counter.getInstance().disscount(pPackage.getTax(),client.get_ID()));
+        String disscount = String.valueOf(client.disscount(pPackage.getTax()));
+        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(),client.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pPackage) ;
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(packageInfo,iDelivery);
         
     }
-    private void createLineReportMagazine(Magazine pMagazine, int iDelivery){
+    private void createLineReportMagazine(Client client,Magazine pMagazine, int iDelivery){
         String code = String.valueOf(pMagazine.get_code());
         String deliveryType = "Revista";
-        String tax = String.valueOf(pMagazine.get_status());
-        String discount = pMagazine.get_remittent();
-        String totalCRC = "";       
-        String totalUSD = pMagazine.get_description();
-        String details = "";
-        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        String tax = String.valueOf(pMagazine.getTax());
+//        String discount = String.valueOf(Counter.getInstance().disscount(pMagazine.getTax(),client.get_ID()));
+        String disscount = String.valueOf(client.disscount(pMagazine.getTax()));
+        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(),client.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pMagazine);
+        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(magazineInfo,iDelivery);
     }
-    private void createLineReportEnvelope(Envelope pEnvelope, int iDelivery){
+    private void createLineReportEnvelope(Client client,Envelope pEnvelope, int iDelivery){
         String code = String.valueOf(pEnvelope.get_code());
         String deliveryType = "Sobre";
-        String tax = String.valueOf(pEnvelope.get_status());
-        String discount = pEnvelope.get_remittent();
-        String totalCRC = "";
-        String totalUSD = pEnvelope.get_description();
-        String details = "";
-        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        String tax = String.valueOf(pEnvelope.getTax());
+//        String discount = String.valueOf(Counter.getInstance().disscount(pEnvelope.getTax(),client.get_ID()));
+        String disscount = String.valueOf(client.disscount(pEnvelope.getTax()));
+        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(),client.get_ID()))*(WebServiceBCCR.getInstance().getExchangeSale()));
+        String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(),client.get_ID()));
+        String details = Counter.getInstance().show_tax_delivery(pEnvelope);
+        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(envelopeInfo,iDelivery);
     }
     private void createLineReport(ArrayList<String> pDeliveryInfo, int iDelivery){
@@ -1303,31 +1553,45 @@ public class CounterView extends javax.swing.JFrame {
             public void run() {
                 new CounterView().setVisible(true);
             }
-        });
+      });
         Counter Aerostore=new Counter("aerosostes",12313,"cwewef",100);
         //Aerostore.add_client(304900953,"Byron", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
         Aerostore.add_client(116080577,"GOKU", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
         //Aerostore.add_client(304900951,"Chichimara", "bmiranda@.com", 12345678, "paraiso cartago", "F","18/11/1995");
         //Aerostore.add_client(304900952,"Liryel", "bmiranda@.com", 12345678, "paraiso cartago", "H","18/11/1995");
         //Aerostore.changeType(304900952);
-        Magazine deliver= new Magazine(true, "revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
+        Magazine deliver= new Magazine("revista de cocina mediterranea", "yor",3123, "cocina mediterranea", false, "cocina");
         Aerostore.saveDeliveryMagazine(116080577, deliver);
-        Package deliver1=new Package(true,"computadora mac","yorley",100,true,true,40);
+        Package deliver1=new Package("computadora mac","yorley",100,true,true,40);
         Aerostore.saveDeliveryPackage(116080577, deliver1);
-        Package deliver2=new Package(true,"almohadas","yorley",14513,true,true,60);
+        Package deliver2=new Package("almohadas","yorley",14513,true,true,60);
         Aerostore.saveDeliveryPackage(116080577, deliver2);
-//        Aerostore.chargeTotalPrice_InsideLocker(304900950);
+        ArrayList<Integer> h= new ArrayList<>();
+        h.add(1);
+        h.add(2);
+        h.add(3);
+        Aerostore.retrieve_packages(h,116080577);
         
+        
+//        Aerostore.chargeTotalPrice_InsideLocker(304900950);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_ConsultExchange;
     private javax.swing.JButton btn_CreateReport;
     private javax.swing.JButton btn_DropDelivery;
     private javax.swing.JButton btn_Receive;
+    private javax.swing.JButton btn_ReturnBackfromExchange;
+    private javax.swing.JButton btn_ReturnBackfromReceive;
+    private javax.swing.JButton btn_ReturnBackfromReg;
+    private javax.swing.JButton btn_ReturnBackfromReport;
+    private javax.swing.JButton btn_ReturnBackfromSearch;
+    private javax.swing.JButton btn_Search;
     private javax.swing.JButton btn_SearchClientdrop;
+    private javax.swing.JComboBox cbox_SearchD;
     private javax.swing.JComboBox cbox_TypeReceivedArticle;
     private javax.swing.JCheckBox cbox_selectAll;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1343,6 +1607,9 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1404,8 +1671,11 @@ public class CounterView extends javax.swing.JFrame {
     private javax.swing.JPanel panel_ReturnDelivery;
     private javax.swing.JPanel panel_SearchDelivery;
     private javax.swing.JSpinner spinner_DayReport;
+    private javax.swing.JSpinner spinner_DayReport1;
     private javax.swing.JSpinner spinner_MonthReport;
+    private javax.swing.JSpinner spinner_MonthReport1;
     private javax.swing.JSpinner spinner_YearReport;
+    private javax.swing.JSpinner spinner_YearReport1;
     private javax.swing.JTabbedPane tabPanel_CounterPrincipal;
     private javax.swing.JTextField txt_DescriptionRD;
     private javax.swing.JTextField txt_Destinatary;

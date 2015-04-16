@@ -14,16 +14,15 @@ import java.util.Calendar;
 public class Delivery {
     protected static int identifier=1;
     protected int code;
-    protected boolean status;
+    protected boolean statusEsPendiente;
     protected String description;
-
     protected String remittent;
     protected Calendar date;
     protected Calendar out_date;
     protected Double price;
-    public Delivery(boolean status, String description, String remittent,double price) {
+    public Delivery(String description, String remittent,double price) {
         this.code=identifier;
-        this.status = status;
+        this.statusEsPendiente = true;
         this.description = description;
         this.remittent = remittent;
         this.date=assing_date();
@@ -38,10 +37,10 @@ public class Delivery {
         return code;
     }
     public final void set_status(boolean pstatus) {
-        status = pstatus;
+        statusEsPendiente = pstatus;
     }
     public boolean get_status() {
-        return status;
+        return statusEsPendiente;
     }
     public final void set_description(String pdescription) {
         description = pdescription;

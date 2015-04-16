@@ -22,48 +22,57 @@ public class Costs_View extends javax.swing.JFrame {
     ArrayList<Package> _PackageList = new ArrayList<Package>();
     ArrayList<Magazine> _MagazineList = new ArrayList<Magazine>();
     ArrayList<Envelope> _EnvelopeList = new ArrayList<Envelope>();
+    Client _Client1;
     public Costs_View(ArrayList<Package> pPackageList, ArrayList<Magazine> pMagazineList, 
-            ArrayList<Envelope> pEnvelopeList) {
+            ArrayList<Envelope> pEnvelopeList,Client _Client) {
         initComponents();
         _PackageList = pPackageList;
         _MagazineList = pMagazineList;
         _EnvelopeList = pEnvelopeList;
+        _Client1=_Client;
         lbl_Buy.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangePurchase()));
         lbl_Sell.setText(String.valueOf(WebServiceBCCR.getInstance().getExchangeSale()));
         showDeliveryInformation();
+        
     }
     private void showDeliveryInformation(){
         this.panel_CostsDisplay.removeAll();
         int cantDeliveries = 0;
-        for(int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
-            Client client = Counter.getInstance().getClient_register().get(iClient);
-            
+        int total_USD=0;
+        int total_UCRC=0;
+        //for(int iClient = 0; iClient != Counter.getInstance().getClient_register().size(); iClient++){
+           // Client client = Counter.getInstance().getClient_register().get(iClient);
+            total_USD+=Counter.getInstance().chargeTotalPrice_InsideLocker(_Client1,_EnvelopeList, _PackageList, _MagazineList);
+            total_UCRC+=Counter.getInstance().chargeTotalPrice_InsideLocker(_Client1,_EnvelopeList, _PackageList, _MagazineList)*(WebServiceBCCR.getInstance().getExchangeSale());
             for(int iDelivery = 0; iDelivery!= _PackageList.size(); iDelivery++){
-                createLineReportPackage(_PackageList.get(iDelivery),iDelivery+cantDeliveries,client);
+                createLineReportPackage(_PackageList.get(iDelivery),iDelivery+cantDeliveries,_Client1);
             }
             for(int iDelivery = 0; iDelivery!= _MagazineList.size(); iDelivery++){
-                createLineReportMagazine(_MagazineList.get(iDelivery),iDelivery+_PackageList.size()+cantDeliveries,client);
+                createLineReportMagazine(_MagazineList.get(iDelivery),iDelivery+_PackageList.size()+cantDeliveries,_Client1);
             }
             for(int iDelivery = 0; iDelivery!= _EnvelopeList.size(); iDelivery++){
-                createLineReportEnvelope(_EnvelopeList.get(iDelivery),iDelivery+_PackageList.size()+_MagazineList.size()+cantDeliveries,client);
+                createLineReportEnvelope(_EnvelopeList.get(iDelivery),iDelivery+_PackageList.size()+_MagazineList.size()+cantDeliveries,_Client1);
             }
             cantDeliveries =+ _PackageList.size();
             cantDeliveries =+ _MagazineList.size();
             cantDeliveries =+ _EnvelopeList.size();
-        }
+        //}
         
         this.panel_CostsDisplay.updateUI();
+        lbl_totalDolars.setText(String.valueOf(total_USD));
+        lbl_totalColon.setText(String.valueOf(total_UCRC));
     }
     
     private void createLineReportPackage(Package pPackage, int iDelivery, Client pClient){
         String code = String.valueOf(pPackage.get_code());
         String deliveryType = "Paquete";
         String tax = String.valueOf(pPackage.getTax());
-        String discount = String.valueOf(Counter.getInstance().disscount(pPackage.getTax(),pClient.get_ID()));
-        String totalCRC = "";
+//        String discount = String.valueOf(Counter.getInstance().disscount(pPackage.getTax(),pClient.get_ID()));
+        String disscount = String.valueOf(pClient.disscount(pPackage.getTax()));
+        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pPackage.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pPackage.get_code(), pClient.get_ID()));
         String details = Counter.getInstance().show_tax_delivery(pPackage);
-        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        ArrayList<String> packageInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(packageInfo,iDelivery);
         
     }
@@ -71,22 +80,24 @@ public class Costs_View extends javax.swing.JFrame {
         String code = String.valueOf(pMagazine.get_code());
         String deliveryType = "Revista";
         String tax = String.valueOf(pMagazine.getTax());
-        String discount = String.valueOf(Counter.getInstance().disscount(pMagazine.getTax(),pClient.get_ID()));
-        String totalCRC = "";       
+//        String discount = String.valueOf(Counter.getInstance().disscount(pMagazine.getTax(),pClient.get_ID()));
+        String disscount = String.valueOf(pClient.disscount(pMagazine.getTax()));
+        String totalCRC = String.valueOf((Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());       
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pMagazine.get_code(), pClient.get_ID()));
         String details = Counter.getInstance().show_tax_delivery(pMagazine);;
-        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        ArrayList<String> magazineInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(magazineInfo,iDelivery);
     }
     private void createLineReportEnvelope(Envelope pEnvelope, int iDelivery, Client pClient){
         String code = String.valueOf(pEnvelope.get_code());
         String deliveryType = "Sobre";
         String tax = String.valueOf(pEnvelope.getTax());
-        String discount = String.valueOf(Counter.getInstance().disscount(pEnvelope.getTax(),pClient.get_ID()));
-        String totalCRC = "";
+        //String discount = String.valueOf(Counter.getInstance().disscount(pEnvelope.getTax(),pClient.get_ID()));
+        String disscount = String.valueOf(pClient.disscount(pEnvelope.getTax()));
+        String totalCRC =String.valueOf((Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(), pClient.get_ID()))*WebServiceBCCR.getInstance().getExchangeSale());
         String totalUSD = String.valueOf(Counter.getInstance().chargeIndividualPrice(pEnvelope.get_code(), pClient.get_ID()));
         String details = Counter.getInstance().show_tax_delivery(pEnvelope);;
-        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,discount,totalCRC,totalUSD,details));
+        ArrayList<String> envelopeInfo = new ArrayList<>(asList(code,deliveryType,tax,disscount,totalCRC,totalUSD,details));
         createLineReport(envelopeInfo,iDelivery);
     }
     private void createLineReport(ArrayList<String> pDeliveryInfo, int iDelivery){
@@ -153,14 +164,17 @@ public class Costs_View extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbl_totalDolars = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbl_totalColon = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btn_Pay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panel_Costs.setBackground(new java.awt.Color(255, 204, 153));
+
+        panel_CostsDisplay.setBackground(new java.awt.Color(255, 255, 204));
         panel_CostsDisplay.setPreferredSize(new java.awt.Dimension(634, 1000));
 
         javax.swing.GroupLayout panel_CostsDisplayLayout = new javax.swing.GroupLayout(panel_CostsDisplay);
@@ -214,11 +228,11 @@ public class Costs_View extends javax.swing.JFrame {
 
         jLabel3.setText("Monto Total:");
 
-        jLabel4.setText("000000.0");
+        lbl_totalDolars.setText("000000.0");
 
         jLabel5.setText("$");
 
-        jLabel6.setText("000000.0");
+        lbl_totalColon.setText("000000.0");
 
         jLabel7.setText("₡");
 
@@ -249,11 +263,11 @@ public class Costs_View extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
+                                .addComponent(lbl_totalDolars)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
+                                .addComponent(lbl_totalColon))
                             .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(panel_CostsLayout.createSequentialGroup()
@@ -328,11 +342,11 @@ public class Costs_View extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
+                        .addComponent(lbl_totalColon)
                         .addComponent(jLabel7))
                     .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jLabel4)
+                        .addComponent(lbl_totalDolars)
                         .addComponent(jLabel5))
                     .addGroup(panel_CostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -363,6 +377,28 @@ public class Costs_View extends javax.swing.JFrame {
 
     private void btn_PayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PayActionPerformed
         // TODO add your handling code here:
+        ArrayList <Integer> listCodesPackage= new ArrayList<Integer> ();
+        ArrayList <Integer> listCodesMagazines= new ArrayList<Integer> ();
+        ArrayList <Integer> listCodesEnvelopes= new ArrayList<Integer> ();
+        for (int m=0;m<_PackageList.size();m++){
+            listCodesPackage.add(_PackageList.get(m).get_code()); 
+            Counter.getInstance().retrieve_packages(listCodesPackage,_Client1.get_ID());
+        }
+        for (int m=0;m<_EnvelopeList.size();m++){
+            listCodesEnvelopes.add(_EnvelopeList.get(m).get_code()); 
+            Counter.getInstance().retrieve_envelopes(listCodesEnvelopes,_Client1.get_ID());
+            
+        }
+        for (int m=0;m<_MagazineList.size();m++){
+            listCodesMagazines.add(_MagazineList.get(m).get_code()); 
+            Counter.getInstance().retrieve_magazines(listCodesMagazines,_Client1.get_ID());
+        }
+        
+        JOptionPane.showMessageDialog(null,"Los paquetes han sido retirados");
+        this.dispose();
+        
+        
+//_PackageList.
         
     }//GEN-LAST:event_btn_PayActionPerformed
 
@@ -373,9 +409,7 @@ public class Costs_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Bill;
@@ -389,6 +423,8 @@ public class Costs_View extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_SellText;
     private javax.swing.JLabel lbl_Tax;
     private javax.swing.JLabel lbl_Type;
+    private javax.swing.JLabel lbl_totalColon;
+    private javax.swing.JLabel lbl_totalDolars;
     private javax.swing.JPanel panel_Costs;
     private javax.swing.JPanel panel_CostsDisplay;
     // End of variables declaration//GEN-END:variables

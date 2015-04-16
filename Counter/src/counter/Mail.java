@@ -18,7 +18,7 @@ import javax.mail.internet.*;
 public class Mail { 
       
     String destinatary; 
-    String asunto; 
+    String asunto="Notificación de su casillero"; 
     String mensaje; 
     private final String Sender="yorleymaria@yahoo.com";
     private final String Password="pajarito1";
@@ -26,9 +26,8 @@ public class Mail {
       
       
     // Constructor Correo 
-    public Mail (String pDestinatario, String pAsunto, String pMensaje) { 
+    public Mail (String pDestinatario,String pMensaje) { 
         destinatary = pDestinatario; 
-        asunto = pAsunto; 
         mensaje = pMensaje;
           
     } 
