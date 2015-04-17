@@ -397,22 +397,22 @@ public class Counter {
                             }
                 }
         }else{
-            if(pClient.get_locker().get_ocuppied()==true){
+            //if(pClient.get_locker().get_ocuppied()==true){
                 Locker locker=pClient.get_locker();
-                if(locker.get_state()==isRetired){
+                //if(locker.get_state()==isRetired){
                     for(int k=0;k<locker.DeliverPackage().size();k++){
                         Package packagee=locker.DeliverPackage().get(k);
-                            Calendar date=packagee.get_date();
-                            if (dateRetired==true){
-                                date=packagee.getOut_date();
-                            }
+                        Calendar date=packagee.get_date();
+                        if (dateRetired==true){
+                            date=packagee.getOut_date();
+                        }
                         //Es necesario sumarle un elemento al mes, ya que la librería le asigna valores comenzando en 0.
                         if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){                          
                             list.add(packagee);
                         }
                     }
-                }       
-            }      
+                //}       
+            //}      
         }   
         return list;    
     }
@@ -433,9 +433,9 @@ public class Counter {
                             }
                         }
             }else{
-                if(pClient.get_locker().get_ocuppied()==true){
+                //if(pClient.get_locker().get_ocuppied()==true){
                     Locker locker=pClient.get_locker();
-                    if(locker.get_state()==isRetired){
+                    //if(locker.get_state()==isRetired){
                            for(int j=0;j<locker.DeliverEnvelope().size();j++){
                             Envelope envelope=locker.DeliverEnvelope().get(j);
                             Calendar date=envelope.get_date();
@@ -446,8 +446,8 @@ public class Counter {
                                 list.add(envelope);
                             }
                         }
-                    }     
-                }      
+                    //}     
+                //}      
             }
     return list;    
     }
@@ -467,9 +467,9 @@ public class Counter {
                             }
                 }
         }else{
-            if(pClient.get_locker().get_ocuppied()==true){
+            //if(pClient.get_locker().get_ocuppied()==true){
                 Locker locker=pClient.get_locker();
-                if(locker.get_state()==isRetired){                        
+                //if(locker.get_state()==isRetired){                        
                   for(int m=0;m<locker.DeliverMagazine().size();m++){
                         Magazine magazine=locker.DeliverMagazine().get(m);
                             Calendar date=magazine.get_date();
@@ -477,12 +477,11 @@ public class Counter {
                                 date=magazine.getOut_date();
                             }
                         if(day==date.get(Calendar.DATE)&&month==date.get(Calendar.MONTH)+1&&year==date.get(Calendar.YEAR)){
-                            System.out.println("hola");
                             list.add(magazine);
                         }               
                      }
-                }
-            } 
+                //}
+            //} 
         }
         return list;
      }    

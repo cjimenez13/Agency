@@ -1293,10 +1293,6 @@ public class CounterView extends javax.swing.JFrame {
             ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
             ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
             ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
-            if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
-                JOptionPane.showMessageDialog(null, "No hay paquetes retirados en esta fecha");
-                break;
-            }
             totalUSD+=Counter.getInstance().chargeTotalPrice_InsideLocker(client,envelopeList, packageList, magazineList);
             totalUCR+=Counter.getInstance().chargeTotalPrice_InsideLocker(client,envelopeList, packageList, magazineList)*(WebServiceBCCR.getInstance().getExchangeSale());
             for(int iDelivery = 0; iDelivery!= packageList.size(); iDelivery++){
@@ -1311,6 +1307,9 @@ public class CounterView extends javax.swing.JFrame {
             cantDeliveries =+ packageList.size();
             cantDeliveries =+ magazineList.size();
             cantDeliveries =+ envelopeList.size();
+        }
+        if(cantDeliveries ==0){
+            JOptionPane.showMessageDialog(null, "No hay paquetes retirados en esta fecha");
         }
         
         panel_ReportDisplay.updateUI();
@@ -1328,34 +1327,39 @@ public class CounterView extends javax.swing.JFrame {
     private void btn_ReturnBackfromRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromRegActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new ActionMenu_View().setVisible(true);
         
     }//GEN-LAST:event_btn_ReturnBackfromRegActionPerformed
 
     private void btn_ReturnBackfromReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromReceiveActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new ActionMenu_View().setVisible(true);
     }//GEN-LAST:event_btn_ReturnBackfromReceiveActionPerformed
 
     private void btn_ReturnBackfromSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromSearchActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new ActionMenu_View().setVisible(true);
         
     }//GEN-LAST:event_btn_ReturnBackfromSearchActionPerformed
 
     private void btn_ReturnBackfromExchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromExchangeActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new ActionMenu_View().setVisible(true);
         
     }//GEN-LAST:event_btn_ReturnBackfromExchangeActionPerformed
 
     private void btn_ReturnBackfromReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnBackfromReportActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new ActionMenu_View().setVisible(true);
     }//GEN-LAST:event_btn_ReturnBackfromReportActionPerformed
 
     private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
         // TODO add your handling code here:
-        if (cbox_SearchD.getSelectedItem().equals(" ")){
+        if (cbox_SearchD.getSelectedItem().toString().equals(" ")){
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de búsqueda");
         }else{
             panel_EnvelopeSDeliver.removeAll();
@@ -1364,7 +1368,9 @@ public class CounterView extends javax.swing.JFrame {
             String day = spinner_DayReport1.getValue().toString();
             String month = spinner_MonthReport1.getValue().toString();
             String year = spinner_YearReport1.getValue().toString();
-            
+            int totalPackages =0;
+            int totalEnvelopes = 0;
+            int totalMagazines = 0;
             switch(cbox_SearchD.getSelectedItem().toString()){
                 case "Fecha de entrega":
                 {
@@ -1373,10 +1379,14 @@ public class CounterView extends javax.swing.JFrame {
                         ArrayList <Package> packageList = Counter.getInstance().packages_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
                         ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
                         ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,true,true,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
+                        
                        // if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
-                            takeOutEachElementsEnvelope(envelopeList);
-                            takeOutEachElementsPackage(packageList);
-                            takeOutEachElementsMagazine(magazineList);
+                            takeOutEachElementsEnvelope(envelopeList,totalEnvelopes);
+                            takeOutEachElementsPackage(packageList,totalPackages);
+                            takeOutEachElementsMagazine(magazineList,totalMagazines);
+                            totalPackages += packageList.size();
+                            totalEnvelopes += envelopeList.size();
+                            totalMagazines += magazineList.size();
                        // }
                         
                     }
@@ -1390,9 +1400,12 @@ public class CounterView extends javax.swing.JFrame {
                         ArrayList <Magazine> magazineList =Counter.getInstance().magazine_ByDay(client,false,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
                         ArrayList <Envelope> envelopeList = Counter.getInstance().envelopes_ByDay(client,false,false,Integer.valueOf(day),Integer.valueOf(month), Integer.valueOf(year));
                         //if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
-                            takeOutEachElementsEnvelope(envelopeList);
-                            takeOutEachElementsPackage(packageList);
-                            takeOutEachElementsMagazine(magazineList);   
+                            takeOutEachElementsEnvelope(envelopeList,totalEnvelopes);
+                            takeOutEachElementsPackage(packageList,totalPackages);
+                            takeOutEachElementsMagazine(magazineList,totalMagazines); 
+                            totalPackages += packageList.size();
+                            totalEnvelopes += envelopeList.size();
+                            totalMagazines += magazineList.size();
                        // }
                     }
                        
@@ -1405,9 +1418,9 @@ public class CounterView extends javax.swing.JFrame {
                         ArrayList <Magazine> magazineList=Counter.getInstance().non_retired_magazine();
                         ArrayList <Envelope> envelopeList=Counter.getInstance().non_retired_envelope();
                        // if(packageList.size()==0||magazineList.size()==0||envelopeList.size()==0 ){
-                            takeOutEachElementsEnvelope(envelopeList);
-                            takeOutEachElementsPackage(packageList);
-                            takeOutEachElementsMagazine(magazineList);   
+                            takeOutEachElementsEnvelope(envelopeList,0);
+                            takeOutEachElementsPackage(packageList,0);
+                            takeOutEachElementsMagazine(magazineList,0);                            
                        // }
                     
             
@@ -1415,25 +1428,28 @@ public class CounterView extends javax.swing.JFrame {
                 
             }
         }
+        panel_EnvelopeSDeliver.updateUI();
+        panel_MagazineSDeliver.updateUI();
+        panel_PackagesSDeliver.updateUI();
+        
     }//GEN-LAST:event_btn_SearchActionPerformed
 
-    private void  takeOutEachElementsEnvelope(ArrayList<Envelope> envelopesDeliveries){
-        for (int iDeliver=0; iDeliver<envelopesDeliveries.size();iDeliver++){
-            createLineDisplayE(envelopesDeliveries.get(iDeliver),iDeliver);
+    private void  takeOutEachElementsEnvelope(ArrayList<Envelope> envelopesDeliveries, int pTotalEnvelope){
+        for (int iDeliver=0; iDeliver!=envelopesDeliveries.size();iDeliver++){
+            createLineDisplayE(envelopesDeliveries.get(iDeliver),iDeliver+pTotalEnvelope);
         }
     }
-    private void  takeOutEachElementsPackage(ArrayList<Package> packagesDeliveries){
-         for (int iDeliver=0; iDeliver<packagesDeliveries.size();iDeliver++){
-            createLineDisplayP(packagesDeliveries.get(iDeliver),iDeliver);
+    private void  takeOutEachElementsPackage(ArrayList<Package> packagesDeliveries, int pTotalPackage){
+         for (int iDeliver=0; iDeliver!=packagesDeliveries.size();iDeliver++){
+            createLineDisplayP(packagesDeliveries.get(iDeliver),iDeliver+pTotalPackage);
         }   
     }
-    private void  takeOutEachElementsMagazine(ArrayList<Magazine> magazinesDeliveries){
-          for (int iDeliver=0; iDeliver<magazinesDeliveries.size();iDeliver++){
-            createLineDisplayM(magazinesDeliveries.get(iDeliver),iDeliver);
+    private void  takeOutEachElementsMagazine(ArrayList<Magazine> magazinesDeliveries, int pTotalMagazine){
+          for (int iDeliver=0; iDeliver!=magazinesDeliveries.size();iDeliver++){
+            createLineDisplayM(magazinesDeliveries.get(iDeliver),iDeliver+pTotalMagazine);
         }    
     }
     private void createLineDisplayE(Envelope envelope,int iDeliver){
-        ArrayList<String> listStrings;
         String code=String.valueOf(envelope.get_code());
         String typeDeliver="Sobre";
         String typeEnvelope=envelope.get_typeEnvelope();
@@ -1503,52 +1519,42 @@ public class CounterView extends javax.swing.JFrame {
     
         private void  createDropLineSearch(ArrayList<String> packageInfo,int iDelivery,JPanel panel){
         ////Variables para editar el margen en el que se colocan
+            
             int firstMargenX = 15;
             int firstMargenY = 15;
             int widthLbl = 70;
             int heightLbl = 25;
             int spaceBetweenLblY = 10;
                 
-                JLabel lbl_code = new JLabel();
-                JLabel lbl_deliveryType = new JLabel();
-                JLabel lbl_isCommited = new JLabel();
-                JLabel lbl_Remittent = new JLabel();
-                JLabel lbl_DateIn = new JLabel();
-                JLabel lbl_Specific1= new JLabel();
-                JLabel lbl_Specific2= new JLabel();
-                JLabel lbl_Specific3= new JLabel();
-                JLabel lbl_Description = new JLabel();
+            JLabel lbl_code = new JLabel(packageInfo.get(0));
+            JLabel lbl_deliveryType = new JLabel(packageInfo.get(1));
+            JLabel lbl_isCommited = new JLabel(packageInfo.get(2));
+            JLabel lbl_Remittent = new JLabel(packageInfo.get(3));
+            JLabel lbl_DateIn = new JLabel(packageInfo.get(4));
+            JLabel lbl_Specific1= new JLabel(packageInfo.get(5));
+            JLabel lbl_Specific2= new JLabel(packageInfo.get(6));
+            JLabel lbl_Specific3= new JLabel(packageInfo.get(7));
+            JLabel lbl_Description = new JLabel(packageInfo.get(8));
 
-                lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_deliveryType.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_isCommited.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_Remittent.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_DateIn.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_Specific1.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_Specific2.setBounds(firstMargenX+widthLbl*6,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_Specific3.setBounds(firstMargenX+widthLbl*7,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                lbl_Description.setBounds(firstMargenX+widthLbl*8,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
-                
-                panel.add(lbl_code);
-                panel.add(lbl_deliveryType);
-                panel.add(lbl_isCommited);
-                panel.add(lbl_Remittent);
-                panel.add(lbl_DateIn);
-                panel.add(lbl_Specific1);
-                panel.add(lbl_Specific2);
-                panel.add(lbl_Specific3);
-                panel.add(lbl_Description);
-                
-                lbl_code.setText(packageInfo.get(0));
-                lbl_deliveryType.setText(packageInfo.get(1));
-                lbl_isCommited.setText(packageInfo.get(2));
-                lbl_Remittent.setText(packageInfo.get(3));
-                lbl_DateIn.setText(packageInfo.get(4));
-                lbl_Specific1.setText(packageInfo.get(5));
-                lbl_Specific2.setText(packageInfo.get(6));
-                lbl_Specific3.setText(packageInfo.get(7));
-                lbl_Description.setText(packageInfo.get(8));
+            lbl_code.setBounds(firstMargenX+widthLbl*0,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_deliveryType.setBounds(firstMargenX+widthLbl*1,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_isCommited.setBounds(firstMargenX+widthLbl*2,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_Remittent.setBounds(firstMargenX+widthLbl*3,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_DateIn.setBounds(firstMargenX+widthLbl*4,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_Specific1.setBounds(firstMargenX+widthLbl*5,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_Specific2.setBounds(firstMargenX+widthLbl*6,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_Specific3.setBounds(firstMargenX+widthLbl*7,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
+            lbl_Description.setBounds(firstMargenX+widthLbl*8,firstMargenY+(spaceBetweenLblY+heightLbl)*iDelivery,widthLbl,heightLbl);
 
+            panel.add(lbl_code);
+            panel.add(lbl_deliveryType);
+            panel.add(lbl_isCommited);
+            panel.add(lbl_Remittent);
+            panel.add(lbl_DateIn);
+            panel.add(lbl_Specific1);
+            panel.add(lbl_Specific2);
+            panel.add(lbl_Specific3);
+            panel.add(lbl_Description);
             panel.updateUI();
     }
 
@@ -1740,11 +1746,11 @@ public class CounterView extends javax.swing.JFrame {
         Aerostore.saveDeliveryPackage(304900951, deliver1);
         Package deliver2=new Package("almohadas","yorley",true,true,60);
         Aerostore.saveDeliveryPackage(116080577, deliver2);
-//        ArrayList<Integer> h= new ArrayList<>();
-//        h.add(1);
-//        h.add(2);
-//        h.add(3);
-//        Aerostore.retrieve_packages(h,116080577);
+        ArrayList<Integer> h= new ArrayList<>();
+        h.add(1);
+        h.add(2);
+        h.add(3);
+        Aerostore.retrieve_packages(h,116080577);
         
         
 //        Aerostore.chargeTotalPrice_InsideLocker(304900950);
